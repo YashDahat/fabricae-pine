@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { useParams } from 'react-router-dom';
 import { useLookbookEntryById } from '@/hooks/lookbookHooks';
 import { Skeleton } from '@/components/ui/skeleton';

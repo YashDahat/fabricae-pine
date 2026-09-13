@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -80,7 +81,6 @@ export default function AdminLookbookPage(): React.JSX.Element {
       </div>
 
       <LookbookTable
-        entries={lookbookEntries || []}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />

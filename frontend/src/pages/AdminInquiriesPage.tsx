@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useInquiries, useUpdateInquiryStatus } from '@/hooks/inquiryHooks';
-import { InquiryResponseDto, InquiryStatus } from '@/types/inquiry';
+import { InquiryResponseDto } from '@/types/inquiry';
 import InquiryTable from '@/components/inquiry/admin/InquiryTable';
 import { InquiryDetailView } from '@/components/inquiry/admin/InquiryDetailView';
 import { Dialog, DialogContent } from '@/components/ui/dialog';

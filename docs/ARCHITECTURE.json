@@ -1119,7 +1119,7 @@
     "layer" : "PAGE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Landing page featuring a hero section, featured products, and company introduction.",
     "public_functions" : [ {
       "name" : "HomePage",
@@ -1143,7 +1143,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Full-width hero component with a background image and a call-to-action.",
     "public_functions" : [ {
       "name" : "HeroSection",
@@ -1167,7 +1167,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "A grid showcasing a selection of featured products on the home page.",
     "public_functions" : [ {
       "name" : "FeaturedProducts",
@@ -1198,7 +1198,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "A brief section on the homepage introducing the company and its values.",
     "public_functions" : [ {
       "name" : "AboutSnippet",
@@ -1222,7 +1222,7 @@
     "layer" : "PAGE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Displays detailed information about the company's history and manufacturing process.",
     "public_functions" : [ {
       "name" : "AboutPage",
@@ -1246,7 +1246,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Component detailing the history and mission of Fabricae PINE.",
     "public_functions" : [ {
       "name" : "CompanyStory",
@@ -1270,7 +1270,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Visually showcases the steps in the garment manufacturing process.",
     "public_functions" : [ {
       "name" : "ManufacturingProcess",
@@ -1294,7 +1294,7 @@
     "layer" : "PAGE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Provides contact information, a contact form, and an embedded Google Map.",
     "public_functions" : [ {
       "name" : "ContactPage",
@@ -1318,7 +1318,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "A simple form for general inquiries, distinct from the bulk order inquiry.",
     "public_functions" : [ {
       "name" : "ContactForm",
@@ -1349,7 +1349,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Embeds a Google Map showing the business location.",
     "public_functions" : [ {
       "name" : "LocationMap",
@@ -1373,7 +1373,7 @@
     "layer" : "PAGE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "A standard 404 page for handling invalid routes.",
     "public_functions" : [ {
       "name" : "NotFoundPage",
@@ -1397,7 +1397,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "A floating action button for initiating a WhatsApp chat.",
     "public_functions" : [ {
       "name" : "WhatsAppCta",
@@ -1421,7 +1421,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "A reusable dialog component to confirm delete actions in admin panels.",
     "public_functions" : [ {
       "name" : "DeleteConfirmationDialog",
@@ -1445,7 +1445,7 @@
     "layer" : "PAGE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Page containing the login form for B2B clients and administrators.",
     "public_functions" : [ {
       "name" : "LoginPage",
@@ -1469,7 +1469,7 @@
     "layer" : "PAGE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Page for new B2B clients to register for an account.",
     "public_functions" : [ {
       "name" : "SignupPage",
@@ -1493,7 +1493,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "The user login form component, which calls the pre-scaffolded useAuth() hook.",
     "public_functions" : [ {
       "name" : "LoginForm",
@@ -1517,7 +1517,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "The B2B client registration form component, calling the useAuth() hook.",
     "public_functions" : [ {
       "name" : "SignupForm",
@@ -1541,7 +1541,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "A route guard that checks authentication status and roles using the useAuth() hook.",
     "public_functions" : [ {
       "name" : "ProtectedRoute",
@@ -1565,7 +1565,7 @@
     "layer" : "PAGE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Dashboard for logged-in B2B clients to view their profile and inquiry history.",
     "public_functions" : [ {
       "name" : "ClientDashboardPage",
@@ -1589,7 +1589,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Header component for the client dashboard, welcoming the user.",
     "public_functions" : [ {
       "name" : "DashboardHeader",
@@ -1613,7 +1613,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Displays a table of the client's past inquiries and their statuses.",
     "public_functions" : [ {
       "name" : "InquiryHistoryTable",
@@ -1726,7 +1726,7 @@
     "layer" : "PAGE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Main product catalog page with a filterable grid of all available products.",
     "public_functions" : [ {
       "name" : "ProductsPage",
@@ -1750,7 +1750,7 @@
     "layer" : "PAGE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Displays details for a single product, including images, specs, and an inquiry form.",
     "public_functions" : [ {
       "name" : "ProductDetailPage",
@@ -1774,7 +1774,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "A responsive grid that displays product cards based on active filters.",
     "public_functions" : [ {
       "name" : "ProductGrid",
@@ -1798,7 +1798,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "A card component to display a summary of a single product in the grid.",
     "public_functions" : [ {
       "name" : "ProductCard",
@@ -1822,7 +1822,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "A sidebar with controls to filter the product catalog by category and other attributes.",
     "public_functions" : [ {
       "name" : "ProductFilterSidebar",
@@ -1846,7 +1846,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Displays a gallery of images for a single product.",
     "public_functions" : [ {
       "name" : "ProductImageGallery",
@@ -1870,7 +1870,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Displays textual details of a product, including description, specs, and pricing.",
     "public_functions" : [ {
       "name" : "ProductDetails",
@@ -1952,7 +1952,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Form for B2B clients to submit a bulk order inquiry for a specific product.",
     "public_functions" : [ {
       "name" : "InquiryForm",
@@ -2042,7 +2042,7 @@
     "layer" : "PAGE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Displays a grid of all lookbook entries, showcasing different collections.",
     "public_functions" : [ {
       "name" : "LookbookPage",
@@ -2066,7 +2066,7 @@
     "layer" : "PAGE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Displays the full content and images for a single lookbook entry.",
     "public_functions" : [ {
       "name" : "LookbookEntryDetailPage",
@@ -2090,7 +2090,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "A responsive grid that displays lookbook entry cards.",
     "public_functions" : [ {
       "name" : "LookbookGrid",
@@ -2114,7 +2114,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "A card component to display a summary of a single lookbook entry.",
     "public_functions" : [ {
       "name" : "LookbookCard",
@@ -2137,8 +2137,8 @@
     "file_type" : "FRONTEND",
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-09-13",
+    "status" : "VALIDATED",
     "description" : "The main layout for the admin section, including a sidebar for navigation.",
     "public_functions" : [ {
       "name" : "AdminLayout",
@@ -2162,7 +2162,7 @@
     "layer" : "PAGE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "The landing page for the admin portal, showing key stats and navigation links.",
     "public_functions" : [ {
       "name" : "AdminDashboardPage",
@@ -2186,7 +2186,7 @@
     "layer" : "PAGE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Admin page for managing the product catalog, including a product table and forms.",
     "public_functions" : [ {
       "name" : "AdminProductsPage",
@@ -2210,7 +2210,7 @@
     "layer" : "PAGE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Admin page for viewing and managing all submitted client inquiries.",
     "public_functions" : [ {
       "name" : "AdminInquiriesPage",
@@ -2234,7 +2234,7 @@
     "layer" : "PAGE",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Admin page for creating, editing, and deleting lookbook entries.",
     "public_functions" : [ {
       "name" : "AdminLookbookPage",
@@ -2258,7 +2258,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "Component displaying summary statistics on the admin dashboard.",
     "public_functions" : [ {
       "name" : "DashboardSummary",
@@ -2282,7 +2282,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "A data table for displaying and managing products in the admin panel.",
     "public_functions" : [ {
       "name" : "ProductTable",
@@ -2306,7 +2306,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "A form, likely in a dialog, for creating and editing products.",
     "public_functions" : [ {
       "name" : "ProductForm",
@@ -2330,7 +2330,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "A data table for displaying and managing client inquiries in the admin panel.",
     "public_functions" : [ {
       "name" : "InquiryTable",
@@ -2354,7 +2354,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "A component to view the full details of a single client inquiry.",
     "public_functions" : [ {
       "name" : "InquiryDetailView",
@@ -2378,7 +2378,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "A data table for displaying and managing lookbook entries in the admin panel.",
     "public_functions" : [ {
       "name" : "LookbookTable",
@@ -2402,7 +2402,7 @@
     "layer" : "COMPONENT",
     "created_date" : "2024-07-30",
     "updated_date" : "2026-09-13",
-    "status" : "GENERATED",
+    "status" : "VALIDATED",
     "description" : "A form, likely in a dialog, for creating and editing lookbook entries.",
     "public_functions" : [ {
       "name" : "LookbookForm",
@@ -2425,7 +2425,7 @@
     "file_type" : "FRONTEND",
     "layer" : "UTIL",
     "created_date" : null,
-    "updated_date" : null,
+    "updated_date" : "2026-09-13",
     "status" : "VALIDATED",
     "description" : "Derived route registry — regenerated every attempt, never LLM-written",
     "public_functions" : null,
@@ -2444,7 +2444,7 @@
     "file_type" : "FRONTEND",
     "layer" : "UTIL",
     "created_date" : null,
-    "updated_date" : null,
+    "updated_date" : "2026-09-13",
     "status" : "VALIDATED",
     "description" : "Derived route registry — regenerated every attempt, never LLM-written",
     "public_functions" : null,
@@ -2463,7 +2463,7 @@
     "file_type" : "FRONTEND",
     "layer" : "UTIL",
     "created_date" : null,
-    "updated_date" : null,
+    "updated_date" : "2026-09-13",
     "status" : "VALIDATED",
     "description" : "Derived route registry — regenerated every attempt, never LLM-written",
     "public_functions" : null,
@@ -2482,7 +2482,7 @@
     "file_type" : "FRONTEND",
     "layer" : "UTIL",
     "created_date" : null,
-    "updated_date" : null,
+    "updated_date" : "2026-09-13",
     "status" : "VALIDATED",
     "description" : "Derived route registry — regenerated every attempt, never LLM-written",
     "public_functions" : null,

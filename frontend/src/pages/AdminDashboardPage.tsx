@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import DashboardSummary from '@/components/admin/DashboardSummary';
 
 export default function AdminDashboardPage(): React.JSX.Element {

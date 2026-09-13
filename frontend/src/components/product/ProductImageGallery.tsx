@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { ProductDto } from '@/types/product';
 
 interface ProductImageGalleryProps {

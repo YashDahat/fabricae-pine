@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useAuth } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { AuthUser } from "@/context/AuthContext"; // Import AuthUser from AuthContext
+// Import AuthUser from AuthContext
 import { ROUTES } from "@/routes";
 
 const formSchema = z.object({

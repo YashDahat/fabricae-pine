@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -30,7 +30,7 @@ const formSchema = z.object({
 });
 
 export function SignupForm() {
-  const router = useRouter();
+  const router = useNavigate();
   const { register, isLoading } = useAuth();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -56,7 +56,7 @@ export function SignupForm() {
       };
       await register(registerRequest);
       toast.success('Registration successful! You are now logged in.');
-      router.push(ROUTES.CLIENT_DASHBOARD);
+      router(ROUTES.CLIENT_DASHBOARD);
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : 'An unknown error occurred';

@@ -1,0 +1,136 @@
+# Smoke Test Failure — attempt 1 — 2026-09-13T17:45:37.619730383
+Failed gate: api-data
+
+== Gate report ==
+PASS boot — /actuator/health 200
+PASS frontend — SPA shell + bundle /assets/index-D8SV8bFj.js served
+FAIL api-data — no public endpoint returned data (DataSeeder likely didn't run or seeded nothing): /api/v1/products→200 empty, /api/v1/categories→200 empty, /api/v1/admin/inquiries→403, /api/v1/lookbook→200 empty
+PASS flows — 17 journeys passed
+
+== Container logs (tail 2000 lines) ==
+minio-1  | INFO: Formatting 1st pool, 1 set(s), 1 drives per set.
+minio-1  | INFO: WARNING: Host local has more than 0 drives of set. A host failure will result in data becoming unavailable.
+minio-1  | MinIO Object Storage Server
+minio-1  | Copyright: 2015-2026 MinIO, Inc.
+minio-1  | License: GNU AGPLv3 - https://www.gnu.org/licenses/agpl-3.0.html
+minio-1  | Version: RELEASE.2025-09-07T16-13-09Z (go1.24.6 linux/arm64)
+minio-1  | 
+minio-1  | API: http://172.24.0.2:9000  http://127.0.0.1:9000 
+minio-1  | WebUI: http://172.24.0.2:9001 http://127.0.0.1:9001  
+minio-1  | 
+minio-1  | Docs: https://docs.min.io
+minio-1  | WARN: Detected default credentials 'minioadmin:minioadmin', we recommend that you change these values with 'MINIO_ROOT_USER' and 'MINIO_ROOT_PASSWORD' environment variables
+app-1    | 
+app-1    |   .   ____          _            __ _ _
+app-1    |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+app-1    | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+app-1    |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+app-1    |   '  |____| .__|_| |_|_| |_\__, | / / / /
+app-1    |  =========|_|==============|___/=/_/_/_/
+app-1    | 
+app-1    |  :: Spring Boot ::                (v4.1.0)
+app-1    | 
+app-1    | 2026-09-13T17:45:32.543Z  INFO 1 --- [fabricaepine] [           main] c.fabricaepine.FabricaePineApplication   : Starting FabricaePineApplication v0.0.1-SNAPSHOT using Java 17.0.19 with PID 1 (/app/app.jar started by app in /app)
+app-1    | 2026-09-13T17:45:32.545Z  INFO 1 --- [fabricaepine] [           main] c.fabricaepine.FabricaePineApplication   : No active profile set, falling back to 1 default profile: "default"
+app-1    | 2026-09-13T17:45:33.048Z  INFO 1 --- [fabricaepine] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+app-1    | 2026-09-13T17:45:33.072Z  INFO 1 --- [fabricaepine] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 7 JPA repository interfaces.
+app-1    | 2026-09-13T17:45:33.375Z  INFO 1 --- [fabricaepine] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+app-1    | 2026-09-13T17:45:33.381Z  INFO 1 --- [fabricaepine] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+app-1    | 2026-09-13T17:45:33.381Z  INFO 1 --- [fabricaepine] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.22]
+app-1    | 2026-09-13T17:45:33.395Z  INFO 1 --- [fabricaepine] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 811 ms
+app-1    | 2026-09-13T17:45:33.537Z  INFO 1 --- [fabricaepine] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+app-1    | 2026-09-13T17:45:33.562Z  INFO 1 --- [fabricaepine] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.1.Final
+app-1    | 2026-09-13T17:45:33.742Z  INFO 1 --- [fabricaepine] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+app-1    | 2026-09-13T17:45:33.755Z  INFO 1 --- [fabricaepine] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+app-1    | 2026-09-13T17:45:33.846Z  INFO 1 --- [fabricaepine] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7030b74c
+app-1    | 2026-09-13T17:45:33.846Z  INFO 1 --- [fabricaepine] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+app-1    | 2026-09-13T17:45:33.861Z  WARN 1 --- [fabricaepine] [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+app-1    | 2026-09-13T17:45:33.873Z  INFO 1 --- [fabricaepine] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+app-1    | 	Database JDBC URL [jdbc:postgresql://db:5432/fabricaepine]
+app-1    | 	Database driver: PostgreSQL JDBC Driver
+app-1    | 	Database dialect: PostgreSQLDialect
+app-1    | 	Database version: 16.15
+app-1    | 	Default catalog/schema: fabricaepine/public
+app-1    | 	Autocommit mode: undefined/unknown
+app-1    | 	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+app-1    | 	JDBC fetch size: none
+app-1    | 	Pool: DataSourceConnectionProvider
+app-1    | 	Minimum pool size: undefined/unknown
+app-1    | 	Maximum pool size: undefined/unknown
+app-1    | 2026-09-13T17:45:34.349Z  INFO 1 --- [fabricaepine] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+app-1    | 2026-09-13T17:45:34.389Z  WARN 1 --- [fabricaepine] [           main] org.hibernate.orm.jdbc.warn              : HHH000247: ErrorCode: 0, SQLState: 00000
+app-1    | 2026-09-13T17:45:34.389Z  WARN 1 --- [fabricaepine] [           main] org.hibernate.orm.jdbc.warn              : constraint "ukk11y3pdtsrjgy8w9b6q4bjwrx" of relation "_user" does not exist, skipping
+app-1    | 2026-09-13T17:45:34.390Z  WARN 1 --- [fabricaepine] [           main] org.hibernate.orm.jdbc.warn              : HHH000247: ErrorCode: 0, SQLState: 00000
+app-1    | 2026-09-13T17:45:34.390Z  WARN 1 --- [fabricaepine] [           main] org.hibernate.orm.jdbc.warn              : constraint "uksmv6iv0phvugvruh5upf10h08" of relation "_user" does not exist, skipping
+app-1    | 2026-09-13T17:45:34.393Z  INFO 1 --- [fabricaepine] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+app-1    | 2026-09-13T17:45:34.424Z  INFO 1 --- [fabricaepine] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+app-1    | 2026-09-13T17:45:34.522Z  INFO 1 --- [fabricaepine] [           main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+app-1    | 2026-09-13T17:45:34.523Z  WARN 1 --- [fabricaepine] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+app-1    | 2026-09-13T17:45:34.916Z  INFO 1 --- [fabricaepine] [           main] c.f.storage.MinioStorageService          : [storage] Created bucket 'media'
+app-1    | 2026-09-13T17:45:34.991Z  WARN 1 --- [fabricaepine] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+app-1    | 2026-09-13T17:45:35.109Z  INFO 1 --- [fabricaepine] [           main] o.s.b.w.a.WelcomePageHandlerMapping      : Adding welcome page: class path resource [static/index.html]
+app-1    | 2026-09-13T17:45:35.287Z  INFO 1 --- [fabricaepine] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+app-1    | 2026-09-13T17:45:35.326Z  INFO 1 --- [fabricaepine] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8080 (http) with context path '/'
+app-1    | 2026-09-13T17:45:35.332Z  INFO 1 --- [fabricaepine] [           main] c.fabricaepine.FabricaePineApplication   : Started FabricaePineApplication in 3.009 seconds (process running for 3.25)
+app-1    | 2026-09-13T17:45:37.183Z  INFO 1 --- [fabricaepine] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+app-1    | 2026-09-13T17:45:37.184Z  INFO 1 --- [fabricaepine] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+app-1    | 2026-09-13T17:45:37.184Z  INFO 1 --- [fabricaepine] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+db-1     | The files belonging to this database system will be owned by user "postgres".
+db-1     | This user must also own the server process.
+db-1     | 
+db-1     | The database cluster will be initialized with locale "en_US.utf8".
+db-1     | The default database encoding has accordingly been set to "UTF8".
+db-1     | The default text search configuration will be set to "english".
+db-1     | 
+db-1     | Data page checksums are disabled.
+db-1     | 
+db-1     | fixing permissions on existing directory /var/lib/postgresql/data ... ok
+db-1     | creating subdirectories ... ok
+db-1     | selecting dynamic shared memory implementation ... posix
+db-1     | selecting default max_connections ... 100
+db-1     | selecting default shared_buffers ... 128MB
+db-1     | selecting default time zone ... UTC
+db-1     | creating configuration files ... ok
+db-1     | running bootstrap script ... ok
+db-1     | sh: locale: not found
+db-1     | 2026-09-13 17:45:21.832 UTC [36] WARNING:  no usable system locales were found
+db-1     | performing post-bootstrap initialization ... ok
+db-1     | initdb: warning: enabling "trust" authentication for local connections
+db-1     | initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+db-1     | syncing data to disk ... ok
+db-1     | 
+db-1     | 
+db-1     | Success. You can now start the database server using:
+db-1     | 
+db-1     |     pg_ctl -D /var/lib/postgresql/data -l logfile start
+db-1     | 
+db-1     | waiting for server to start....2026-09-13 17:45:22.056 UTC [42] LOG:  starting PostgreSQL 16.15 on aarch64-unknown-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+db-1     | 2026-09-13 17:45:22.057 UTC [42] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+db-1     | 2026-09-13 17:45:22.058 UTC [45] LOG:  database system was shut down at 2026-09-13 17:45:21 UTC
+db-1     | 2026-09-13 17:45:22.060 UTC [42] LOG:  database system is ready to accept connections
+db-1     |  done
+db-1     | server started
+db-1     | CREATE DATABASE
+db-1     | 
+db-1     | 
+db-1     | /usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+db-1     | 
+db-1     | waiting for server to shut down....2026-09-13 17:45:22.189 UTC [42] LOG:  received fast shutdown request
+db-1     | 2026-09-13 17:45:22.191 UTC [42] LOG:  aborting any active transactions
+db-1     | 2026-09-13 17:45:22.192 UTC [42] LOG:  background worker "logical replication launcher" (PID 48) exited with exit code 1
+db-1     | 2026-09-13 17:45:22.192 UTC [43] LOG:  shutting down
+db-1     | 2026-09-13 17:45:22.193 UTC [43] LOG:  checkpoint starting: shutdown immediate
+db-1     | 2026-09-13 17:45:22.231 UTC [43] LOG:  checkpoint complete: wrote 926 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.009 s, sync=0.018 s, total=0.039 s; sync files=301, longest=0.005 s, average=0.001 s; distance=4283 kB, estimate=4283 kB; lsn=0/1925D20, redo lsn=0/1925D20
+db-1     | 2026-09-13 17:45:22.233 UTC [42] LOG:  database system is shut down
+db-1     |  done
+db-1     | server stopped
+db-1     | 
+db-1     | PostgreSQL init process complete; ready for start up.
+db-1     | 
+db-1     | 2026-09-13 17:45:22.308 UTC [1] LOG:  starting PostgreSQL 16.15 on aarch64-unknown-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+db-1     | 2026-09-13 17:45:22.309 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+db-1     | 2026-09-13 17:45:22.309 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+db-1     | 2026-09-13 17:45:22.316 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+db-1     | 2026-09-13 17:45:22.326 UTC [58] LOG:  database system was shut down at 2026-09-13 17:45:22 UTC
+db-1     | 2026-09-13 17:45:22.329 UTC [1] LOG:  database system is ready to accept connections
+

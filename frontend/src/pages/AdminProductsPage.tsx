@@ -93,7 +93,7 @@ export default function AdminProductsPage() {
 
       <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
         {products && products.length > 0 ? (
-          <ProductTable products={products} onEdit={handleEditProduct} onDelete={handleDeleteProduct} />
+          <ProductTable onEdit={handleEditProduct} onDelete={handleDeleteProduct} />
         ) : (
           <div className="text-center py-10">
             <p className="text-gray-500">No products found. Add a new product to get started.</p>

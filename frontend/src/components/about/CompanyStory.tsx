@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { Separator } from '@/components/ui/separator';
 
 export default function CompanyStory(): React.JSX.Element {

@@ -19,6 +19,10 @@ export const ROUTES = {
   ADMIN_LOOKBOOK: '/admin/lookbook',
   ADMIN_PRODUCTS: '/admin/products',
   NOT_FOUND: '*',
+  CART: '/cart',
+  CHECKOUT: '/checkout',
+  GALLERY: '/gallery',
+  ADMIN_MEDIA: '/admin/media',
 } as const;
 
 export type RouteGate = 'public' | 'auth' | 'admin';
@@ -49,4 +53,8 @@ export const routeTable: RouteEntry[] = [
   { key: 'ADMIN_LOOKBOOK', path: ROUTES.ADMIN_LOOKBOOK, page: 'AdminLookbookPage', importPath: './pages/AdminLookbookPage', label: 'Lookbook', gate: 'admin', nav: true },
   { key: 'ADMIN_PRODUCTS', path: ROUTES.ADMIN_PRODUCTS, page: 'AdminProductsPage', importPath: './pages/AdminProductsPage', label: 'Products', gate: 'admin', nav: true },
   { key: 'NOT_FOUND', path: ROUTES.NOT_FOUND, page: 'NotFoundPage', importPath: './pages/NotFoundPage', label: 'Not Found', gate: 'public', nav: false },
+  { key: 'CART', path: ROUTES.CART, page: 'CartPage', importPath: './pages/CartPage', label: 'Cart', gate: 'public', nav: false },
+  { key: 'CHECKOUT', path: ROUTES.CHECKOUT, page: 'CheckoutPage', importPath: './pages/CheckoutPage', label: 'Checkout', gate: 'auth', nav: false },
+  { key: 'GALLERY', path: ROUTES.GALLERY, page: 'GalleryPage', importPath: './pages/GalleryPage', label: 'Gallery', gate: 'public', nav: true },
+  { key: 'ADMIN_MEDIA', path: ROUTES.ADMIN_MEDIA, page: 'AdminMediaPage', importPath: './pages/admin/AdminMediaPage', label: 'Media', gate: 'admin', nav: true },
 ];

@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useInquiries } from '@/hooks/inquiryHooks';
 import { InquiryResponseDto, InquiryStatus } from '@/types/inquiry';

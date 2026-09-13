@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import CompanyStory from '@/components/about/CompanyStory';
 import ManufacturingProcess from '@/components/about/ManufacturingProcess';
 

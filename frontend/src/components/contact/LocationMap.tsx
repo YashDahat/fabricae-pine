@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import React from 'react';
 
 export function LocationMap(): React.JSX.Element {
@@ -7,7 +8,7 @@ export function LocationMap(): React.JSX.Element {
   const zoom = 15;
 
   // Google Maps embed URL
-  const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&q=${latitude},${longitude}&zoom=${zoom}`;
+  const mapUrl = `https://www.google.com/maps/embed/v1/place?key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}&q=${latitude},${longitude}&zoom=${zoom}`;
 
   return (
     <section className="py-16 px-4 bg-white" data-testid="location-map-section">

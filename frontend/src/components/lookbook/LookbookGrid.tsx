@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { LookbookEntryDto } from '@/types/lookbook';
 import { LookbookCard } from '@/components/lookbook/LookbookCard';
 

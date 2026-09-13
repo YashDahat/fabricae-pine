@@ -1,5 +1,6 @@
+import type { JSX } from 'react';
 import { ProductDto } from '@/types/product';
-import { ProductCard } from '@/components/product/ProductCard';
+import ProductCard from '@/components/product/ProductCard';
 
 interface ProductGridProps {
   products: ProductDto[];

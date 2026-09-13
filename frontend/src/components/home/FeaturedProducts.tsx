@@ -1,5 +1,5 @@
 import { useProducts } from '@/hooks/productHooks';
-import { ProductCard } from '@/components/product/ProductCard';
+import ProductCard from '@/components/product/ProductCard';
 import { Skeleton } from '@/components/ui/skeleton';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';

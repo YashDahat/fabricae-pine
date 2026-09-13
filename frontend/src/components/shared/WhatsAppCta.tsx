@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { Button } from '@/components/ui/button';
 import { siteConfig } from '@/config/siteConfig';
 import { MessageCircle } from 'lucide-react';

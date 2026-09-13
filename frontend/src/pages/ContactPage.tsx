@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { ContactForm } from '@/components/contact/ContactForm';
 import { LocationMap } from '@/components/contact/LocationMap';
 import { WhatsAppCta } from '@/components/shared/WhatsAppCta';

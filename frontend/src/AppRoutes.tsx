@@ -4,6 +4,7 @@
 
 import { Routes, Route, Outlet } from 'react-router-dom'
 import RequireAdmin from '@/components/RequireAdmin'
+import RequireAuth from '@/components/RequireAuth'
 import { SiteLayout } from '@/shell'
 import AdminLayout from '@/components/AdminLayout'
 import { siteConfig } from '@/config/siteConfig'
@@ -23,6 +24,10 @@ import AdminInquiriesPage from './pages/AdminInquiriesPage';
 import AdminLookbookPage from './pages/AdminLookbookPage';
 import AdminProductsPage from './pages/AdminProductsPage';
 import NotFoundPage from './pages/NotFoundPage';
+import CartPage from './pages/CartPage';
+import CheckoutPage from './pages/CheckoutPage';
+import GalleryPage from './pages/GalleryPage';
+import AdminMediaPage from './pages/admin/AdminMediaPage';
 
 export default function AppRoutes() {
   return (
@@ -32,6 +37,7 @@ export default function AppRoutes() {
         <Route path="/admin/inquiries" element={<AdminInquiriesPage />} />
         <Route path="/admin/lookbook" element={<AdminLookbookPage />} />
         <Route path="/admin/products" element={<AdminProductsPage />} />
+        <Route path="/admin/media" element={<AdminMediaPage />} />
       </Route>
       <Route element={<SiteLayout config={siteConfig}><Outlet /></SiteLayout>}>
         {/* Outlet receives the matched child route */}
@@ -45,6 +51,11 @@ export default function AppRoutes() {
         <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/gallery" element={<GalleryPage />} />
+        <Route element={<RequireAuth><Outlet /></RequireAuth>}>
+          <Route path="/checkout" element={<CheckoutPage />} />
+        </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

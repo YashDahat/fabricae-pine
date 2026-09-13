@@ -9,7 +9,7 @@ export default function ProductDetailPage() {
   const { id } = useParams<{ id: string }>();
   const productId = id ? parseInt(id) : undefined;
 
-  const { data: product, isLoading, isError, error } = useProductById(productId);
+  const { data: product, isLoading, isError, error } = useProductById(productId ?? 0);
 
   if (isLoading) {
     return (
