@@ -1570,14 +1570,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Dashboard for logged-in B2B clients to view their profile and inquiry history.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ClientDashboardPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the client dashboard, including a welcome header and inquiry history table."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/client/DashboardHeader.tsx", "frontend/src/components/client/InquiryHistoryTable.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "client-dashboard",
-    "file_role" : null,
+    "file_role" : "PAGE layer — orchestrates the client dashboard view, displaying a personalized header and the client's inquiry history.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1589,14 +1594,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Header component for the client dashboard, welcoming the user.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "DashboardHeader",
+      "parameters" : [ "{ clientName: string }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays a personalized welcome message for the client."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "client-dashboard",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — displays a welcome message for the authenticated client.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1608,14 +1618,26 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Displays a table of the client's past inquiries and their statuses.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "InquiryHistoryTable",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Fetches and renders a table of the current client's inquiry history."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/admin/inquiries",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches all inquiries from the backend to filter for the current client's history.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/services/inquiryService.ts", "frontend/src/types/inquiry.ts" ],
     "depends_on" : [ ],
     "feature_name" : "client-dashboard",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — fetches and displays a table of the client's past inquiries.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -2254,9 +2276,9 @@
     "feature_display_name" : "Client Dashboard",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/pages/ClientDashboardPage.tsx", "frontend/src/components/client/DashboardHeader.tsx", "frontend/src/components/client/InquiryHistoryTable.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
-    "consumes_foundation" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#0A4837] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#B8942E] text-white font-semibold rounded-md px-6 py-3 transition-all duration-200\n- Secondary CTA: border border-[#0A4837] text-[#0A4837] hover:bg-[#0A4837] hover:text-white font-semibold rounded-md px-6 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-[#F5F5DC] (even sections)\n- Card: bg-white rounded-lg shadow-sm border border-gray-100 p-5\n- Section container: <section className=\"py-12 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-5xl font-bold text-white\n- Body: text-[#333333] leading-relaxed\n- Table header: bg-[#0A4837] text-white\n- Table row: bg-white even:bg-gray-50\n\nThe Client Dashboard feature provides a dedicated portal for logged-in B2B clients to manage their profile and view their inquiry history. The `ClientDashboardPage.tsx` serves as the main entry point, orchestrating the display of client-specific information. It utilizes the `DashboardHeader.tsx` component to present a personalized welcome message and the `InquiryHistoryTable.tsx` component to list all past inquiries made by the client. The `InquiryHistoryTable.tsx` component fetches inquiry data from the backend using the generated `inquiryService` and displays it in a structured, professional table format. All monetary values, if any, will be displayed in Indian Rupees (₹) using the `en-IN` locale.\n\n### ClientDashboardPage.tsx\nThis page is responsible for rendering the overall client dashboard layout. It will use the `useAuth()` hook to retrieve the current user's information and display a personalized welcome message via the `DashboardHeader` component. It will then render the `InquiryHistoryTable` component to show the client's past inquiries. The page will ensure a clean and structured layout, adhering to the defined design tokens.\n\n### DashboardHeader.tsx\nThis component receives the `clientName` as a prop and displays a welcoming header for the client dashboard. It will use the brand accent color for the client's name to maintain a professional and elegant look. The header will be simple and focused, aligning with the overall tone of reliability and expertise.\n\n### InquiryHistoryTable.tsx\nThis component is responsible for fetching and displaying the client's inquiry history in a tabular format. It will use the generated `inquiryService` to call the `getAllInquiries()` function, which in turn consumes the `GET /api/v1/admin/inquiries` endpoint from the `inquiry-management-backend` feature. Although the backend endpoint is `/admin/inquiries`, the frontend will filter the results to show only inquiries belonging to the current authenticated client. The table will display relevant inquiry details such as `submissionDate`, `productInterest`, `quantity`, and `status` from the `InquiryResponseDto` data shape. The table will be styled with the defined table header and row design tokens, ensuring a professional and readable presentation. Each row will display the `submissionDate` formatted as a localized date string for India, and any quantities as plain numbers. The `status` will be displayed as a capitalized string.\n",
+    "depends_on_features" : [ "inquiry-management-backend" ],
+    "consumes_foundation" : [ "auth" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
