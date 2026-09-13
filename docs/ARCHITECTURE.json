@@ -1100,14 +1100,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Main application component that sets up providers and the router outlet.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "App",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "The root component rendering the application's routing and global context."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Main application component that sets up React Router, global providers, and the `sonner` Toaster. It defines the main public and admin routes, applying `SiteLayout` and `AdminLayout` respectively.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1119,14 +1124,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Landing page featuring a hero section, featured products, and company introduction.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "HomePage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the home page with a hero banner, featured products, and an about snippet."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/home/HeroSection.tsx", "frontend/src/components/home/FeaturedProducts.tsx", "frontend/src/components/home/AboutSnippet.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Public page that serves as the landing page, composed of a hero section, featured products, and a company introduction snippet.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1138,14 +1148,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Full-width hero component with a background image and a call-to-action.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "HeroSection",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the hero section with a background image, headline, and CTA."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Component for the home page hero section, featuring a background image, a prominent headline, and a call-to-action button.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1157,14 +1172,26 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A grid showcasing a selection of featured products on the home page.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "FeaturedProducts",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Fetches and displays a grid of featured products."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/products",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches a list of all products to display as featured.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/services/productService.ts", "frontend/src/components/product/ProductCard.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Component for displaying a grid of featured products on the home page, fetching data from the product-management-backend.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1176,14 +1203,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A brief section on the homepage introducing the company and its values.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AboutSnippet",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a brief introductory section about the company."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Component providing a brief introduction to Fabricae PINE and its values, displayed on the home page.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1195,14 +1227,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Displays detailed information about the company's history and manufacturing process.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "AboutPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the about page with company story and manufacturing process details."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/about/CompanyStory.tsx", "frontend/src/components/about/ManufacturingProcess.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Public page that displays detailed information about Fabricae PINE's history, mission, and manufacturing process.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1214,14 +1251,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Component detailing the history and mission of Fabricae PINE.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "CompanyStory",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the company's history, mission, and values."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Component detailing the history, mission, and values of Fabricae PINE for the About Us page.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1233,14 +1275,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Visually showcases the steps in the garment manufacturing process.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ManufacturingProcess",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a visual representation of the manufacturing process."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Component visually showcasing the steps involved in Fabricae PINE's garment manufacturing process.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1252,14 +1299,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Provides contact information, a contact form, and an embedded Google Map.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ContactPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the contact page with a form, location map, and contact details."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/contact/ContactForm.tsx", "frontend/src/components/contact/LocationMap.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Public page that provides contact information, a general inquiry form, and an embedded Google Map showing the business location.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1271,14 +1323,26 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A simple form for general inquiries, distinct from the bulk order inquiry.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ContactForm",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders and handles submission for the general contact inquiry form."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/inquiries",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Submits a new general inquiry to the backend.",
+      "access" : null
+    } ],
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Component for a general inquiry form, allowing users to submit messages to Fabricae PINE, which calls the inquiry-management-backend.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1290,14 +1354,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Embeds a Google Map showing the business location.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "LocationMap",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders an embedded Google Map centered on the business location."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Component that embeds a Google Map to display the physical location of Fabricae PINE.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1309,14 +1378,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A standard 404 page for handling invalid routes.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "NotFoundPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a 404 'Page Not Found' message."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Public page that serves as a standard 404 error page for invalid routes.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1328,14 +1402,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A floating action button for initiating a WhatsApp chat.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "WhatsAppCta",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a floating WhatsApp chat button."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Reusable floating action button component that initiates a WhatsApp chat with the business.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1347,14 +1426,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A reusable dialog component to confirm delete actions in admin panels.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "DeleteConfirmationDialog",
+      "parameters" : [ "boolean isOpen", "() => void onClose", "() => void onConfirm", "string itemType", "string itemName" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a confirmation dialog for delete operations."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : null,
+    "file_role" : "Reusable dialog component to confirm delete actions, typically used in admin panels.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -2125,9 +2209,9 @@
     "feature_display_name" : "Core UI",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/App.tsx", "frontend/src/pages/HomePage.tsx", "frontend/src/pages/AboutPage.tsx", "frontend/src/pages/ContactPage.tsx", "frontend/src/pages/NotFoundPage.tsx", "frontend/src/components/home/HeroSection.tsx", "frontend/src/components/home/FeaturedProducts.tsx", "frontend/src/components/home/AboutSnippet.tsx", "frontend/src/components/about/CompanyStory.tsx", "frontend/src/components/about/ManufacturingProcess.tsx", "frontend/src/components/contact/ContactForm.tsx", "frontend/src/components/contact/LocationMap.tsx", "frontend/src/components/shared/WhatsAppCta.tsx", "frontend/src/components/shared/DeleteConfirmationDialog.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
-    "consumes_foundation" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#0A4837] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#C2A032] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Secondary CTA: border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-[#F5F5DC] (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#333333] leading-relaxed\n\nThe `core-ui` feature provides the foundational UI structure and common components for the Fabricae PINE website. It includes the main application entry point (`App.tsx`), core public pages (`HomePage.tsx`, `AboutPage.tsx`, `ContactPage.tsx`, `NotFoundPage.tsx`), and shared components used across the application. This feature establishes the overall look and feel, navigation, and basic user interaction patterns.\n\n`App.tsx` is the root component that sets up the React Router for navigation and wraps the application with necessary providers. It defines the main routes for public pages and the admin portal, ensuring the `SiteLayout` (which includes `SiteHeader` and `SiteFooter`) is applied globally to public routes, and `AdminLayout` to admin routes. It also integrates the `Toaster` component from `sonner` for displaying toast notifications.\n\n`HomePage.tsx` serves as the landing page, composed of `HeroSection.tsx`, `FeaturedProducts.tsx`, and `AboutSnippet.tsx`. The `HeroSection` displays a prominent banner with a background image, a compelling headline, and a call-to-action button. `FeaturedProducts` showcases a selection of products by fetching them from the `product-management-backend` via the generated `productService` and rendering them using `ProductCard` components. `AboutSnippet` provides a brief introduction to Fabricae PINE, encouraging users to learn more.\n\n`AboutPage.tsx` presents detailed information about Fabricae PINE, utilizing `CompanyStory.tsx` to describe the company's history and mission, and `ManufacturingProcess.tsx` to visually illustrate the garment production steps. The content should be professional and emphasize quality craftsmanship.\n\n`ContactPage.tsx` offers various ways for clients to reach Fabricae PINE. It includes `ContactForm.tsx` for general inquiries, which submits data to the `inquiry-management-backend` via the generated `inquiryService`. It also embeds `LocationMap.tsx` to display the business address using Google Maps, and lists contact details such as phone number and opening hours.\n\n`NotFoundPage.tsx` is a generic 404 page displayed when a user navigates to an invalid URL.\n\nShared components like `WhatsAppCta.tsx` provide a floating action button for direct communication, and `DeleteConfirmationDialog.tsx` offers a reusable modal for confirming delete actions, primarily for admin interfaces.\n\n### Inter-file Wiring and Data Flow:\n- `App.tsx` uses `react-router-dom` to define routes and render pages. It implicitly applies `SiteLayout` to public routes and `AdminLayout` to admin routes.\n- `HomePage.tsx` imports and renders `HeroSection`, `FeaturedProducts`, and `AboutSnippet`.\n- `FeaturedProducts.tsx` calls the generated `productService.getAllProducts()` to fetch product data and maps this data to `ProductCard` components. Each `ProductCard` will display product details like `name`, `price`, and `imageUrl` from the `ProductDto` data shape.\n- `AboutPage.tsx` imports and renders `CompanyStory` and `ManufacturingProcess`.\n- `ContactPage.tsx` imports and renders `ContactForm` and `LocationMap`.\n- `ContactForm.tsx` uses the generated `inquiryService.createInquiry(InquiryRequestDto)` to submit inquiry data to the backend. Upon successful submission, it should display a toast notification using `sonner`.\n- `LocationMap.tsx` uses the hardcoded latitude and longitude from the business context to display the map.\n- All pages and components will adhere to the defined Design Tokens for styling, using Tailwind CSS classes for colors, typography, and spacing.\n- Monetary values, where displayed (e.g., in `ProductCard` if prices are shown), must be formatted using `toLocaleString('en-IN', { style: 'currency', currency: 'INR' })`.\n\n### Error Handling:\n- `ContactForm.tsx` should handle potential errors from `inquiryService.createInquiry` by displaying an error toast notification to the user.\n- `FeaturedProducts.tsx` should handle errors from `productService.getAllProducts` by displaying an error message or toast, indicating that products could not be loaded.\n",
+    "depends_on_features" : [ "product-catalog", "inquiry-management-backend" ],
+    "consumes_foundation" : [ ],
     "change_required" : true,
     "change_instruction" : null
   }, {
