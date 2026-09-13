@@ -447,13 +447,53 @@
     "status" : "PLANNED",
     "description" : "Represents a bulk order inquiry submitted by a B2B client.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "Long",
+      "description" : "Unique identifier for the inquiry. Auto-generated."
+    }, {
+      "name" : "clientName",
+      "type" : "String",
+      "description" : "Name of the client submitting the inquiry. Not null, max 255 characters."
+    }, {
+      "name" : "clientEmail",
+      "type" : "String",
+      "description" : "Email of the client. Not null, valid email format, max 255 characters."
+    }, {
+      "name" : "clientPhone",
+      "type" : "String",
+      "description" : "Phone number of the client. Max 20 characters."
+    }, {
+      "name" : "companyName",
+      "type" : "String",
+      "description" : "Company name of the client. Max 255 characters."
+    }, {
+      "name" : "productInterest",
+      "type" : "String",
+      "description" : "Description of products the client is interested in. Not null, max 1000 characters."
+    }, {
+      "name" : "quantity",
+      "type" : "Integer",
+      "description" : "Estimated quantity required. Not null, must be positive."
+    }, {
+      "name" : "additionalDetails",
+      "type" : "String",
+      "description" : "Any additional details provided by the client. Max 2000 characters."
+    }, {
+      "name" : "status",
+      "type" : "InquiryStatus",
+      "description" : "Current status of the inquiry (e.g., PENDING, REVIEWED, CONTACTED). Not null."
+    }, {
+      "name" : "submissionDate",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the inquiry was submitted. Not null."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/model/InquiryStatus.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management-backend",
-    "file_role" : null,
+    "file_role" : "MODEL layer — represents a bulk order inquiry with fields for client details, product interest, quantity, and status.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -472,7 +512,7 @@
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management-backend",
-    "file_role" : null,
+    "file_role" : "MODEL layer — an enum defining the possible states of a client inquiry.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -484,14 +524,14 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Spring Data JPA repository for CRUD operations on Inquiry entities.",
-    "public_functions" : null,
+    "public_functions" : [ ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/model/Inquiry.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management-backend",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — provides standard CRUD operations for `Inquiry` entities.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -503,14 +543,34 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Handles business logic for creating and managing client inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createInquiry",
+      "parameters" : [ "InquiryRequestDto inquiryRequestDto" ],
+      "return_type" : "InquiryResponseDto",
+      "description" : "Creates a new inquiry from the provided DTO, sets its status to PENDING, and saves it. Returns the saved inquiry as a DTO."
+    }, {
+      "name" : "getAllInquiries",
+      "parameters" : [ ],
+      "return_type" : "List<InquiryResponseDto>",
+      "description" : "Retrieves all inquiries and returns them as a list of DTOs."
+    }, {
+      "name" : "getInquiryById",
+      "parameters" : [ "Long id" ],
+      "return_type" : "InquiryResponseDto",
+      "description" : "Retrieves a single inquiry by its ID. Throws ResourceNotFoundException if not found. Returns the inquiry as a DTO."
+    }, {
+      "name" : "updateInquiryStatus",
+      "parameters" : [ "Long id", "InquiryStatus status" ],
+      "return_type" : "InquiryResponseDto",
+      "description" : "Updates the status of an inquiry identified by its ID. Throws ResourceNotFoundException if the inquiry does not exist. Returns the updated inquiry as a DTO."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/repository/InquiryRepository.java", "backend/src/main/java/com/fabricaepine/dto/InquiryRequestDto.java", "backend/src/main/java/com/fabricaepine/dto/InquiryResponseDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management-backend",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements `createInquiry(InquiryRequestDto): InquiryResponseDto`, `getAllInquiries(): List<InquiryResponseDto>`, `getInquiryById(Long id): InquiryResponseDto`, and `updateInquiryStatus(Long id, InquiryStatus status): InquiryResponseDto`.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -522,14 +582,26 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Public REST controller for submitting new bulk order inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createInquiry",
+      "parameters" : [ "InquiryRequestDto inquiryRequestDto" ],
+      "return_type" : "ResponseEntity<InquiryResponseDto>",
+      "description" : "Handles POST requests to create a new inquiry."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/inquiries",
+      "request_body" : "InquiryRequestDto",
+      "response_body" : "InquiryResponseDto",
+      "description" : "Submits a new bulk order inquiry. Returns 201 Created on success.",
+      "access" : "public"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/service/InquiryService.java", "backend/src/main/java/com/fabricaepine/dto/InquiryRequestDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management-backend",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes a public REST endpoint for submitting new bulk order inquiries.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -541,14 +613,50 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Admin-only REST controller for viewing and managing all client inquiries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllInquiries",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<InquiryResponseDto>>",
+      "description" : "Handles GET requests to retrieve all inquiries."
+    }, {
+      "name" : "getInquiryById",
+      "parameters" : [ "Long id" ],
+      "return_type" : "ResponseEntity<InquiryResponseDto>",
+      "description" : "Handles GET requests to retrieve a single inquiry by ID."
+    }, {
+      "name" : "updateInquiryStatus",
+      "parameters" : [ "Long id", "InquiryStatus status" ],
+      "return_type" : "ResponseEntity<InquiryResponseDto>",
+      "description" : "Handles PUT requests to update the status of an inquiry."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/admin/inquiries",
+      "request_body" : null,
+      "response_body" : "List<InquiryResponseDto>",
+      "description" : "Retrieves a list of all client inquiries.",
+      "access" : "admin"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/admin/inquiries/{id}",
+      "request_body" : null,
+      "response_body" : "InquiryResponseDto",
+      "description" : "Retrieves a single client inquiry by its ID. Returns 404 if not found.",
+      "access" : "admin"
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/admin/inquiries/{id}/status",
+      "request_body" : "InquiryStatus",
+      "response_body" : "InquiryResponseDto",
+      "description" : "Updates the status of a specific inquiry. Returns 404 if inquiry not found.",
+      "access" : "admin"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/service/InquiryService.java", "backend/src/main/java/com/fabricaepine/dto/InquiryResponseDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management-backend",
-    "file_role" : null,
+    "file_role" : "CONTROLLER layer — exposes admin-only REST endpoints for viewing and managing client inquiries.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -561,13 +669,41 @@
     "status" : "PLANNED",
     "description" : "Data Transfer Object for creating a new inquiry.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "clientName",
+      "type" : "String",
+      "description" : "Name of the client. Not null, max 255 characters."
+    }, {
+      "name" : "clientEmail",
+      "type" : "String",
+      "description" : "Email of the client. Not null, valid email format, max 255 characters."
+    }, {
+      "name" : "clientPhone",
+      "type" : "String",
+      "description" : "Phone number of the client. Max 20 characters."
+    }, {
+      "name" : "companyName",
+      "type" : "String",
+      "description" : "Company name of the client. Max 255 characters."
+    }, {
+      "name" : "productInterest",
+      "type" : "String",
+      "description" : "Description of products interested in. Not null, max 1000 characters."
+    }, {
+      "name" : "quantity",
+      "type" : "Integer",
+      "description" : "Estimated quantity. Not null, must be positive."
+    }, {
+      "name" : "additionalDetails",
+      "type" : "String",
+      "description" : "Additional details. Max 2000 characters."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management-backend",
-    "file_role" : null,
+    "file_role" : "DTO layer — used for data transfer when creating a new inquiry.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -580,13 +716,53 @@
     "status" : "PLANNED",
     "description" : "Data Transfer Object for viewing an existing inquiry.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "Long",
+      "description" : "Unique identifier for the inquiry."
+    }, {
+      "name" : "clientName",
+      "type" : "String",
+      "description" : "Name of the client."
+    }, {
+      "name" : "clientEmail",
+      "type" : "String",
+      "description" : "Email of the client."
+    }, {
+      "name" : "clientPhone",
+      "type" : "String",
+      "description" : "Phone number of the client."
+    }, {
+      "name" : "companyName",
+      "type" : "String",
+      "description" : "Company name of the client."
+    }, {
+      "name" : "productInterest",
+      "type" : "String",
+      "description" : "Description of products interested in."
+    }, {
+      "name" : "quantity",
+      "type" : "Integer",
+      "description" : "Estimated quantity."
+    }, {
+      "name" : "additionalDetails",
+      "type" : "String",
+      "description" : "Additional details."
+    }, {
+      "name" : "status",
+      "type" : "InquiryStatus",
+      "description" : "Current status of the inquiry."
+    }, {
+      "name" : "submissionDate",
+      "type" : "LocalDateTime",
+      "description" : "Timestamp when the inquiry was submitted."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management-backend",
-    "file_role" : null,
+    "file_role" : "DTO layer — used for data transfer when retrieving inquiry details.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1794,9 +1970,9 @@
     "feature_display_name" : "Inquiry Management (Backend)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/fabricaepine/model/Inquiry.java", "backend/src/main/java/com/fabricaepine/model/InquiryStatus.java", "backend/src/main/java/com/fabricaepine/repository/InquiryRepository.java", "backend/src/main/java/com/fabricaepine/service/InquiryService.java", "backend/src/main/java/com/fabricaepine/controller/InquiryController.java", "backend/src/main/java/com/fabricaepine/controller/admin/AdminInquiryController.java", "backend/src/main/java/com/fabricaepine/dto/InquiryRequestDto.java", "backend/src/main/java/com/fabricaepine/dto/InquiryResponseDto.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
-    "consumes_foundation" : null,
+    "feature_instruction" : "This feature manages bulk order inquiries from B2B clients for Fabricae PINE. It provides a public API endpoint for clients to submit new inquiries and an admin-only API for internal staff to view and manage these inquiries. The `Inquiry` entity represents a single inquiry, with its `InquiryStatus` enum tracking its lifecycle (PENDING, REVIEWED, CONTACTED, CLOSED). The `InquiryRepository` handles persistence, while `InquiryService` encapsulates the core business logic, including creating new inquiries and updating their statuses. `InquiryController` exposes the public endpoint for inquiry submission, and `AdminInquiryController` provides the administrative interface for managing inquiries.\n\n### Inquiry Submission Flow\n1. A B2B client (or an anonymous user) submits an inquiry via the `POST /api/v1/inquiries` endpoint.\n2. The `InquiryController.createInquiry(InquiryRequestDto)` method receives the request.\n3. It calls `inquiryService.createInquiry(InquiryRequestDto)`.\n4. `InquiryService` maps the `InquiryRequestDto` to an `Inquiry` entity, sets its `status` to `PENDING`, and saves it using `inquiryRepository.save(inquiry)`.\n5. The saved `Inquiry` entity is then mapped to an `InquiryResponseDto` and returned.\n\n### Admin Inquiry Management Flow\n1. An authenticated administrator accesses the admin portal to view inquiries.\n2. The frontend calls `GET /api/v1/admin/inquiries` to fetch all inquiries or `GET /api/v1/admin/inquiries/{id}` for a specific inquiry.\n3. `AdminInquiryController` methods `getAllInquiries()` and `getInquiryById(Long id)` call `inquiryService.getAllInquiries()` and `inquiryService.getInquiryById(Long id)` respectively.\n4. `InquiryService` retrieves inquiries from `inquiryRepository` and maps them to `InquiryResponseDto` objects.\n5. To update an inquiry's status, the admin frontend calls `PUT /api/v1/admin/inquiries/{id}/status`.\n6. `AdminInquiryController.updateInquiryStatus(Long id, InquiryStatus status)` calls `inquiryService.updateInquiryStatus(Long id, InquiryStatus status)`.\n7. `InquiryService` fetches the `Inquiry` by ID, updates its status, and saves it. If the inquiry is not found, `InquiryService` throws a `ResourceNotFoundException`.\n\n### Error Handling\n- If an inquiry is not found during an update or retrieval operation, `InquiryService` will throw a `ResourceNotFoundException`. This exception will be caught by the `GlobalExceptionHandler` (from the `shared-backend` feature), which will return an HTTP 404 Not Found response with an `ErrorResponse` body.",
+    "depends_on_features" : [ "shared-backend" ],
+    "consumes_foundation" : [ ],
     "change_required" : true,
     "change_instruction" : null
   }, {
