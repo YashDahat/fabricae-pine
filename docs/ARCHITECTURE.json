@@ -20,71 +20,71 @@
     "public_variables" : [ {
       "name" : "id",
       "type" : "Long",
-      "description" : "Unique identifier for the product. Generated automatically."
+      "description" : null
     }, {
       "name" : "name",
       "type" : "String",
-      "description" : "Name of the product. Not null, max 255 characters."
+      "description" : null
     }, {
       "name" : "description",
       "type" : "String",
-      "description" : "Detailed description of the product. Max 1000 characters."
+      "description" : null
     }, {
       "name" : "price",
       "type" : "BigDecimal",
-      "description" : "Wholesale price of the product. Not null, must be positive."
+      "description" : null
     }, {
       "name" : "minimumOrderQuantity",
       "type" : "Integer",
-      "description" : "Minimum quantity required for an order of this product. Not null, must be positive."
+      "description" : null
     }, {
       "name" : "imageUrl",
       "type" : "String",
-      "description" : "URL of the product's main image. Max 500 characters."
+      "description" : null
     }, {
       "name" : "category",
       "type" : "ProductCategory",
-      "description" : "The category this product belongs to. Many-to-one relationship."
+      "description" : null
     } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/model/ProductCategory.java" ],
     "depends_on" : [ ],
     "feature_name" : "product-management-backend",
-    "file_role" : "MODEL layer — Represents a single clothing product in the catalog, including details, pricing, and MOQ.",
+    "file_role" : "MODEL layer — Represents a single clothing product in the catalog, including details, pricing, and MOQ.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { id: Long; name: String; description: String; price: BigDecimal; minimumOrderQuantity: Integer; imageUrl: String; category: ProductCategory }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "ProductCategory.java",
     "file_path" : "backend/src/main/java/com/fabricaepine/model/ProductCategory.java",
     "file_type" : "BACKEND",
     "layer" : "MODEL",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-09-13",
+    "status" : "GENERATED",
     "description" : "Represents a category for products, used for filtering and organization.",
     "public_functions" : null,
     "public_variables" : [ {
       "name" : "id",
       "type" : "Long",
-      "description" : "Unique identifier for the product category. Generated automatically."
+      "description" : null
     }, {
       "name" : "name",
       "type" : "String",
-      "description" : "Name of the product category. Not null, unique, max 100 characters."
+      "description" : null
     }, {
       "name" : "description",
       "type" : "String",
-      "description" : "Description of the product category. Max 500 characters."
+      "description" : null
     } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "product-management-backend",
-    "file_role" : "MODEL layer — Represents a category for products, used for filtering and organization.",
+    "file_role" : "MODEL layer — Represents a category for products, used for filtering and organization.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { id: Long; name: String; description: String }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "ProductRepository.java",
     "file_path" : "backend/src/main/java/com/fabricaepine/repository/ProductRepository.java",
@@ -96,9 +96,9 @@
     "description" : "Spring Data JPA repository for CRUD operations on Product entities.",
     "public_functions" : [ {
       "name" : "findByCategoryId",
-      "parameters" : [ "Long categoryId" ],
-      "return_type" : "List<Product>",
-      "description" : "Finds all products belonging to a specific category."
+      "parameters" : [ "List<Product> findByCategoryId(Long categoryId)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -106,9 +106,9 @@
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/model/Product.java" ],
     "depends_on" : [ ],
     "feature_name" : "product-management-backend",
-    "file_role" : "REPOSITORY layer — Spring Data JPA repository for CRUD operations on Product entities, including finding products by category.",
+    "file_role" : "REPOSITORY layer — Spring Data JPA repository for CRUD operations on Product entities, including finding products by category.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: List<Product> findByCategoryId(Long categoryId)",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "ProductCategoryRepository.java",
     "file_path" : "backend/src/main/java/com/fabricaepine/repository/ProductCategoryRepository.java",
@@ -139,64 +139,64 @@
     "description" : "Handles business logic for managing products and categories, including filtering.",
     "public_functions" : [ {
       "name" : "getAllProducts",
-      "parameters" : [ "Long categoryId" ],
-      "return_type" : "List<ProductDto>",
-      "description" : "Retrieves all products, optionally filtered by category."
+      "parameters" : [ "List<ProductDto> getAllProducts(Long categoryId)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "getProductById",
-      "parameters" : [ "Long id" ],
-      "return_type" : "ProductDto",
-      "description" : "Retrieves a single product by its ID."
+      "parameters" : [ "ProductDto getProductById(Long id)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "createProduct",
-      "parameters" : [ "ProductDto productDto" ],
-      "return_type" : "ProductDto",
-      "description" : "Creates a new product."
+      "parameters" : [ "ProductDto createProduct(ProductDto productDto)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "updateProduct",
-      "parameters" : [ "Long id", "ProductDto productDto" ],
-      "return_type" : "ProductDto",
-      "description" : "Updates an existing product."
+      "parameters" : [ "ProductDto updateProduct(Long id, ProductDto productDto)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "deleteProduct",
-      "parameters" : [ "Long id" ],
-      "return_type" : "void",
-      "description" : "Deletes a product by its ID."
+      "parameters" : [ "void deleteProduct(Long id)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "getAllCategories",
-      "parameters" : [ ],
-      "return_type" : "List<ProductCategoryDto>",
-      "description" : "Retrieves all product categories."
+      "parameters" : [ "List<ProductCategoryDto> getAllCategories()" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "getCategoryById",
-      "parameters" : [ "Long id" ],
-      "return_type" : "ProductCategoryDto",
-      "description" : "Retrieves a single product category by its ID."
+      "parameters" : [ "ProductCategoryDto getCategoryById(Long id)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "createCategory",
-      "parameters" : [ "ProductCategoryDto categoryDto" ],
-      "return_type" : "ProductCategoryDto",
-      "description" : "Creates a new product category."
+      "parameters" : [ "ProductCategoryDto createCategory(ProductCategoryDto categoryDto)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "updateCategory",
-      "parameters" : [ "Long id", "ProductCategoryDto categoryDto" ],
-      "return_type" : "ProductCategoryDto",
-      "description" : "Updates an existing product category."
+      "parameters" : [ "ProductCategoryDto updateCategory(Long id, ProductCategoryDto categoryDto)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "deleteCategory",
-      "parameters" : [ "Long id" ],
-      "return_type" : "void",
-      "description" : "Deletes a product category by its ID."
+      "parameters" : [ "void deleteCategory(Long id)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
-    "imports_from" : [ "backend/src/main/java/com/fabricaepine/repository/ProductRepository.java", "backend/src/main/java/com/fabricaepine/repository/ProductCategoryRepository.java", "backend/src/main/java/com/fabricaepine/dto/ProductDto.java", "backend/src/main/java/com/fabricaepine/exception/ResourceNotFoundException.java" ],
+    "imports_from" : [ "backend/src/main/java/com/fabricaepine/repository/ProductRepository.java", "backend/src/main/java/com/fabricaepine/repository/ProductCategoryRepository.java", "backend/src/main/java/com/fabricaepine/dto/ProductDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "product-management-backend",
-    "file_role" : "SERVICE layer — implements business logic for managing products and categories, including filtering and CRUD operations.",
+    "file_role" : "SERVICE layer — implements business logic for managing products and categories, including filtering and CRUD operations.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: List<ProductDto> getAllProducts(Long categoryId); ProductDto getProductById(Long id); ProductDto createProduct(ProductDto productDto); ProductDto updateProduct(Long id, ProductDto productDto); void deleteProduct(Long id); List<ProductCategoryDto> getAllCategories(); ProductCategoryDto getCategoryById(Long id); ProductCategoryDto createCategory(ProductCategoryDto categoryDto); ProductCategoryDto updateCategory(Long id, ProductCategoryDto categoryDto); void deleteCategory(Long id)",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "ProductController.java",
     "file_path" : "backend/src/main/java/com/fabricaepine/controller/ProductController.java",
@@ -208,24 +208,24 @@
     "description" : "Public REST controller for fetching product and category data for the catalog.",
     "public_functions" : [ {
       "name" : "getAllProducts",
-      "parameters" : [ "Long categoryId" ],
-      "return_type" : "ResponseEntity<List<ProductDto>>",
-      "description" : "Handles GET requests to retrieve all products, optionally filtered by category."
+      "parameters" : [ "List<ProductDto> getAllProducts(Long categoryId)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "getProductById",
-      "parameters" : [ "Long id" ],
-      "return_type" : "ResponseEntity<ProductDto>",
-      "description" : "Handles GET requests to retrieve a single product by ID."
+      "parameters" : [ "ProductDto getProductById(Long id)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "getAllCategories",
-      "parameters" : [ ],
-      "return_type" : "ResponseEntity<List<ProductCategoryDto>>",
-      "description" : "Handles GET requests to retrieve all product categories."
+      "parameters" : [ "List<ProductCategoryDto> getAllCategories()" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "getCategoryById",
-      "parameters" : [ "Long id" ],
-      "return_type" : "ResponseEntity<ProductCategoryDto>",
-      "description" : "Handles GET requests to retrieve a single product category by ID."
+      "parameters" : [ "ProductCategoryDto getCategoryById(Long id)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : [ {
@@ -261,9 +261,9 @@
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/service/ProductService.java", "backend/src/main/java/com/fabricaepine/dto/ProductDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "product-management-backend",
-    "file_role" : "CONTROLLER layer — Public REST controller for fetching product and category data for the catalog.",
+    "file_role" : "CONTROLLER layer — Public REST controller for fetching product and category data for the catalog.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: List<ProductDto> getAllProducts(Long categoryId); ProductDto getProductById(Long id); List<ProductCategoryDto> getAllCategories(); ProductCategoryDto getCategoryById(Long id)",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "AdminProductController.java",
     "file_path" : "backend/src/main/java/com/fabricaepine/controller/admin/AdminProductController.java",
@@ -275,34 +275,34 @@
     "description" : "Admin-only REST controller for CRUD operations on products and categories.",
     "public_functions" : [ {
       "name" : "createProduct",
-      "parameters" : [ "ProductDto productDto" ],
-      "return_type" : "ResponseEntity<ProductDto>",
-      "description" : "Handles POST requests to create a new product."
+      "parameters" : [ "ProductDto createProduct(ProductDto productDto)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "updateProduct",
-      "parameters" : [ "Long id", "ProductDto productDto" ],
-      "return_type" : "ResponseEntity<ProductDto>",
-      "description" : "Handles PUT requests to update an existing product."
+      "parameters" : [ "ProductDto updateProduct(Long id, ProductDto productDto)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "deleteProduct",
-      "parameters" : [ "Long id" ],
-      "return_type" : "ResponseEntity<Void>",
-      "description" : "Handles DELETE requests to delete a product."
+      "parameters" : [ "void deleteProduct(Long id)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "createCategory",
-      "parameters" : [ "ProductCategoryDto categoryDto" ],
-      "return_type" : "ResponseEntity<ProductCategoryDto>",
-      "description" : "Handles POST requests to create a new product category."
+      "parameters" : [ "ProductCategoryDto createCategory(ProductCategoryDto categoryDto)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "updateCategory",
-      "parameters" : [ "Long id", "ProductCategoryDto categoryDto" ],
-      "return_type" : "ResponseEntity<ProductCategoryDto>",
-      "description" : "Handles PUT requests to update an existing product category."
+      "parameters" : [ "ProductCategoryDto updateCategory(Long id, ProductCategoryDto categoryDto)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "deleteCategory",
-      "parameters" : [ "Long id" ],
-      "return_type" : "ResponseEntity<Void>",
-      "description" : "Handles DELETE requests to delete a product category."
+      "parameters" : [ "void deleteCategory(Long id)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : [ {
@@ -352,9 +352,9 @@
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/service/ProductService.java", "backend/src/main/java/com/fabricaepine/dto/ProductDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "product-management-backend",
-    "file_role" : "CONTROLLER layer — Admin-only REST controller for CRUD operations on products and categories.",
+    "file_role" : "CONTROLLER layer — Admin-only REST controller for CRUD operations on products and categories.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: ProductDto createProduct(ProductDto productDto); ProductDto updateProduct(Long id, ProductDto productDto); void deleteProduct(Long id); ProductCategoryDto createCategory(ProductCategoryDto categoryDto); ProductCategoryDto updateCategory(Long id, ProductCategoryDto categoryDto); void deleteCategory(Long id)",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "ProductDto.java",
     "file_path" : "backend/src/main/java/com/fabricaepine/dto/ProductDto.java",
@@ -368,44 +368,44 @@
     "public_variables" : [ {
       "name" : "id",
       "type" : "Long",
-      "description" : "Unique identifier for the product."
+      "description" : null
     }, {
       "name" : "name",
       "type" : "String",
-      "description" : "Name of the product. Not null, max 255 characters."
+      "description" : null
     }, {
       "name" : "description",
       "type" : "String",
-      "description" : "Detailed description of the product. Max 1000 characters."
+      "description" : null
     }, {
       "name" : "price",
       "type" : "BigDecimal",
-      "description" : "Wholesale price of the product. Not null, must be positive."
+      "description" : null
     }, {
       "name" : "minimumOrderQuantity",
       "type" : "Integer",
-      "description" : "Minimum quantity required for an order of this product. Not null, must be positive."
+      "description" : null
     }, {
       "name" : "imageUrl",
       "type" : "String",
-      "description" : "URL of the product's main image. Max 500 characters."
+      "description" : null
     }, {
       "name" : "categoryId",
       "type" : "Long",
-      "description" : "ID of the category this product belongs to. Not null."
+      "description" : null
     }, {
       "name" : "categoryName",
       "type" : "String",
-      "description" : "Name of the category this product belongs to."
+      "description" : null
     } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/dto/ProductCategoryDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "product-management-backend",
-    "file_role" : "DTO layer — Data Transfer Object for Product entities, includes wholesale pricing for B2B clients.",
+    "file_role" : "DTO layer — Data Transfer Object for Product entities, includes wholesale pricing for B2B clients.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { id: Long; name: String; description: String; price: BigDecimal; minimumOrderQuantity: Integer; imageUrl: String; categoryId: Long; categoryName: String }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "ProductCategoryDto.java",
     "file_path" : "backend/src/main/java/com/fabricaepine/dto/ProductCategoryDto.java",
@@ -419,24 +419,24 @@
     "public_variables" : [ {
       "name" : "id",
       "type" : "Long",
-      "description" : "Unique identifier for the product category."
+      "description" : null
     }, {
       "name" : "name",
       "type" : "String",
-      "description" : "Name of the product category. Not null, max 100 characters."
+      "description" : null
     }, {
       "name" : "description",
       "type" : "String",
-      "description" : "Description of the product category. Max 500 characters."
+      "description" : null
     } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "product-management-backend",
-    "file_role" : "DTO layer — Data Transfer Object for ProductCategory entities.",
+    "file_role" : "DTO layer — Data Transfer Object for ProductCategory entities.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { id: Long; name: String; description: String }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "Inquiry.java",
     "file_path" : "backend/src/main/java/com/fabricaepine/model/Inquiry.java",
@@ -450,71 +450,87 @@
     "public_variables" : [ {
       "name" : "id",
       "type" : "Long",
-      "description" : "Unique identifier for the inquiry. Auto-generated."
+      "description" : null
     }, {
       "name" : "clientName",
       "type" : "String",
-      "description" : "Name of the client submitting the inquiry. Not null, max 255 characters."
+      "description" : null
     }, {
       "name" : "clientEmail",
       "type" : "String",
-      "description" : "Email of the client. Not null, valid email format, max 255 characters."
+      "description" : null
     }, {
       "name" : "clientPhone",
       "type" : "String",
-      "description" : "Phone number of the client. Max 20 characters."
+      "description" : null
     }, {
       "name" : "companyName",
       "type" : "String",
-      "description" : "Company name of the client. Max 255 characters."
+      "description" : null
     }, {
       "name" : "productInterest",
       "type" : "String",
-      "description" : "Description of products the client is interested in. Not null, max 1000 characters."
+      "description" : null
     }, {
       "name" : "quantity",
       "type" : "Integer",
-      "description" : "Estimated quantity required. Not null, must be positive."
+      "description" : null
     }, {
       "name" : "additionalDetails",
       "type" : "String",
-      "description" : "Any additional details provided by the client. Max 2000 characters."
+      "description" : null
     }, {
       "name" : "status",
       "type" : "InquiryStatus",
-      "description" : "Current status of the inquiry (e.g., PENDING, REVIEWED, CONTACTED). Not null."
+      "description" : null
     }, {
       "name" : "submissionDate",
-      "type" : "LocalDateTime",
-      "description" : "Timestamp when the inquiry was submitted. Not null."
+      "type" : "java.time.LocalDateTime",
+      "description" : null
     } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/model/InquiryStatus.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management-backend",
-    "file_role" : "MODEL layer — represents a bulk order inquiry with fields for client details, product interest, quantity, and status.",
+    "file_role" : "MODEL layer — represents a bulk order inquiry with fields for client details, product interest, quantity, and status.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { id: Long; clientName: String; clientEmail: String; clientPhone: String; companyName: String; productInterest: String; quantity: Integer; additionalDetails: String; status: InquiryStatus; submissionDate: java.time.LocalDateTime }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "InquiryStatus.java",
     "file_path" : "backend/src/main/java/com/fabricaepine/model/InquiryStatus.java",
     "file_type" : "BACKEND",
     "layer" : "MODEL",
     "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
+    "updated_date" : "2026-09-13",
+    "status" : "GENERATED",
     "description" : "Enum representing the status of a client inquiry (e.g., PENDING, REVIEWED, CONTACTED).",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "PENDING",
+      "type" : "enum",
+      "description" : null
+    }, {
+      "name" : "REVIEWED",
+      "type" : "enum",
+      "description" : null
+    }, {
+      "name" : "CONTACTED",
+      "type" : "enum",
+      "description" : null
+    }, {
+      "name" : "CLOSED",
+      "type" : "enum",
+      "description" : null
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management-backend",
-    "file_role" : "MODEL layer — an enum defining the possible states of a client inquiry.",
+    "file_role" : "MODEL layer — an enum defining the possible states of a client inquiry.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { PENDING: enum; REVIEWED: enum; CONTACTED: enum; CLOSED: enum }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "InquiryRepository.java",
     "file_path" : "backend/src/main/java/com/fabricaepine/repository/InquiryRepository.java",
@@ -545,24 +561,24 @@
     "description" : "Handles business logic for creating and managing client inquiries.",
     "public_functions" : [ {
       "name" : "createInquiry",
-      "parameters" : [ "InquiryRequestDto inquiryRequestDto" ],
-      "return_type" : "InquiryResponseDto",
-      "description" : "Creates a new inquiry from the provided DTO, sets its status to PENDING, and saves it. Returns the saved inquiry as a DTO."
+      "parameters" : [ "InquiryResponseDto createInquiry(InquiryRequestDto inquiryRequestDto)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "getAllInquiries",
-      "parameters" : [ ],
-      "return_type" : "List<InquiryResponseDto>",
-      "description" : "Retrieves all inquiries and returns them as a list of DTOs."
+      "parameters" : [ "java.util.List<InquiryResponseDto> getAllInquiries()" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "getInquiryById",
-      "parameters" : [ "Long id" ],
-      "return_type" : "InquiryResponseDto",
-      "description" : "Retrieves a single inquiry by its ID. Throws ResourceNotFoundException if not found. Returns the inquiry as a DTO."
+      "parameters" : [ "InquiryResponseDto getInquiryById(Long id)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "updateInquiryStatus",
-      "parameters" : [ "Long id", "InquiryStatus status" ],
-      "return_type" : "InquiryResponseDto",
-      "description" : "Updates the status of an inquiry identified by its ID. Throws ResourceNotFoundException if the inquiry does not exist. Returns the updated inquiry as a DTO."
+      "parameters" : [ "InquiryResponseDto updateInquiryStatus(Long id, InquiryStatus status)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -570,9 +586,9 @@
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/repository/InquiryRepository.java", "backend/src/main/java/com/fabricaepine/dto/InquiryRequestDto.java", "backend/src/main/java/com/fabricaepine/dto/InquiryResponseDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management-backend",
-    "file_role" : "SERVICE layer — implements `createInquiry(InquiryRequestDto): InquiryResponseDto`, `getAllInquiries(): List<InquiryResponseDto>`, `getInquiryById(Long id): InquiryResponseDto`, and `updateInquiryStatus(Long id, InquiryStatus status): InquiryResponseDto`.",
+    "file_role" : "SERVICE layer — implements `createInquiry(InquiryRequestDto): InquiryResponseDto`, `getAllInquiries(): List<InquiryResponseDto>`, `getInquiryById(Long id): InquiryResponseDto`, and `updateInquiryStatus(Long id, InquiryStatus status): InquiryResponseDto`.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: InquiryResponseDto createInquiry(InquiryRequestDto inquiryRequestDto); java.util.List<InquiryResponseDto> getAllInquiries(); InquiryResponseDto getInquiryById(Long id); InquiryResponseDto updateInquiryStatus(Long id, InquiryStatus status)",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "InquiryController.java",
     "file_path" : "backend/src/main/java/com/fabricaepine/controller/InquiryController.java",
@@ -584,9 +600,9 @@
     "description" : "Public REST controller for submitting new bulk order inquiries.",
     "public_functions" : [ {
       "name" : "createInquiry",
-      "parameters" : [ "InquiryRequestDto inquiryRequestDto" ],
-      "return_type" : "ResponseEntity<InquiryResponseDto>",
-      "description" : "Handles POST requests to create a new inquiry."
+      "parameters" : [ "InquiryResponseDto createInquiry(InquiryRequestDto inquiryRequestDto)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : [ {
@@ -601,9 +617,9 @@
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/service/InquiryService.java", "backend/src/main/java/com/fabricaepine/dto/InquiryRequestDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management-backend",
-    "file_role" : "CONTROLLER layer — exposes a public REST endpoint for submitting new bulk order inquiries.",
+    "file_role" : "CONTROLLER layer — exposes a public REST endpoint for submitting new bulk order inquiries.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: InquiryResponseDto createInquiry(InquiryRequestDto inquiryRequestDto)",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "AdminInquiryController.java",
     "file_path" : "backend/src/main/java/com/fabricaepine/controller/admin/AdminInquiryController.java",
@@ -615,19 +631,19 @@
     "description" : "Admin-only REST controller for viewing and managing all client inquiries.",
     "public_functions" : [ {
       "name" : "getAllInquiries",
-      "parameters" : [ ],
-      "return_type" : "ResponseEntity<List<InquiryResponseDto>>",
-      "description" : "Handles GET requests to retrieve all inquiries."
+      "parameters" : [ "java.util.List<InquiryResponseDto> getAllInquiries()" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "getInquiryById",
-      "parameters" : [ "Long id" ],
-      "return_type" : "ResponseEntity<InquiryResponseDto>",
-      "description" : "Handles GET requests to retrieve a single inquiry by ID."
+      "parameters" : [ "InquiryResponseDto getInquiryById(Long id)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "updateInquiryStatus",
-      "parameters" : [ "Long id", "InquiryStatus status" ],
-      "return_type" : "ResponseEntity<InquiryResponseDto>",
-      "description" : "Handles PUT requests to update the status of an inquiry."
+      "parameters" : [ "InquiryResponseDto updateInquiryStatus(Long id, InquiryStatus status)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : [ {
@@ -656,9 +672,9 @@
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/service/InquiryService.java", "backend/src/main/java/com/fabricaepine/dto/InquiryResponseDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management-backend",
-    "file_role" : "CONTROLLER layer — exposes admin-only REST endpoints for viewing and managing client inquiries.",
+    "file_role" : "CONTROLLER layer — exposes admin-only REST endpoints for viewing and managing client inquiries.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: java.util.List<InquiryResponseDto> getAllInquiries(); InquiryResponseDto getInquiryById(Long id); InquiryResponseDto updateInquiryStatus(Long id, InquiryStatus status)",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "InquiryRequestDto.java",
     "file_path" : "backend/src/main/java/com/fabricaepine/dto/InquiryRequestDto.java",
@@ -672,40 +688,40 @@
     "public_variables" : [ {
       "name" : "clientName",
       "type" : "String",
-      "description" : "Name of the client. Not null, max 255 characters."
+      "description" : null
     }, {
       "name" : "clientEmail",
       "type" : "String",
-      "description" : "Email of the client. Not null, valid email format, max 255 characters."
+      "description" : null
     }, {
       "name" : "clientPhone",
       "type" : "String",
-      "description" : "Phone number of the client. Max 20 characters."
+      "description" : null
     }, {
       "name" : "companyName",
       "type" : "String",
-      "description" : "Company name of the client. Max 255 characters."
+      "description" : null
     }, {
       "name" : "productInterest",
       "type" : "String",
-      "description" : "Description of products interested in. Not null, max 1000 characters."
+      "description" : null
     }, {
       "name" : "quantity",
       "type" : "Integer",
-      "description" : "Estimated quantity. Not null, must be positive."
+      "description" : null
     }, {
       "name" : "additionalDetails",
       "type" : "String",
-      "description" : "Additional details. Max 2000 characters."
+      "description" : null
     } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management-backend",
-    "file_role" : "DTO layer — used for data transfer when creating a new inquiry.",
+    "file_role" : "DTO layer — used for data transfer when creating a new inquiry.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { clientName: String; clientEmail: String; clientPhone: String; companyName: String; productInterest: String; quantity: Integer; additionalDetails: String }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "InquiryResponseDto.java",
     "file_path" : "backend/src/main/java/com/fabricaepine/dto/InquiryResponseDto.java",
@@ -719,52 +735,52 @@
     "public_variables" : [ {
       "name" : "id",
       "type" : "Long",
-      "description" : "Unique identifier for the inquiry."
+      "description" : null
     }, {
       "name" : "clientName",
       "type" : "String",
-      "description" : "Name of the client."
+      "description" : null
     }, {
       "name" : "clientEmail",
       "type" : "String",
-      "description" : "Email of the client."
+      "description" : null
     }, {
       "name" : "clientPhone",
       "type" : "String",
-      "description" : "Phone number of the client."
+      "description" : null
     }, {
       "name" : "companyName",
       "type" : "String",
-      "description" : "Company name of the client."
+      "description" : null
     }, {
       "name" : "productInterest",
       "type" : "String",
-      "description" : "Description of products interested in."
+      "description" : null
     }, {
       "name" : "quantity",
       "type" : "Integer",
-      "description" : "Estimated quantity."
+      "description" : null
     }, {
       "name" : "additionalDetails",
       "type" : "String",
-      "description" : "Additional details."
+      "description" : null
     }, {
       "name" : "status",
       "type" : "InquiryStatus",
-      "description" : "Current status of the inquiry."
+      "description" : null
     }, {
       "name" : "submissionDate",
-      "type" : "LocalDateTime",
-      "description" : "Timestamp when the inquiry was submitted."
+      "type" : "java.time.LocalDateTime",
+      "description" : null
     } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "inquiry-management-backend",
-    "file_role" : "DTO layer — used for data transfer when retrieving inquiry details.",
+    "file_role" : "DTO layer — used for data transfer when retrieving inquiry details.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { id: Long; clientName: String; clientEmail: String; clientPhone: String; companyName: String; productInterest: String; quantity: Integer; additionalDetails: String; status: InquiryStatus; submissionDate: java.time.LocalDateTime }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "LookbookEntry.java",
     "file_path" : "backend/src/main/java/com/fabricaepine/model/LookbookEntry.java",
@@ -778,32 +794,32 @@
     "public_variables" : [ {
       "name" : "id",
       "type" : "Long",
-      "description" : "Unique identifier for the lookbook entry, auto-generated."
+      "description" : null
     }, {
       "name" : "title",
       "type" : "String",
-      "description" : "Title of the lookbook entry, not null, max 255 characters."
+      "description" : null
     }, {
       "name" : "content",
       "type" : "String",
-      "description" : "Main content or description of the lookbook entry, not null."
+      "description" : null
     }, {
       "name" : "imageUrl",
       "type" : "String",
-      "description" : "URL of the main image for the lookbook entry, not null, max 1024 characters."
+      "description" : null
     }, {
       "name" : "publicationDate",
       "type" : "LocalDate",
-      "description" : "Date when the lookbook entry was published, not null."
+      "description" : null
     } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "content-management-backend",
-    "file_role" : "MODEL layer — defines the LookbookEntry entity for persistence, mapping to the database table.",
+    "file_role" : "MODEL layer — defines the LookbookEntry entity for persistence, mapping to the database table.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { id: Long; title: String; content: String; imageUrl: String; publicationDate: LocalDate }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "LookbookEntryRepository.java",
     "file_path" : "backend/src/main/java/com/fabricaepine/repository/LookbookEntryRepository.java",
@@ -834,29 +850,29 @@
     "description" : "Handles business logic for managing lookbook entries.",
     "public_functions" : [ {
       "name" : "createLookbookEntry",
-      "parameters" : [ "LookbookEntryDto lookbookEntryDto" ],
-      "return_type" : "LookbookEntryDto",
-      "description" : "Creates a new lookbook entry from the provided DTO. Steps: 1. Map LookbookEntryDto to LookbookEntry. 2. Save the LookbookEntry using LookbookEntryRepository. 3. Map the saved LookbookEntry back to LookbookEntryDto and return it."
+      "parameters" : [ "LookbookEntryDto createLookbookEntry(LookbookEntryDto lookbookEntryDto)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "getAllLookbookEntries",
-      "parameters" : [ ],
-      "return_type" : "List<LookbookEntryDto>",
-      "description" : "Retrieves all lookbook entries. Steps: 1. Fetch all LookbookEntry entities from LookbookEntryRepository. 2. Map each LookbookEntry to LookbookEntryDto. 3. Return the list of DTOs."
+      "parameters" : [ "List<LookbookEntryDto> getAllLookbookEntries()" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "getLookbookEntryById",
-      "parameters" : [ "Long id" ],
-      "return_type" : "LookbookEntryDto",
-      "description" : "Retrieves a single lookbook entry by its ID. Steps: 1. Find LookbookEntry by ID using LookbookEntryRepository. 2. If not found, throw ResourceNotFoundException. 3. Map the found LookbookEntry to LookbookEntryDto and return it."
+      "parameters" : [ "LookbookEntryDto getLookbookEntryById(Long id)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "updateLookbookEntry",
-      "parameters" : [ "Long id", "LookbookEntryDto lookbookEntryDto" ],
-      "return_type" : "LookbookEntryDto",
-      "description" : "Updates an existing lookbook entry. Steps: 1. Find LookbookEntry by ID using LookbookEntryRepository. 2. If not found, throw ResourceNotFoundException. 3. Update the fields of the found LookbookEntry with values from LookbookEntryDto. 4. Save the updated LookbookEntry using LookbookEntryRepository. 5. Map the saved LookbookEntry back to LookbookEntryDto and return it."
+      "parameters" : [ "LookbookEntryDto updateLookbookEntry(Long id, LookbookEntryDto lookbookEntryDto)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "deleteLookbookEntry",
-      "parameters" : [ "Long id" ],
-      "return_type" : "void",
-      "description" : "Deletes a lookbook entry by its ID. Steps: 1. Check if LookbookEntry exists by ID using LookbookEntryRepository. 2. If not found, throw ResourceNotFoundException. 3. Delete the LookbookEntry using LookbookEntryRepository."
+      "parameters" : [ "void deleteLookbookEntry(Long id)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -864,9 +880,9 @@
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/repository/LookbookEntryRepository.java", "backend/src/main/java/com/fabricaepine/dto/LookbookEntryDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "content-management-backend",
-    "file_role" : "SERVICE layer — implements business logic for managing lookbook entries, including createLookbookEntry(LookbookEntryDto), getAllLookbookEntries(), getLookbookEntryById(Long), updateLookbookEntry(Long, LookbookEntryDto), and deleteLookbookEntry(Long).",
+    "file_role" : "SERVICE layer — implements business logic for managing lookbook entries, including createLookbookEntry(LookbookEntryDto), getAllLookbookEntries(), getLookbookEntryById(Long), updateLookbookEntry(Long, LookbookEntryDto), and deleteLookbookEntry(Long).\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: LookbookEntryDto createLookbookEntry(LookbookEntryDto lookbookEntryDto); List<LookbookEntryDto> getAllLookbookEntries(); LookbookEntryDto getLookbookEntryById(Long id); LookbookEntryDto updateLookbookEntry(Long id, LookbookEntryDto lookbookEntryDto); void deleteLookbookEntry(Long id)",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "LookbookEntryController.java",
     "file_path" : "backend/src/main/java/com/fabricaepine/controller/LookbookEntryController.java",
@@ -878,14 +894,14 @@
     "description" : "Public REST controller for fetching lookbook entries.",
     "public_functions" : [ {
       "name" : "getAllLookbookEntries",
-      "parameters" : [ ],
-      "return_type" : "ResponseEntity<List<LookbookEntryDto>>",
-      "description" : "Handles GET requests to retrieve all lookbook entries. Calls LookbookEntryService.getAllLookbookEntries(). Returns 200 OK with a list of LookbookEntryDto."
+      "parameters" : [ "List<LookbookEntryDto> getAllLookbookEntries()" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "getLookbookEntryById",
-      "parameters" : [ "Long id" ],
-      "return_type" : "ResponseEntity<LookbookEntryDto>",
-      "description" : "Handles GET requests to retrieve a single lookbook entry by ID. Calls LookbookEntryService.getLookbookEntryById(id). Returns 200 OK with LookbookEntryDto or 404 NOT FOUND if ResourceNotFoundException is thrown."
+      "parameters" : [ "LookbookEntryDto getLookbookEntryById(Long id)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : [ {
@@ -907,9 +923,9 @@
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/service/LookbookEntryService.java", "backend/src/main/java/com/fabricaepine/dto/LookbookEntryDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "content-management-backend",
-    "file_role" : "Public REST controller for fetching lookbook entries, exposing GET /api/v1/lookbook and GET /api/v1/lookbook/{id}.",
+    "file_role" : "Public REST controller for fetching lookbook entries, exposing GET /api/v1/lookbook and GET /api/v1/lookbook/{id}.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: List<LookbookEntryDto> getAllLookbookEntries(); LookbookEntryDto getLookbookEntryById(Long id)",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "AdminLookbookController.java",
     "file_path" : "backend/src/main/java/com/fabricaepine/controller/admin/AdminLookbookController.java",
@@ -921,19 +937,19 @@
     "description" : "Admin-only REST controller for CRUD operations on lookbook entries.",
     "public_functions" : [ {
       "name" : "createLookbookEntry",
-      "parameters" : [ "LookbookEntryDto lookbookEntryDto" ],
-      "return_type" : "ResponseEntity<LookbookEntryDto>",
-      "description" : "Handles POST requests to create a new lookbook entry. Calls LookbookEntryService.createLookbookEntry(lookbookEntryDto). Returns 201 CREATED with the created LookbookEntryDto."
+      "parameters" : [ "LookbookEntryDto createLookbookEntry(LookbookEntryDto lookbookEntryDto)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "updateLookbookEntry",
-      "parameters" : [ "Long id", "LookbookEntryDto lookbookEntryDto" ],
-      "return_type" : "ResponseEntity<LookbookEntryDto>",
-      "description" : "Handles PUT requests to update an existing lookbook entry. Calls LookbookEntryService.updateLookbookEntry(id, lookbookEntryDto). Returns 200 OK with the updated LookbookEntryDto or 404 NOT FOUND if ResourceNotFoundException is thrown."
+      "parameters" : [ "LookbookEntryDto updateLookbookEntry(Long id, LookbookEntryDto lookbookEntryDto)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "deleteLookbookEntry",
-      "parameters" : [ "Long id" ],
-      "return_type" : "ResponseEntity<Void>",
-      "description" : "Handles DELETE requests to remove a lookbook entry. Calls LookbookEntryService.deleteLookbookEntry(id). Returns 204 NO CONTENT or 404 NOT FOUND if ResourceNotFoundException is thrown."
+      "parameters" : [ "void deleteLookbookEntry(Long id)" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : [ {
@@ -962,9 +978,9 @@
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/service/LookbookEntryService.java", "backend/src/main/java/com/fabricaepine/dto/LookbookEntryDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "content-management-backend",
-    "file_role" : "Admin-only REST controller for CRUD operations on lookbook entries, exposing POST /api/v1/admin/lookbook, PUT /api/v1/admin/lookbook/{id}, and DELETE /api/v1/admin/lookbook/{id}.",
+    "file_role" : "Admin-only REST controller for CRUD operations on lookbook entries, exposing POST /api/v1/admin/lookbook, PUT /api/v1/admin/lookbook/{id}, and DELETE /api/v1/admin/lookbook/{id}.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: LookbookEntryDto createLookbookEntry(LookbookEntryDto lookbookEntryDto); LookbookEntryDto updateLookbookEntry(Long id, LookbookEntryDto lookbookEntryDto); void deleteLookbookEntry(Long id)",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "LookbookEntryDto.java",
     "file_path" : "backend/src/main/java/com/fabricaepine/dto/LookbookEntryDto.java",
@@ -978,32 +994,32 @@
     "public_variables" : [ {
       "name" : "id",
       "type" : "Long",
-      "description" : "Unique identifier for the lookbook entry."
+      "description" : null
     }, {
       "name" : "title",
       "type" : "String",
-      "description" : "Title of the lookbook entry. @NotBlank, @Size(max = 255)."
+      "description" : null
     }, {
       "name" : "content",
       "type" : "String",
-      "description" : "Main content or description of the lookbook entry. @NotBlank."
+      "description" : null
     }, {
       "name" : "imageUrl",
       "type" : "String",
-      "description" : "URL of the main image for the lookbook entry. @NotBlank, @Size(max = 1024)."
+      "description" : null
     }, {
       "name" : "publicationDate",
       "type" : "LocalDate",
-      "description" : "Date when the lookbook entry was published. @NotNull."
+      "description" : null
     } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "content-management-backend",
-    "file_role" : "DTO layer — Data Transfer Object for LookbookEntry entities, used for request and response bodies.",
+    "file_role" : "DTO layer — Data Transfer Object for LookbookEntry entities, used for request and response bodies.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { id: Long; title: String; content: String; imageUrl: String; publicationDate: LocalDate }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "GlobalExceptionHandler.java",
     "file_path" : "backend/src/main/java/com/fabricaepine/exception/GlobalExceptionHandler.java",
@@ -1027,7 +1043,7 @@
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
-    "imports_from" : [ "backend/src/main/java/com/fabricaepine/dto/ErrorResponse.java", "backend/src/main/java/com/fabricaepine/exception/ResourceNotFoundException.java" ],
+    "imports_from" : [ "backend/src/main/java/com/fabricaepine/dto/ErrorResponse.java" ],
     "depends_on" : [ ],
     "feature_name" : "shared-backend",
     "file_role" : "EXCEPTION handler — catches application-wide exceptions and formats them into a standard ErrorResponse DTO.",
@@ -1070,25 +1086,6 @@
     "depends_on" : [ ],
     "feature_name" : "shared-backend",
     "file_role" : "DTO — defines the standard JSON structure for API error responses.",
-    "change_required" : null,
-    "contract_reconciled" : null
-  }, {
-    "file_name" : "ResourceNotFoundException.java",
-    "file_path" : "backend/src/main/java/com/fabricaepine/exception/ResourceNotFoundException.java",
-    "file_type" : "BACKEND",
-    "layer" : "EXCEPTION",
-    "created_date" : "2024-07-30",
-    "updated_date" : "2024-07-30",
-    "status" : "PLANNED",
-    "description" : "Custom exception thrown when a requested resource is not found.",
-    "public_functions" : [ ],
-    "public_variables" : null,
-    "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
-    "imports_from" : [ ],
-    "depends_on" : [ ],
-    "feature_name" : "shared-backend",
-    "file_role" : "EXCEPTION — custom exception for when a requested resource is not found.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1428,9 +1425,9 @@
     "description" : "A reusable dialog component to confirm delete actions in admin panels.",
     "public_functions" : [ {
       "name" : "DeleteConfirmationDialog",
-      "parameters" : [ "boolean isOpen", "() => void onClose", "() => void onConfirm", "string itemType", "string itemName" ],
+      "parameters" : [ "isOpen: boolean", "onClose: () => void", "onConfirm: () => void", "itemType: string", "itemName: string" ],
       "return_type" : "JSX.Element",
-      "description" : "Renders a confirmation dialog for delete operations."
+      "description" : "Reconciled prop contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -1438,9 +1435,9 @@
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "core-ui",
-    "file_role" : "Reusable dialog component to confirm delete actions, typically used in admin panels.",
+    "file_role" : "Reusable dialog component to confirm delete actions, typically used in admin panels.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { isOpen: boolean; onClose: () => void; onConfirm: () => void; itemType: string; itemName: string }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "LoginPage.tsx",
     "file_path" : "frontend/src/pages/LoginPage.tsx",
@@ -1548,9 +1545,9 @@
     "description" : "A route guard that checks authentication status and roles using the useAuth() hook.",
     "public_functions" : [ {
       "name" : "ProtectedRoute",
-      "parameters" : [ "{ children: React.ReactNode, roles?: string[] }" ],
+      "parameters" : [ "children: React.ReactNode", "roles: string[] | undefined" ],
       "return_type" : "JSX.Element",
-      "description" : "Protects routes by checking user authentication and roles, redirecting if unauthorized."
+      "description" : "Reconciled prop contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -1558,9 +1555,9 @@
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "authentication",
-    "file_role" : "React component acting as a route guard, checking authentication status and roles using useAuth().",
+    "file_role" : "React component acting as a route guard, checking authentication status and roles using useAuth().\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { children: React.ReactNode; roles: string[] | undefined }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "ClientDashboardPage.tsx",
     "file_path" : "frontend/src/pages/ClientDashboardPage.tsx",
@@ -1596,9 +1593,9 @@
     "description" : "Header component for the client dashboard, welcoming the user.",
     "public_functions" : [ {
       "name" : "DashboardHeader",
-      "parameters" : [ "{ clientName: string }" ],
+      "parameters" : [ "clientName: string" ],
       "return_type" : "JSX.Element",
-      "description" : "Displays a personalized welcome message for the client."
+      "description" : "Reconciled prop contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -1606,9 +1603,9 @@
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "client-dashboard",
-    "file_role" : "COMPONENT layer — displays a welcome message for the authenticated client.",
+    "file_role" : "COMPONENT layer — displays a welcome message for the authenticated client.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { clientName: string }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "InquiryHistoryTable.tsx",
     "file_path" : "frontend/src/components/client/InquiryHistoryTable.tsx",
@@ -1678,19 +1675,19 @@
     "description" : "Provides functions for interacting with the product-related API endpoints.",
     "public_functions" : [ {
       "name" : "getAllProducts",
-      "parameters" : [ "Long categoryId" ],
-      "return_type" : "Promise<Product[]>",
-      "description" : "Fetches a list of all products, optionally filtered by category ID."
+      "parameters" : [ "getAllProducts(categoryId?: number): Promise<ProductDto[]>" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "getProductById",
-      "parameters" : [ "Long id" ],
-      "return_type" : "Promise<Product>",
-      "description" : "Fetches details for a single product by its ID."
+      "parameters" : [ "getProductById(id: number): Promise<ProductDto>" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     }, {
       "name" : "getAllCategories",
-      "parameters" : [ ],
-      "return_type" : "Promise<ProductCategory[]>",
-      "description" : "Fetches a list of all product categories."
+      "parameters" : [ "getAllCategories(): Promise<ProductCategoryDto[]>" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -1719,9 +1716,9 @@
     "imports_from" : [ "frontend/src/types/product.ts" ],
     "depends_on" : [ ],
     "feature_name" : "product-catalog",
-    "file_role" : "SERVICE layer — provides asynchronous functions to interact with the product-management-backend API.",
+    "file_role" : "SERVICE layer — provides asynchronous functions to interact with the product-management-backend API.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: getAllProducts(categoryId?: number): Promise<ProductDto[]>; getProductById(id: number): Promise<ProductDto>; getAllCategories(): Promise<ProductCategoryDto[]>",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "ProductsPage.tsx",
     "file_path" : "frontend/src/pages/ProductsPage.tsx",
@@ -1781,9 +1778,9 @@
     "description" : "A responsive grid that displays product cards based on active filters.",
     "public_functions" : [ {
       "name" : "ProductGrid",
-      "parameters" : [ "{ products: Product[] }" ],
+      "parameters" : [ "products: ProductDto[]" ],
       "return_type" : "JSX.Element",
-      "description" : "Displays a grid of product cards based on the provided product data."
+      "description" : "Reconciled prop contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -1791,9 +1788,9 @@
     "imports_from" : [ "frontend/src/services/productService.ts", "frontend/src/types/product.ts", "frontend/src/components/product/ProductCard.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "product-catalog",
-    "file_role" : "COMPONENT — renders a responsive grid of ProductCard components.",
+    "file_role" : "COMPONENT — renders a responsive grid of ProductCard components.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { products: ProductDto[] }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "ProductCard.tsx",
     "file_path" : "frontend/src/components/product/ProductCard.tsx",
@@ -1805,9 +1802,9 @@
     "description" : "A card component to display a summary of a single product in the grid.",
     "public_functions" : [ {
       "name" : "ProductCard",
-      "parameters" : [ "{ product: Product }" ],
+      "parameters" : [ "product: ProductDto" ],
       "return_type" : "JSX.Element",
-      "description" : "Renders a card displaying product name, image, price, and actions to view details or add to cart."
+      "description" : "Reconciled prop contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -1815,9 +1812,9 @@
     "imports_from" : [ "frontend/src/types/product.ts" ],
     "depends_on" : [ ],
     "feature_name" : "product-catalog",
-    "file_role" : "COMPONENT — displays a summary of a single product with a view details button and add to cart functionality.",
+    "file_role" : "COMPONENT — displays a summary of a single product with a view details button and add to cart functionality.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { product: ProductDto }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "ProductFilterSidebar.tsx",
     "file_path" : "frontend/src/components/product/ProductFilterSidebar.tsx",
@@ -1829,9 +1826,9 @@
     "description" : "A sidebar with controls to filter the product catalog by category and other attributes.",
     "public_functions" : [ {
       "name" : "ProductFilterSidebar",
-      "parameters" : [ "{ onSelectCategory: (categoryId: Long | null) => void; selectedCategoryId: Long | null }" ],
+      "parameters" : [ "categories: ProductCategoryDto[]", "selectedCategory: ProductCategoryDto | null", "onSelectCategory: (category: ProductCategoryDto | null) => void" ],
       "return_type" : "JSX.Element",
-      "description" : "Renders a sidebar with product category filters."
+      "description" : "Reconciled prop contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -1839,9 +1836,9 @@
     "imports_from" : [ "frontend/src/services/productService.ts" ],
     "depends_on" : [ ],
     "feature_name" : "product-catalog",
-    "file_role" : "COMPONENT — provides controls to filter products by category.",
+    "file_role" : "COMPONENT — provides controls to filter products by category.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { categories: ProductCategoryDto[]; selectedCategory: ProductCategoryDto | null; onSelectCategory: (category: ProductCategoryDto | null) => void }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "ProductImageGallery.tsx",
     "file_path" : "frontend/src/components/product/ProductImageGallery.tsx",
@@ -1853,9 +1850,9 @@
     "description" : "Displays a gallery of images for a single product.",
     "public_functions" : [ {
       "name" : "ProductImageGallery",
-      "parameters" : [ "{ imageUrl: string; productName: string }" ],
+      "parameters" : [ "product: ProductDto" ],
       "return_type" : "JSX.Element",
-      "description" : "Renders a gallery displaying the main image of a product."
+      "description" : "Reconciled prop contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -1863,9 +1860,9 @@
     "imports_from" : [ "frontend/src/types/product.ts" ],
     "depends_on" : [ ],
     "feature_name" : "product-catalog",
-    "file_role" : "COMPONENT — displays a gallery of images for a single product.",
+    "file_role" : "COMPONENT — displays a gallery of images for a single product.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { product: ProductDto }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "ProductDetails.tsx",
     "file_path" : "frontend/src/components/product/ProductDetails.tsx",
@@ -1877,9 +1874,9 @@
     "description" : "Displays textual details of a product, including description, specs, and pricing.",
     "public_functions" : [ {
       "name" : "ProductDetails",
-      "parameters" : [ "{ product: Product }" ],
+      "parameters" : [ "product: ProductDto" ],
       "return_type" : "JSX.Element",
-      "description" : "Renders the name, description, price, and minimum order quantity of a product."
+      "description" : "Reconciled prop contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -1887,9 +1884,9 @@
     "imports_from" : [ "frontend/src/types/product.ts" ],
     "depends_on" : [ ],
     "feature_name" : "product-catalog",
-    "file_role" : "COMPONENT — displays textual details of a product.",
+    "file_role" : "COMPONENT — displays textual details of a product.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { product: ProductDto }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "inquiry.ts",
     "file_path" : "frontend/src/types/inquiry.ts",
@@ -1928,9 +1925,9 @@
     "description" : "Provides functions for interacting with the inquiry-related API endpoints.",
     "public_functions" : [ {
       "name" : "createInquiry",
-      "parameters" : [ "InquiryRequest inquiry" ],
-      "return_type" : "Promise<InquiryResponse>",
-      "description" : "Submits a new bulk order inquiry."
+      "parameters" : [ "createInquiry(inquiry: InquiryRequestDto): Promise<InquiryResponseDto>" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -1945,9 +1942,9 @@
     "imports_from" : [ "frontend/src/types/inquiry.ts" ],
     "depends_on" : [ ],
     "feature_name" : "product-catalog",
-    "file_role" : "SERVICE layer — provides asynchronous functions to interact with the inquiry-management-backend API.",
+    "file_role" : "SERVICE layer — provides asynchronous functions to interact with the inquiry-management-backend API.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: createInquiry(inquiry: InquiryRequestDto): Promise<InquiryResponseDto>",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "InquiryForm.tsx",
     "file_path" : "frontend/src/components/inquiry/InquiryForm.tsx",
@@ -1959,9 +1956,9 @@
     "description" : "Form for B2B clients to submit a bulk order inquiry for a specific product.",
     "public_functions" : [ {
       "name" : "InquiryForm",
-      "parameters" : [ "{ productId: Long; productName: string }" ],
+      "parameters" : [ "productId: number", "productName: string" ],
       "return_type" : "JSX.Element",
-      "description" : "Renders a form for submitting a bulk order inquiry for a given product."
+      "description" : "Reconciled prop contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -1969,9 +1966,9 @@
     "imports_from" : [ "frontend/src/services/inquiryService.ts", "frontend/src/types/inquiry.ts" ],
     "depends_on" : [ ],
     "feature_name" : "product-catalog",
-    "file_role" : "COMPONENT — form for B2B clients to submit a bulk order inquiry.",
+    "file_role" : "COMPONENT — form for B2B clients to submit a bulk order inquiry.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { productId: number; productName: string }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "lookbook.ts",
     "file_path" : "frontend/src/types/lookbook.ts",
@@ -2004,7 +2001,17 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Provides functions for interacting with the lookbook API endpoints.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllLookbookEntries",
+      "parameters" : [ "getAllLookbookEntries(): Promise<LookbookEntryDto[]>" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
+    }, {
+      "name" : "getLookbookEntryById",
+      "parameters" : [ "getLookbookEntryById(id: number): Promise<LookbookEntryDto>" ],
+      "return_type" : null,
+      "description" : "Reconciled method contract"
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : [ {
@@ -2025,9 +2032,9 @@
     "imports_from" : [ "frontend/src/types/lookbook.ts" ],
     "depends_on" : [ ],
     "feature_name" : "lookbook",
-    "file_role" : "Generated from the backend API contract — provides functions for interacting with the lookbook API endpoints.",
+    "file_role" : "Generated from the backend API contract — provides functions for interacting with the lookbook API endpoints.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: getAllLookbookEntries(): Promise<LookbookEntryDto[]>; getLookbookEntryById(id: number): Promise<LookbookEntryDto>",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "LookbookPage.tsx",
     "file_path" : "frontend/src/pages/LookbookPage.tsx",
@@ -2087,9 +2094,9 @@
     "description" : "A responsive grid that displays lookbook entry cards.",
     "public_functions" : [ {
       "name" : "LookbookGrid",
-      "parameters" : [ "{ entries: LookbookEntry[] }" ],
+      "parameters" : [ "entries: LookbookEntryDto[]" ],
       "return_type" : "JSX.Element",
-      "description" : "Renders a grid of LookbookCard components from a list of lookbook entries."
+      "description" : "Reconciled prop contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -2097,9 +2104,9 @@
     "imports_from" : [ "frontend/src/services/lookbookService.ts", "frontend/src/components/lookbook/LookbookCard.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "lookbook",
-    "file_role" : "COMPONENT layer — a responsive grid that displays lookbook entry cards.",
+    "file_role" : "COMPONENT layer — a responsive grid that displays lookbook entry cards.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { entries: LookbookEntryDto[] }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "LookbookCard.tsx",
     "file_path" : "frontend/src/components/lookbook/LookbookCard.tsx",
@@ -2111,9 +2118,9 @@
     "description" : "A card component to display a summary of a single lookbook entry.",
     "public_functions" : [ {
       "name" : "LookbookCard",
-      "parameters" : [ "{ entry: LookbookEntry }" ],
+      "parameters" : [ "entry: LookbookEntryDto" ],
       "return_type" : "JSX.Element",
-      "description" : "Renders a card with the title, image, and a link to the detail page for a single lookbook entry."
+      "description" : "Reconciled prop contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -2121,9 +2128,9 @@
     "imports_from" : [ "frontend/src/types/lookbook.ts" ],
     "depends_on" : [ ],
     "feature_name" : "lookbook",
-    "file_role" : "COMPONENT layer — a card component to display a summary of a single lookbook entry.",
+    "file_role" : "COMPONENT layer — a card component to display a summary of a single lookbook entry.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { entry: LookbookEntryDto }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "AdminLayout.tsx",
     "file_path" : "frontend/src/components/AdminLayout.tsx",
@@ -2279,9 +2286,9 @@
     "description" : "A data table for displaying and managing products in the admin panel.",
     "public_functions" : [ {
       "name" : "ProductTable",
-      "parameters" : [ "{ onEdit: (product: ProductDto) => void; onDelete: (productId: Long, productName: string) => void }" ],
+      "parameters" : [ "onEdit: (product: ProductDto) => void", "onDelete: (product: ProductDto) => void" ],
       "return_type" : "JSX.Element",
-      "description" : "Displays a table of products, fetching data using the generated getAllProducts() service function. Provides actions for editing and deleting products."
+      "description" : "Reconciled prop contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -2289,9 +2296,9 @@
     "imports_from" : [ "frontend/src/services/productService.ts", "frontend/src/types/product.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : "COMPONENT layer — a data table for displaying and managing products in the admin panel.",
+    "file_role" : "COMPONENT layer — a data table for displaying and managing products in the admin panel.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { onEdit: (product: ProductDto) => void; onDelete: (product: ProductDto) => void }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "ProductForm.tsx",
     "file_path" : "frontend/src/components/product/admin/ProductForm.tsx",
@@ -2303,9 +2310,9 @@
     "description" : "A form, likely in a dialog, for creating and editing products.",
     "public_functions" : [ {
       "name" : "ProductForm",
-      "parameters" : [ "{ product?: ProductDto; onClose: () => void; onSuccess: () => void }" ],
+      "parameters" : [ "product: ProductDto | null", "onClose: () => void", "onSuccess: () => void" ],
       "return_type" : "JSX.Element",
-      "description" : "Provides a form for creating or editing product details. Integrates with the gallery foundation for image uploads and calls generated service functions for product creation/update."
+      "description" : "Reconciled prop contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -2313,9 +2320,9 @@
     "imports_from" : [ "frontend/src/services/productService.ts", "frontend/src/types/product.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : "COMPONENT layer — a form for creating and editing products, typically used within a dialog.",
+    "file_role" : "COMPONENT layer — a form for creating and editing products, typically used within a dialog.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { product: ProductDto | null; onClose: () => void; onSuccess: () => void }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "InquiryTable.tsx",
     "file_path" : "frontend/src/components/inquiry/admin/InquiryTable.tsx",
@@ -2327,9 +2334,9 @@
     "description" : "A data table for displaying and managing client inquiries in the admin panel.",
     "public_functions" : [ {
       "name" : "InquiryTable",
-      "parameters" : [ "{ onView: (inquiry: InquiryResponseDto) => void }" ],
+      "parameters" : [ "onView: (inquiry: InquiryResponseDto) => void" ],
       "return_type" : "JSX.Element",
-      "description" : "Displays a table of client inquiries, fetching data using the generated getAllInquiries() service function. Provides an action to view inquiry details."
+      "description" : "Reconciled prop contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -2337,9 +2344,9 @@
     "imports_from" : [ "frontend/src/services/inquiryService.ts", "frontend/src/types/inquiry.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : "COMPONENT layer — a data table for displaying and managing client inquiries in the admin panel.",
+    "file_role" : "COMPONENT layer — a data table for displaying and managing client inquiries in the admin panel.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { onView: (inquiry: InquiryResponseDto) => void }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "InquiryDetailView.tsx",
     "file_path" : "frontend/src/components/inquiry/admin/InquiryDetailView.tsx",
@@ -2351,9 +2358,9 @@
     "description" : "A component to view the full details of a single client inquiry.",
     "public_functions" : [ {
       "name" : "InquiryDetailView",
-      "parameters" : [ "{ inquiry: InquiryResponseDto; onClose: () => void; onStatusUpdate: () => void }" ],
+      "parameters" : [ "inquiry: InquiryResponseDto", "onClose: () => void", "onStatusUpdate: () => void" ],
       "return_type" : "JSX.Element",
-      "description" : "Displays the detailed information of a single inquiry and allows updating its status using the generated updateInquiryStatus() service function."
+      "description" : "Reconciled prop contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -2361,9 +2368,9 @@
     "imports_from" : [ "frontend/src/types/inquiry.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : "COMPONENT layer — a component to view the full details of a single client inquiry.",
+    "file_role" : "COMPONENT layer — a component to view the full details of a single client inquiry.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { inquiry: InquiryResponseDto; onClose: () => void; onStatusUpdate: () => void }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "LookbookTable.tsx",
     "file_path" : "frontend/src/components/lookbook/admin/LookbookTable.tsx",
@@ -2375,9 +2382,9 @@
     "description" : "A data table for displaying and managing lookbook entries in the admin panel.",
     "public_functions" : [ {
       "name" : "LookbookTable",
-      "parameters" : [ "{ onEdit: (entry: LookbookEntryDto) => void; onDelete: (entryId: Long, entryTitle: string) => void }" ],
+      "parameters" : [ "onEdit: (entry: LookbookEntryDto) => void", "onDelete: (entry: LookbookEntryDto) => void" ],
       "return_type" : "JSX.Element",
-      "description" : "Displays a table of lookbook entries, fetching data using the generated getAllLookbookEntries() service function. Provides actions for editing and deleting entries."
+      "description" : "Reconciled prop contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -2385,9 +2392,9 @@
     "imports_from" : [ "frontend/src/services/lookbookService.ts", "frontend/src/types/lookbook.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : "COMPONENT layer — a data table for displaying and managing lookbook entries in the admin panel.",
+    "file_role" : "COMPONENT layer — a data table for displaying and managing lookbook entries in the admin panel.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { onEdit: (entry: LookbookEntryDto) => void; onDelete: (entry: LookbookEntryDto) => void }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   }, {
     "file_name" : "LookbookForm.tsx",
     "file_path" : "frontend/src/components/lookbook/admin/LookbookForm.tsx",
@@ -2399,9 +2406,9 @@
     "description" : "A form, likely in a dialog, for creating and editing lookbook entries.",
     "public_functions" : [ {
       "name" : "LookbookForm",
-      "parameters" : [ "{ entry?: LookbookEntryDto; onClose: () => void; onSuccess: () => void }" ],
+      "parameters" : [ "entry: LookbookEntryDto | null", "onClose: () => void", "onSuccess: () => void" ],
       "return_type" : "JSX.Element",
-      "description" : "Provides a form for creating or editing lookbook entry details. Integrates with the gallery foundation for image uploads and calls generated service functions for entry creation/update."
+      "description" : "Reconciled prop contract"
     } ],
     "public_variables" : null,
     "api_endpoints" : null,
@@ -2409,9 +2416,9 @@
     "imports_from" : [ "frontend/src/services/lookbookService.ts", "frontend/src/types/lookbook.ts" ],
     "depends_on" : [ ],
     "feature_name" : "admin-portal",
-    "file_role" : "COMPONENT layer — a form for creating and editing lookbook entries, typically used within a dialog.",
+    "file_role" : "COMPONENT layer — a form for creating and editing lookbook entries, typically used within a dialog.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { entry: LookbookEntryDto | null; onClose: () => void; onSuccess: () => void }",
     "change_required" : null,
-    "contract_reconciled" : null
+    "contract_reconciled" : true
   } ],
   "features" : [ {
     "feature_name" : "product-management-backend",
@@ -2447,7 +2454,7 @@
     "feature_name" : "shared-backend",
     "feature_display_name" : "Shared (Backend)",
     "feature_type" : "SHARED",
-    "file_paths" : [ "backend/src/main/java/com/fabricaepine/exception/GlobalExceptionHandler.java", "backend/src/main/java/com/fabricaepine/dto/ErrorResponse.java", "backend/src/main/java/com/fabricaepine/exception/ResourceNotFoundException.java" ],
+    "file_paths" : [ "backend/src/main/java/com/fabricaepine/exception/GlobalExceptionHandler.java", "backend/src/main/java/com/fabricaepine/dto/ErrorResponse.java" ],
     "feature_instruction" : "This feature provides shared backend utilities for error handling and custom exceptions. The `ErrorResponse.java` DTO defines a standardized JSON structure for all API error responses, ensuring consistency across the application. The `ResourceNotFoundException.java` is a custom exception that should be thrown by services when a requested entity cannot be found. The `GlobalExceptionHandler.java` is a centralized exception handler that catches `ResourceNotFoundException` and other uncaught exceptions, mapping them to appropriate HTTP status codes and formatting the response body using the `ErrorResponse` DTO. Services throughout the application will throw `ResourceNotFoundException` when an entity is not found, and the `GlobalExceptionHandler` will automatically convert this into a 404 Not Found HTTP response with a structured error message.",
     "depends_on_features" : [ ],
     "consumes_foundation" : [ ],

@@ -1,0 +1,431 @@
+{
+  "generated_at" : "2026-09-13",
+  "reconciled_count" : 71,
+  "contracts" : [ {
+    "feature_name" : "product-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/model/Product.java",
+    "kind" : "FIELDS",
+    "planned_interface" : "id: Long; name: String; description: String; price: BigDecimal; minimumOrderQuantity: Integer; imageUrl: String; category: ProductCategory",
+    "reconciled_interface" : "id: Long; name: String; description: String; price: BigDecimal; minimumOrderQuantity: Integer; imageUrl: String; category: ProductCategory"
+  }, {
+    "feature_name" : "product-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/model/ProductCategory.java",
+    "kind" : "FIELDS",
+    "planned_interface" : "id: Long; name: String; description: String",
+    "reconciled_interface" : "id: Long; name: String; description: String"
+  }, {
+    "feature_name" : "product-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/repository/ProductRepository.java",
+    "kind" : "METHODS",
+    "planned_interface" : "findByCategoryId(Long categoryId)",
+    "reconciled_interface" : "findByCategoryId(List<Product> findByCategoryId(Long categoryId))"
+  }, {
+    "feature_name" : "product-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/repository/ProductCategoryRepository.java",
+    "kind" : "METHODS",
+    "planned_interface" : "",
+    "reconciled_interface" : ""
+  }, {
+    "feature_name" : "product-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/service/ProductService.java",
+    "kind" : "METHODS",
+    "planned_interface" : "getAllProducts(Long categoryId); getProductById(Long id); createProduct(ProductDto productDto); updateProduct(Long id, ProductDto productDto); deleteProduct(Long id); getAllCategories(); getCategoryById(Long id); createCategory(ProductCategoryDto categoryDto); updateCategory(Long id, ProductCategoryDto categoryDto); deleteCategory(Long id)",
+    "reconciled_interface" : "getAllProducts(List<ProductDto> getAllProducts(Long categoryId)); getProductById(ProductDto getProductById(Long id)); createProduct(ProductDto createProduct(ProductDto productDto)); updateProduct(ProductDto updateProduct(Long id, ProductDto productDto)); deleteProduct(void deleteProduct(Long id)); getAllCategories(List<ProductCategoryDto> getAllCategories()); getCategoryById(ProductCategoryDto getCategoryById(Long id)); createCategory(ProductCategoryDto createCategory(ProductCategoryDto categoryDto)); updateCategory(ProductCategoryDto updateCategory(Long id, ProductCategoryDto categoryDto)); deleteCategory(void deleteCategory(Long id))"
+  }, {
+    "feature_name" : "product-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/controller/ProductController.java",
+    "kind" : "METHODS",
+    "planned_interface" : "getAllProducts(Long categoryId); getProductById(Long id); getAllCategories(); getCategoryById(Long id)",
+    "reconciled_interface" : "getAllProducts(List<ProductDto> getAllProducts(Long categoryId)); getProductById(ProductDto getProductById(Long id)); getAllCategories(List<ProductCategoryDto> getAllCategories()); getCategoryById(ProductCategoryDto getCategoryById(Long id))"
+  }, {
+    "feature_name" : "product-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/controller/admin/AdminProductController.java",
+    "kind" : "METHODS",
+    "planned_interface" : "createProduct(ProductDto productDto); updateProduct(Long id, ProductDto productDto); deleteProduct(Long id); createCategory(ProductCategoryDto categoryDto); updateCategory(Long id, ProductCategoryDto categoryDto); deleteCategory(Long id)",
+    "reconciled_interface" : "createProduct(ProductDto createProduct(ProductDto productDto)); updateProduct(ProductDto updateProduct(Long id, ProductDto productDto)); deleteProduct(void deleteProduct(Long id)); createCategory(ProductCategoryDto createCategory(ProductCategoryDto categoryDto)); updateCategory(ProductCategoryDto updateCategory(Long id, ProductCategoryDto categoryDto)); deleteCategory(void deleteCategory(Long id))"
+  }, {
+    "feature_name" : "product-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/dto/ProductDto.java",
+    "kind" : "FIELDS",
+    "planned_interface" : "id: Long; name: String; description: String; price: BigDecimal; minimumOrderQuantity: Integer; imageUrl: String; categoryId: Long; categoryName: String",
+    "reconciled_interface" : "id: Long; name: String; description: String; price: BigDecimal; minimumOrderQuantity: Integer; imageUrl: String; categoryId: Long; categoryName: String"
+  }, {
+    "feature_name" : "product-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/dto/ProductCategoryDto.java",
+    "kind" : "FIELDS",
+    "planned_interface" : "id: Long; name: String; description: String",
+    "reconciled_interface" : "id: Long; name: String; description: String"
+  }, {
+    "feature_name" : "inquiry-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/model/Inquiry.java",
+    "kind" : "FIELDS",
+    "planned_interface" : "id: Long; clientName: String; clientEmail: String; clientPhone: String; companyName: String; productInterest: String; quantity: Integer; additionalDetails: String; status: InquiryStatus; submissionDate: LocalDateTime",
+    "reconciled_interface" : "id: Long; clientName: String; clientEmail: String; clientPhone: String; companyName: String; productInterest: String; quantity: Integer; additionalDetails: String; status: InquiryStatus; submissionDate: java.time.LocalDateTime"
+  }, {
+    "feature_name" : "inquiry-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/model/InquiryStatus.java",
+    "kind" : "FIELDS",
+    "planned_interface" : "",
+    "reconciled_interface" : "PENDING: enum; REVIEWED: enum; CONTACTED: enum; CLOSED: enum"
+  }, {
+    "feature_name" : "inquiry-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/repository/InquiryRepository.java",
+    "kind" : "METHODS",
+    "planned_interface" : "",
+    "reconciled_interface" : ""
+  }, {
+    "feature_name" : "inquiry-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/service/InquiryService.java",
+    "kind" : "METHODS",
+    "planned_interface" : "createInquiry(InquiryRequestDto inquiryRequestDto); getAllInquiries(); getInquiryById(Long id); updateInquiryStatus(Long id, InquiryStatus status)",
+    "reconciled_interface" : "createInquiry(InquiryResponseDto createInquiry(InquiryRequestDto inquiryRequestDto)); getAllInquiries(java.util.List<InquiryResponseDto> getAllInquiries()); getInquiryById(InquiryResponseDto getInquiryById(Long id)); updateInquiryStatus(InquiryResponseDto updateInquiryStatus(Long id, InquiryStatus status))"
+  }, {
+    "feature_name" : "inquiry-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/controller/InquiryController.java",
+    "kind" : "METHODS",
+    "planned_interface" : "createInquiry(InquiryRequestDto inquiryRequestDto)",
+    "reconciled_interface" : "createInquiry(InquiryResponseDto createInquiry(InquiryRequestDto inquiryRequestDto))"
+  }, {
+    "feature_name" : "inquiry-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/controller/admin/AdminInquiryController.java",
+    "kind" : "METHODS",
+    "planned_interface" : "getAllInquiries(); getInquiryById(Long id); updateInquiryStatus(Long id, InquiryStatus status)",
+    "reconciled_interface" : "getAllInquiries(java.util.List<InquiryResponseDto> getAllInquiries()); getInquiryById(InquiryResponseDto getInquiryById(Long id)); updateInquiryStatus(InquiryResponseDto updateInquiryStatus(Long id, InquiryStatus status))"
+  }, {
+    "feature_name" : "inquiry-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/dto/InquiryRequestDto.java",
+    "kind" : "FIELDS",
+    "planned_interface" : "clientName: String; clientEmail: String; clientPhone: String; companyName: String; productInterest: String; quantity: Integer; additionalDetails: String",
+    "reconciled_interface" : "clientName: String; clientEmail: String; clientPhone: String; companyName: String; productInterest: String; quantity: Integer; additionalDetails: String"
+  }, {
+    "feature_name" : "inquiry-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/dto/InquiryResponseDto.java",
+    "kind" : "FIELDS",
+    "planned_interface" : "id: Long; clientName: String; clientEmail: String; clientPhone: String; companyName: String; productInterest: String; quantity: Integer; additionalDetails: String; status: InquiryStatus; submissionDate: LocalDateTime",
+    "reconciled_interface" : "id: Long; clientName: String; clientEmail: String; clientPhone: String; companyName: String; productInterest: String; quantity: Integer; additionalDetails: String; status: InquiryStatus; submissionDate: java.time.LocalDateTime"
+  }, {
+    "feature_name" : "content-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/model/LookbookEntry.java",
+    "kind" : "FIELDS",
+    "planned_interface" : "id: Long; title: String; content: String; imageUrl: String; publicationDate: LocalDate",
+    "reconciled_interface" : "id: Long; title: String; content: String; imageUrl: String; publicationDate: LocalDate"
+  }, {
+    "feature_name" : "content-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/repository/LookbookEntryRepository.java",
+    "kind" : "METHODS",
+    "planned_interface" : "",
+    "reconciled_interface" : ""
+  }, {
+    "feature_name" : "content-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/service/LookbookEntryService.java",
+    "kind" : "METHODS",
+    "planned_interface" : "createLookbookEntry(LookbookEntryDto lookbookEntryDto); getAllLookbookEntries(); getLookbookEntryById(Long id); updateLookbookEntry(Long id, LookbookEntryDto lookbookEntryDto); deleteLookbookEntry(Long id)",
+    "reconciled_interface" : "createLookbookEntry(LookbookEntryDto createLookbookEntry(LookbookEntryDto lookbookEntryDto)); getAllLookbookEntries(List<LookbookEntryDto> getAllLookbookEntries()); getLookbookEntryById(LookbookEntryDto getLookbookEntryById(Long id)); updateLookbookEntry(LookbookEntryDto updateLookbookEntry(Long id, LookbookEntryDto lookbookEntryDto)); deleteLookbookEntry(void deleteLookbookEntry(Long id))"
+  }, {
+    "feature_name" : "content-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/controller/LookbookEntryController.java",
+    "kind" : "METHODS",
+    "planned_interface" : "getAllLookbookEntries(); getLookbookEntryById(Long id)",
+    "reconciled_interface" : "getAllLookbookEntries(List<LookbookEntryDto> getAllLookbookEntries()); getLookbookEntryById(LookbookEntryDto getLookbookEntryById(Long id))"
+  }, {
+    "feature_name" : "content-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/controller/admin/AdminLookbookController.java",
+    "kind" : "METHODS",
+    "planned_interface" : "createLookbookEntry(LookbookEntryDto lookbookEntryDto); updateLookbookEntry(Long id, LookbookEntryDto lookbookEntryDto); deleteLookbookEntry(Long id)",
+    "reconciled_interface" : "createLookbookEntry(LookbookEntryDto createLookbookEntry(LookbookEntryDto lookbookEntryDto)); updateLookbookEntry(LookbookEntryDto updateLookbookEntry(Long id, LookbookEntryDto lookbookEntryDto)); deleteLookbookEntry(void deleteLookbookEntry(Long id))"
+  }, {
+    "feature_name" : "content-management-backend",
+    "module" : "backend/src/main/java/com/fabricaepine/dto/LookbookEntryDto.java",
+    "kind" : "FIELDS",
+    "planned_interface" : "id: Long; title: String; content: String; imageUrl: String; publicationDate: LocalDate",
+    "reconciled_interface" : "id: Long; title: String; content: String; imageUrl: String; publicationDate: LocalDate"
+  }, {
+    "feature_name" : "core-ui",
+    "module" : "frontend/src/pages/HomePage.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "HomePage()",
+    "reconciled_interface" : "HomePage()"
+  }, {
+    "feature_name" : "core-ui",
+    "module" : "frontend/src/pages/AboutPage.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "AboutPage()",
+    "reconciled_interface" : "AboutPage()"
+  }, {
+    "feature_name" : "core-ui",
+    "module" : "frontend/src/pages/ContactPage.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "ContactPage()",
+    "reconciled_interface" : "ContactPage()"
+  }, {
+    "feature_name" : "core-ui",
+    "module" : "frontend/src/pages/NotFoundPage.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "NotFoundPage()",
+    "reconciled_interface" : "NotFoundPage()"
+  }, {
+    "feature_name" : "core-ui",
+    "module" : "frontend/src/components/home/HeroSection.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "HeroSection()",
+    "reconciled_interface" : "HeroSection()"
+  }, {
+    "feature_name" : "core-ui",
+    "module" : "frontend/src/components/home/FeaturedProducts.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "FeaturedProducts()",
+    "reconciled_interface" : "FeaturedProducts()"
+  }, {
+    "feature_name" : "core-ui",
+    "module" : "frontend/src/components/home/AboutSnippet.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "AboutSnippet()",
+    "reconciled_interface" : "AboutSnippet()"
+  }, {
+    "feature_name" : "core-ui",
+    "module" : "frontend/src/components/about/CompanyStory.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "CompanyStory()",
+    "reconciled_interface" : "CompanyStory()"
+  }, {
+    "feature_name" : "core-ui",
+    "module" : "frontend/src/components/about/ManufacturingProcess.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "ManufacturingProcess()",
+    "reconciled_interface" : "ManufacturingProcess()"
+  }, {
+    "feature_name" : "core-ui",
+    "module" : "frontend/src/components/contact/ContactForm.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "ContactForm()",
+    "reconciled_interface" : "ContactForm()"
+  }, {
+    "feature_name" : "core-ui",
+    "module" : "frontend/src/components/contact/LocationMap.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "LocationMap()",
+    "reconciled_interface" : "LocationMap()"
+  }, {
+    "feature_name" : "core-ui",
+    "module" : "frontend/src/components/shared/WhatsAppCta.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "WhatsAppCta()",
+    "reconciled_interface" : "WhatsAppCta()"
+  }, {
+    "feature_name" : "core-ui",
+    "module" : "frontend/src/components/shared/DeleteConfirmationDialog.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "DeleteConfirmationDialog(boolean isOpen, () => void onClose, () => void onConfirm, string itemType, string itemName)",
+    "reconciled_interface" : "DeleteConfirmationDialog(isOpen: boolean, onClose: () => void, onConfirm: () => void, itemType: string, itemName: string)"
+  }, {
+    "feature_name" : "authentication",
+    "module" : "frontend/src/pages/LoginPage.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "LoginPage()",
+    "reconciled_interface" : "LoginPage()"
+  }, {
+    "feature_name" : "authentication",
+    "module" : "frontend/src/pages/SignupPage.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "SignupPage()",
+    "reconciled_interface" : "SignupPage()"
+  }, {
+    "feature_name" : "authentication",
+    "module" : "frontend/src/components/auth/LoginForm.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "LoginForm()",
+    "reconciled_interface" : "LoginForm()"
+  }, {
+    "feature_name" : "authentication",
+    "module" : "frontend/src/components/auth/SignupForm.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "SignupForm()",
+    "reconciled_interface" : "SignupForm()"
+  }, {
+    "feature_name" : "authentication",
+    "module" : "frontend/src/components/ProtectedRoute.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "ProtectedRoute({ children: React.ReactNode, roles?: string[] })",
+    "reconciled_interface" : "ProtectedRoute(children: React.ReactNode, roles: string[] | undefined)"
+  }, {
+    "feature_name" : "client-dashboard",
+    "module" : "frontend/src/pages/ClientDashboardPage.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "ClientDashboardPage()",
+    "reconciled_interface" : "ClientDashboardPage()"
+  }, {
+    "feature_name" : "client-dashboard",
+    "module" : "frontend/src/components/client/DashboardHeader.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "DashboardHeader({ clientName: string })",
+    "reconciled_interface" : "DashboardHeader(clientName: string)"
+  }, {
+    "feature_name" : "client-dashboard",
+    "module" : "frontend/src/components/client/InquiryHistoryTable.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "InquiryHistoryTable()",
+    "reconciled_interface" : "InquiryHistoryTable()"
+  }, {
+    "feature_name" : "product-catalog",
+    "module" : "frontend/src/services/productService.ts",
+    "kind" : "METHODS",
+    "planned_interface" : "getAllProducts(Long categoryId); getProductById(Long id); getAllCategories()",
+    "reconciled_interface" : "getAllProducts(getAllProducts(categoryId?: number): Promise<ProductDto[]>); getProductById(getProductById(id: number): Promise<ProductDto>); getAllCategories(getAllCategories(): Promise<ProductCategoryDto[]>)"
+  }, {
+    "feature_name" : "product-catalog",
+    "module" : "frontend/src/pages/ProductsPage.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "ProductsPage()",
+    "reconciled_interface" : "ProductsPage()"
+  }, {
+    "feature_name" : "product-catalog",
+    "module" : "frontend/src/pages/ProductDetailPage.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "ProductDetailPage()",
+    "reconciled_interface" : "ProductDetailPage()"
+  }, {
+    "feature_name" : "product-catalog",
+    "module" : "frontend/src/components/product/ProductGrid.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "ProductGrid({ products: Product[] })",
+    "reconciled_interface" : "ProductGrid(products: ProductDto[])"
+  }, {
+    "feature_name" : "product-catalog",
+    "module" : "frontend/src/components/product/ProductCard.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "ProductCard({ product: Product })",
+    "reconciled_interface" : "ProductCard(product: ProductDto)"
+  }, {
+    "feature_name" : "product-catalog",
+    "module" : "frontend/src/components/product/ProductFilterSidebar.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "ProductFilterSidebar({ onSelectCategory: (categoryId: Long | null) => void; selectedCategoryId: Long | null })",
+    "reconciled_interface" : "ProductFilterSidebar(categories: ProductCategoryDto[], selectedCategory: ProductCategoryDto | null, onSelectCategory: (category: ProductCategoryDto | null) => void)"
+  }, {
+    "feature_name" : "product-catalog",
+    "module" : "frontend/src/components/product/ProductImageGallery.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "ProductImageGallery({ imageUrl: string; productName: string })",
+    "reconciled_interface" : "ProductImageGallery(product: ProductDto)"
+  }, {
+    "feature_name" : "product-catalog",
+    "module" : "frontend/src/components/product/ProductDetails.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "ProductDetails({ product: Product })",
+    "reconciled_interface" : "ProductDetails(product: ProductDto)"
+  }, {
+    "feature_name" : "product-catalog",
+    "module" : "frontend/src/services/inquiryService.ts",
+    "kind" : "METHODS",
+    "planned_interface" : "createInquiry(InquiryRequest inquiry)",
+    "reconciled_interface" : "createInquiry(createInquiry(inquiry: InquiryRequestDto): Promise<InquiryResponseDto>)"
+  }, {
+    "feature_name" : "product-catalog",
+    "module" : "frontend/src/components/inquiry/InquiryForm.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "InquiryForm({ productId: Long; productName: string })",
+    "reconciled_interface" : "InquiryForm(productId: number, productName: string)"
+  }, {
+    "feature_name" : "lookbook",
+    "module" : "frontend/src/services/lookbookService.ts",
+    "kind" : "METHODS",
+    "planned_interface" : "",
+    "reconciled_interface" : "getAllLookbookEntries(getAllLookbookEntries(): Promise<LookbookEntryDto[]>); getLookbookEntryById(getLookbookEntryById(id: number): Promise<LookbookEntryDto>)"
+  }, {
+    "feature_name" : "lookbook",
+    "module" : "frontend/src/pages/LookbookPage.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "LookbookPage()",
+    "reconciled_interface" : "LookbookPage()"
+  }, {
+    "feature_name" : "lookbook",
+    "module" : "frontend/src/pages/LookbookEntryDetailPage.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "LookbookEntryDetailPage()",
+    "reconciled_interface" : "LookbookEntryDetailPage()"
+  }, {
+    "feature_name" : "lookbook",
+    "module" : "frontend/src/components/lookbook/LookbookGrid.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "LookbookGrid({ entries: LookbookEntry[] })",
+    "reconciled_interface" : "LookbookGrid(entries: LookbookEntryDto[])"
+  }, {
+    "feature_name" : "lookbook",
+    "module" : "frontend/src/components/lookbook/LookbookCard.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "LookbookCard({ entry: LookbookEntry })",
+    "reconciled_interface" : "LookbookCard(entry: LookbookEntryDto)"
+  }, {
+    "feature_name" : "admin-portal",
+    "module" : "frontend/src/components/AdminLayout.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "AdminLayout()",
+    "reconciled_interface" : "AdminLayout()"
+  }, {
+    "feature_name" : "admin-portal",
+    "module" : "frontend/src/pages/AdminDashboardPage.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "AdminDashboardPage()",
+    "reconciled_interface" : "AdminDashboardPage()"
+  }, {
+    "feature_name" : "admin-portal",
+    "module" : "frontend/src/pages/AdminProductsPage.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "AdminProductsPage()",
+    "reconciled_interface" : "AdminProductsPage()"
+  }, {
+    "feature_name" : "admin-portal",
+    "module" : "frontend/src/pages/AdminInquiriesPage.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "AdminInquiriesPage()",
+    "reconciled_interface" : "AdminInquiriesPage()"
+  }, {
+    "feature_name" : "admin-portal",
+    "module" : "frontend/src/pages/AdminLookbookPage.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "AdminLookbookPage()",
+    "reconciled_interface" : "AdminLookbookPage()"
+  }, {
+    "feature_name" : "admin-portal",
+    "module" : "frontend/src/components/admin/DashboardSummary.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "DashboardSummary()",
+    "reconciled_interface" : "DashboardSummary()"
+  }, {
+    "feature_name" : "admin-portal",
+    "module" : "frontend/src/components/product/admin/ProductTable.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "ProductTable({ onEdit: (product: ProductDto) => void; onDelete: (productId: Long, productName: string) => void })",
+    "reconciled_interface" : "ProductTable(onEdit: (product: ProductDto) => void, onDelete: (product: ProductDto) => void)"
+  }, {
+    "feature_name" : "admin-portal",
+    "module" : "frontend/src/components/product/admin/ProductForm.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "ProductForm({ product?: ProductDto; onClose: () => void; onSuccess: () => void })",
+    "reconciled_interface" : "ProductForm(product: ProductDto | null, onClose: () => void, onSuccess: () => void)"
+  }, {
+    "feature_name" : "admin-portal",
+    "module" : "frontend/src/components/inquiry/admin/InquiryTable.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "InquiryTable({ onView: (inquiry: InquiryResponseDto) => void })",
+    "reconciled_interface" : "InquiryTable(onView: (inquiry: InquiryResponseDto) => void)"
+  }, {
+    "feature_name" : "admin-portal",
+    "module" : "frontend/src/components/inquiry/admin/InquiryDetailView.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "InquiryDetailView({ inquiry: InquiryResponseDto; onClose: () => void; onStatusUpdate: () => void })",
+    "reconciled_interface" : "InquiryDetailView(inquiry: InquiryResponseDto, onClose: () => void, onStatusUpdate: () => void)"
+  }, {
+    "feature_name" : "admin-portal",
+    "module" : "frontend/src/components/lookbook/admin/LookbookTable.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "LookbookTable({ onEdit: (entry: LookbookEntryDto) => void; onDelete: (entryId: Long, entryTitle: string) => void })",
+    "reconciled_interface" : "LookbookTable(onEdit: (entry: LookbookEntryDto) => void, onDelete: (entry: LookbookEntryDto) => void)"
+  }, {
+    "feature_name" : "admin-portal",
+    "module" : "frontend/src/components/lookbook/admin/LookbookForm.tsx",
+    "kind" : "PROPS",
+    "planned_interface" : "LookbookForm({ entry?: LookbookEntryDto; onClose: () => void; onSuccess: () => void })",
+    "reconciled_interface" : "LookbookForm(entry: LookbookEntryDto | null, onClose: () => void, onSuccess: () => void)"
+  } ]
+}

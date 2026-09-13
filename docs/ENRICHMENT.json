@@ -1,0 +1,346 @@
+{
+  "product-management-backend" : {
+    "feature_name" : "product-management-backend",
+    "feature_display_name" : "Product Management (Backend)",
+    "feature_type" : "BACKEND",
+    "change_required" : true,
+    "feature_instruction" : "The Product Management (Backend) feature provides a comprehensive API for managing clothing products and their categories. It supports both public catalog browsing and authenticated admin operations for CRUD on products and categories. The feature consists of `Product` and `ProductCategory` model entities, `ProductRepository` and `ProductCategoryRepository` for data persistence, `ProductService` for business logic, and two controllers: `ProductController` for public access and `AdminProductController` for administrative tasks. Data transfer objects `ProductDto` and `ProductCategoryDto` are used for all API interactions.\n\n### Product Entity (`Product.java`)\nRepresents a single clothing product with fields such as `name`, `description`, `price`, `minimumOrderQuantity`, `imageUrl`, and a many-to-one relationship with `ProductCategory`.\n\n### Product Category Entity (`ProductCategory.java`)\nRepresents a category for products, with fields like `name` and `description`.\n\n### Repositories (`ProductRepository.java`, `ProductCategoryRepository.java`)\nThese Spring Data JPA repositories provide standard CRUD operations for `Product` and `ProductCategory` entities. `ProductRepository` will include a custom query to find products by category ID.\n\n### Product Service (`ProductService.java`)\nThis service layer orchestrates interactions between controllers and repositories. It defines the following public methods:\n\n1.  `getAllProducts(Long categoryId)`: Returns a list of `ProductDto`. If `categoryId` is provided, it filters products by that category. Otherwise, it returns all products.\n    *   **Logic:**\n        1.  If `categoryId` is not null, call `productRepository.findByCategoryId(categoryId)`. If no category is found for the given ID, throw `ResourceNotFoundException`. Map the resulting `Product` entities to `ProductDto`.\n        2.  If `categoryId` is null, call `productRepository.findAll()`. Map the resulting `Product` entities to `ProductDto`.\n    *   **Error Cases:** `ResourceNotFoundException` if `categoryId` is provided but no matching category exists.\n\n2.  `getProductById(Long id)`: Returns a single `ProductDto` for the given product ID.\n    *   **Logic:**\n        1.  Call `productRepository.findById(id)`. If the product is not found, throw `ResourceNotFoundException`.\n        2.  Map the found `Product` entity to `ProductDto`.\n    *   **Error Cases:** `ResourceNotFoundException` if no product with the given ID is found.\n\n3.  `createProduct(ProductDto productDto)`: Creates a new product from the provided `ProductDto`.\n    *   **Logic:**\n        1.  Validate `productDto`. Ensure `productDto.getCategoryId()` is not null and a `ProductCategory` with that ID exists by calling `productCategoryRepository.findById(productDto.getCategoryId())`. If not found, throw `ResourceNotFoundException`.\n        2.  Map `productDto` to a `Product` entity.\n        3.  Call `productRepository.save()` with the new `Product` entity.\n        4.  Map the saved `Product` entity back to `ProductDto` and return it.\n    *   **Error Cases:** `ResourceNotFoundException` if the specified category does not exist.\n\n4.  `updateProduct(Long id, ProductDto productDto)`: Updates an existing product identified by `id` with data from `productDto`.\n    *   **Logic:**\n        1.  Call `productRepository.findById(id)`. If the product is not found, throw `ResourceNotFoundException`.\n        2.  If `productDto.getCategoryId()` is provided and not null, ensure a `ProductCategory` with that ID exists by calling `productCategoryRepository.findById(productDto.getCategoryId())`. If not found, throw `ResourceNotFoundException`.\n        3.  Update the fields of the existing `Product` entity with data from `productDto`.\n        4.  Call `productRepository.save()` with the updated `Product` entity.\n        5.  Map the saved `Product` entity back to `ProductDto` and return it.\n    *   **Error Cases:** `ResourceNotFoundException` if no product with the given ID is found, or if a new `categoryId` is provided but no matching category exists.\n\n5.  `deleteProduct(Long id)`: Deletes a product by its ID.\n    *   **Logic:**\n        1.  Call `productRepository.findById(id)`. If the product is not found, throw `ResourceNotFoundException`.\n        2.  Call `productRepository.deleteById(id)`.\n    *   **Error Cases:** `ResourceNotFoundException` if no product with the given ID is found.\n\n6.  `getAllCategories()`: Returns a list of all `ProductCategoryDto`.\n    *   **Logic:**\n        1.  Call `productCategoryRepository.findAll()`.\n        2.  Map the resulting `ProductCategory` entities to `ProductCategoryDto`.\n\n7.  `getCategoryById(Long id)`: Returns a single `ProductCategoryDto` for the given category ID.\n    *   **Logic:**\n        1.  Call `productCategoryRepository.findById(id)`. If the category is not found, throw `ResourceNotFoundException`.\n        2.  Map the found `ProductCategory` entity to `ProductCategoryDto`.\n    *   **Error Cases:** `ResourceNotFoundException` if no category with the given ID is found.\n\n8.  `createCategory(ProductCategoryDto categoryDto)`: Creates a new product category.\n    *   **Logic:**\n        1.  Map `categoryDto` to a `ProductCategory` entity.\n        2.  Call `productCategoryRepository.save()` with the new `ProductCategory` entity.\n        3.  Map the saved `ProductCategory` entity back to `ProductCategoryDto` and return it.\n\n9.  `updateCategory(Long id, ProductCategoryDto categoryDto)`: Updates an existing product category.\n    *   **Logic:**\n        1.  Call `productCategoryRepository.findById(id)`. If the category is not found, throw `ResourceNotFoundException`.\n        2.  Update the fields of the existing `ProductCategory` entity with data from `categoryDto`.\n        3.  Call `productCategoryRepository.save()` with the updated `ProductCategory` entity.\n        4.  Map the saved `ProductCategory` entity back to `ProductCategoryDto` and return it.\n    *   **Error Cases:** `ResourceNotFoundException` if no category with the given ID is found.\n\n10. `deleteCategory(Long id)`: Deletes a product category by its ID.\n    *   **Logic:**\n        1.  Call `productCategoryRepository.findById(id)`. If the category is not found, throw `ResourceNotFoundException`.\n        2.  Call `productCategoryRepository.deleteById(id)`.\n    *   **Error Cases:** `ResourceNotFoundException` if no category with the given ID is found.\n\n### Product Controller (`ProductController.java`)\nThis controller exposes public API endpoints for fetching product and category data. It injects `ProductService`.\n\n### Admin Product Controller (`AdminProductController.java`)\nThis controller exposes admin-only API endpoints for CRUD operations on products and categories. It injects `ProductService`.\n\n### DTOs (`ProductDto.java`, `ProductCategoryDto.java`)\n`ProductDto` includes fields for `id`, `name`, `description`, `price`, `minimumOrderQuantity`, `imageUrl`, and `categoryId`. `ProductCategoryDto` includes `id`, `name`, and `description`.\n\n### Error Handling\n`ResourceNotFoundException` is a custom exception that should be handled by a global exception handler (e.g., `GlobalExceptionHandler` in `shared-backend`) to return an appropriate HTTP 404 status.",
+    "depends_on_features" : [ "shared-backend" ],
+    "consumes_foundation" : [ "gallery" ],
+    "files" : [ {
+      "path" : "backend/src/main/java/com/fabricaepine/model/Product.java",
+      "role" : "MODEL layer — Represents a single clothing product in the catalog, including details, pricing, and MOQ.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { id: Long; name: String; description: String; price: BigDecimal; minimumOrderQuantity: Integer; imageUrl: String; category: ProductCategory }"
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/model/ProductCategory.java",
+      "role" : "MODEL layer — Represents a category for products, used for filtering and organization.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { id: Long; name: String; description: String }"
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/repository/ProductRepository.java",
+      "role" : "REPOSITORY layer — Spring Data JPA repository for CRUD operations on Product entities, including finding products by category.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: List<Product> findByCategoryId(Long categoryId)"
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/repository/ProductCategoryRepository.java",
+      "role" : "REPOSITORY layer — Spring Data JPA repository for CRUD operations on ProductCategory entities."
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/service/ProductService.java",
+      "role" : "SERVICE layer — implements business logic for managing products and categories, including filtering and CRUD operations.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: List<ProductDto> getAllProducts(Long categoryId); ProductDto getProductById(Long id); ProductDto createProduct(ProductDto productDto); ProductDto updateProduct(Long id, ProductDto productDto); void deleteProduct(Long id); List<ProductCategoryDto> getAllCategories(); ProductCategoryDto getCategoryById(Long id); ProductCategoryDto createCategory(ProductCategoryDto categoryDto); ProductCategoryDto updateCategory(Long id, ProductCategoryDto categoryDto); void deleteCategory(Long id)"
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/controller/ProductController.java",
+      "role" : "CONTROLLER layer — Public REST controller for fetching product and category data for the catalog.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: List<ProductDto> getAllProducts(Long categoryId); ProductDto getProductById(Long id); List<ProductCategoryDto> getAllCategories(); ProductCategoryDto getCategoryById(Long id)"
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/controller/admin/AdminProductController.java",
+      "role" : "CONTROLLER layer — Admin-only REST controller for CRUD operations on products and categories.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: ProductDto createProduct(ProductDto productDto); ProductDto updateProduct(Long id, ProductDto productDto); void deleteProduct(Long id); ProductCategoryDto createCategory(ProductCategoryDto categoryDto); ProductCategoryDto updateCategory(Long id, ProductCategoryDto categoryDto); void deleteCategory(Long id)"
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/dto/ProductDto.java",
+      "role" : "DTO layer — Data Transfer Object for Product entities, includes wholesale pricing for B2B clients.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { id: Long; name: String; description: String; price: BigDecimal; minimumOrderQuantity: Integer; imageUrl: String; categoryId: Long; categoryName: String }"
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/dto/ProductCategoryDto.java",
+      "role" : "DTO layer — Data Transfer Object for ProductCategory entities.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { id: Long; name: String; description: String }"
+    } ]
+  },
+  "inquiry-management-backend" : {
+    "feature_name" : "inquiry-management-backend",
+    "feature_display_name" : "Inquiry Management (Backend)",
+    "feature_type" : "BACKEND",
+    "change_required" : true,
+    "feature_instruction" : "This feature manages bulk order inquiries from B2B clients for Fabricae PINE. It provides a public API endpoint for clients to submit new inquiries and an admin-only API for internal staff to view and manage these inquiries. The `Inquiry` entity represents a single inquiry, with its `InquiryStatus` enum tracking its lifecycle (PENDING, REVIEWED, CONTACTED, CLOSED). The `InquiryRepository` handles persistence, while `InquiryService` encapsulates the core business logic, including creating new inquiries and updating their statuses. `InquiryController` exposes the public endpoint for inquiry submission, and `AdminInquiryController` provides the administrative interface for managing inquiries.\n\n### Inquiry Submission Flow\n1. A B2B client (or an anonymous user) submits an inquiry via the `POST /api/v1/inquiries` endpoint.\n2. The `InquiryController.createInquiry(InquiryRequestDto)` method receives the request.\n3. It calls `inquiryService.createInquiry(InquiryRequestDto)`.\n4. `InquiryService` maps the `InquiryRequestDto` to an `Inquiry` entity, sets its `status` to `PENDING`, and saves it using `inquiryRepository.save(inquiry)`.\n5. The saved `Inquiry` entity is then mapped to an `InquiryResponseDto` and returned.\n\n### Admin Inquiry Management Flow\n1. An authenticated administrator accesses the admin portal to view inquiries.\n2. The frontend calls `GET /api/v1/admin/inquiries` to fetch all inquiries or `GET /api/v1/admin/inquiries/{id}` for a specific inquiry.\n3. `AdminInquiryController` methods `getAllInquiries()` and `getInquiryById(Long id)` call `inquiryService.getAllInquiries()` and `inquiryService.getInquiryById(Long id)` respectively.\n4. `InquiryService` retrieves inquiries from `inquiryRepository` and maps them to `InquiryResponseDto` objects.\n5. To update an inquiry's status, the admin frontend calls `PUT /api/v1/admin/inquiries/{id}/status`.\n6. `AdminInquiryController.updateInquiryStatus(Long id, InquiryStatus status)` calls `inquiryService.updateInquiryStatus(Long id, InquiryStatus status)`.\n7. `InquiryService` fetches the `Inquiry` by ID, updates its status, and saves it. If the inquiry is not found, `InquiryService` throws a `ResourceNotFoundException`.\n\n### Error Handling\n- If an inquiry is not found during an update or retrieval operation, `InquiryService` will throw a `ResourceNotFoundException`. This exception will be caught by the `GlobalExceptionHandler` (from the `shared-backend` feature), which will return an HTTP 404 Not Found response with an `ErrorResponse` body.",
+    "depends_on_features" : [ "shared-backend" ],
+    "consumes_foundation" : [ ],
+    "files" : [ {
+      "path" : "backend/src/main/java/com/fabricaepine/model/Inquiry.java",
+      "role" : "MODEL layer — represents a bulk order inquiry with fields for client details, product interest, quantity, and status.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { id: Long; clientName: String; clientEmail: String; clientPhone: String; companyName: String; productInterest: String; quantity: Integer; additionalDetails: String; status: InquiryStatus; submissionDate: java.time.LocalDateTime }"
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/model/InquiryStatus.java",
+      "role" : "MODEL layer — an enum defining the possible states of a client inquiry.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { PENDING: enum; REVIEWED: enum; CONTACTED: enum; CLOSED: enum }"
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/repository/InquiryRepository.java",
+      "role" : "REPOSITORY layer — provides standard CRUD operations for `Inquiry` entities."
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/service/InquiryService.java",
+      "role" : "SERVICE layer — implements `createInquiry(InquiryRequestDto): InquiryResponseDto`, `getAllInquiries(): List<InquiryResponseDto>`, `getInquiryById(Long id): InquiryResponseDto`, and `updateInquiryStatus(Long id, InquiryStatus status): InquiryResponseDto`.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: InquiryResponseDto createInquiry(InquiryRequestDto inquiryRequestDto); java.util.List<InquiryResponseDto> getAllInquiries(); InquiryResponseDto getInquiryById(Long id); InquiryResponseDto updateInquiryStatus(Long id, InquiryStatus status)"
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/controller/InquiryController.java",
+      "role" : "CONTROLLER layer — exposes a public REST endpoint for submitting new bulk order inquiries.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: InquiryResponseDto createInquiry(InquiryRequestDto inquiryRequestDto)"
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/controller/admin/AdminInquiryController.java",
+      "role" : "CONTROLLER layer — exposes admin-only REST endpoints for viewing and managing client inquiries.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: java.util.List<InquiryResponseDto> getAllInquiries(); InquiryResponseDto getInquiryById(Long id); InquiryResponseDto updateInquiryStatus(Long id, InquiryStatus status)"
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/dto/InquiryRequestDto.java",
+      "role" : "DTO layer — used for data transfer when creating a new inquiry.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { clientName: String; clientEmail: String; clientPhone: String; companyName: String; productInterest: String; quantity: Integer; additionalDetails: String }"
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/dto/InquiryResponseDto.java",
+      "role" : "DTO layer — used for data transfer when retrieving inquiry details.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { id: Long; clientName: String; clientEmail: String; clientPhone: String; companyName: String; productInterest: String; quantity: Integer; additionalDetails: String; status: InquiryStatus; submissionDate: java.time.LocalDateTime }"
+    } ]
+  },
+  "content-management-backend" : {
+    "feature_name" : "content-management-backend",
+    "feature_display_name" : "Content Management (Backend)",
+    "feature_type" : "BACKEND",
+    "change_required" : true,
+    "feature_instruction" : "This feature provides the backend infrastructure for managing lookbook entries, which showcase Fabricae PINE's collections and manufacturing insights. It includes a Spring Data JPA entity (`LookbookEntry`), a repository (`LookbookEntryRepository`) for database interactions, a service layer (`LookbookEntryService`) for business logic, and two controllers: `LookbookEntryController` for public access to view entries, and `AdminLookbookController` for authenticated administrators to perform CRUD operations. A `LookbookEntryDto` is used for data transfer between layers.\n\n`LookbookEntry` defines the structure of a lookbook entry, including fields for title, content, image URL, and publication date. `LookbookEntryRepository` extends `JpaRepository` to provide standard CRUD functionalities.\n\n`LookbookEntryService` orchestrates interactions between the controllers and the repository. It provides methods for creating, retrieving, updating, and deleting lookbook entries. When creating or updating an entry, the service maps `LookbookEntryDto` to `LookbookEntry` and vice-versa. It handles `ResourceNotFoundException` if an entry is not found during update or deletion operations.\n\n`LookbookEntryController` exposes public API endpoints for fetching all lookbook entries and a single entry by its ID. These endpoints are accessible without authentication. `AdminLookbookController` provides authenticated endpoints for administrators to create, update, and delete lookbook entries. All controller methods return `ResponseEntity` objects, encapsulating the `LookbookEntryDto` or a list of them, along with appropriate HTTP status codes.\n\nBoth controllers inject `LookbookEntryService`. The service, in turn, injects `LookbookEntryRepository`. Image URLs for lookbook entries are expected to be managed externally, likely through a media management system (e.g., the `gallery` foundation feature), and are stored as simple `String` fields in the `LookbookEntry` entity. The `LookbookEntryDto` mirrors the relevant fields of the `LookbookEntry` entity for safe data transfer.",
+    "depends_on_features" : [ ],
+    "consumes_foundation" : [ "gallery" ],
+    "files" : [ {
+      "path" : "backend/src/main/java/com/fabricaepine/model/LookbookEntry.java",
+      "role" : "MODEL layer — defines the LookbookEntry entity for persistence, mapping to the database table.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { id: Long; title: String; content: String; imageUrl: String; publicationDate: LocalDate }"
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/repository/LookbookEntryRepository.java",
+      "role" : "REPOSITORY layer — provides standard CRUD operations for LookbookEntry entities."
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/service/LookbookEntryService.java",
+      "role" : "SERVICE layer — implements business logic for managing lookbook entries, including createLookbookEntry(LookbookEntryDto), getAllLookbookEntries(), getLookbookEntryById(Long), updateLookbookEntry(Long, LookbookEntryDto), and deleteLookbookEntry(Long).\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: LookbookEntryDto createLookbookEntry(LookbookEntryDto lookbookEntryDto); List<LookbookEntryDto> getAllLookbookEntries(); LookbookEntryDto getLookbookEntryById(Long id); LookbookEntryDto updateLookbookEntry(Long id, LookbookEntryDto lookbookEntryDto); void deleteLookbookEntry(Long id)"
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/controller/LookbookEntryController.java",
+      "role" : "Public REST controller for fetching lookbook entries, exposing GET /api/v1/lookbook and GET /api/v1/lookbook/{id}.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: List<LookbookEntryDto> getAllLookbookEntries(); LookbookEntryDto getLookbookEntryById(Long id)"
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/controller/admin/AdminLookbookController.java",
+      "role" : "Admin-only REST controller for CRUD operations on lookbook entries, exposing POST /api/v1/admin/lookbook, PUT /api/v1/admin/lookbook/{id}, and DELETE /api/v1/admin/lookbook/{id}.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: LookbookEntryDto createLookbookEntry(LookbookEntryDto lookbookEntryDto); LookbookEntryDto updateLookbookEntry(Long id, LookbookEntryDto lookbookEntryDto); void deleteLookbookEntry(Long id)"
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/dto/LookbookEntryDto.java",
+      "role" : "DTO layer — Data Transfer Object for LookbookEntry entities, used for request and response bodies.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { id: Long; title: String; content: String; imageUrl: String; publicationDate: LocalDate }"
+    } ]
+  },
+  "shared-backend" : {
+    "feature_name" : "shared-backend",
+    "feature_display_name" : "Shared (Backend)",
+    "feature_type" : "SHARED",
+    "change_required" : true,
+    "feature_instruction" : "This feature provides shared backend utilities for error handling and custom exceptions. The `ErrorResponse.java` DTO defines a standardized JSON structure for all API error responses, ensuring consistency across the application. The `ResourceNotFoundException.java` is a custom exception that should be thrown by services when a requested entity cannot be found. The `GlobalExceptionHandler.java` is a centralized exception handler that catches `ResourceNotFoundException` and other uncaught exceptions, mapping them to appropriate HTTP status codes and formatting the response body using the `ErrorResponse` DTO. Services throughout the application will throw `ResourceNotFoundException` when an entity is not found, and the `GlobalExceptionHandler` will automatically convert this into a 404 Not Found HTTP response with a structured error message.",
+    "depends_on_features" : [ ],
+    "consumes_foundation" : [ ],
+    "files" : [ {
+      "path" : "backend/src/main/java/com/fabricaepine/exception/GlobalExceptionHandler.java",
+      "role" : "EXCEPTION handler — catches application-wide exceptions and formats them into a standard ErrorResponse DTO."
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/dto/ErrorResponse.java",
+      "role" : "DTO — defines the standard JSON structure for API error responses."
+    }, {
+      "path" : "backend/src/main/java/com/fabricaepine/exception/ResourceNotFoundException.java",
+      "role" : "EXCEPTION — custom exception for when a requested resource is not found."
+    } ]
+  },
+  "core-ui" : {
+    "feature_name" : "core-ui",
+    "feature_display_name" : "Core UI",
+    "feature_type" : "FRONTEND",
+    "change_required" : true,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#0A4837] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#C2A032] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Secondary CTA: border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-[#F5F5DC] (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#333333] leading-relaxed\n\nThe `core-ui` feature provides the foundational UI structure and common components for the Fabricae PINE website. It includes the main application entry point (`App.tsx`), core public pages (`HomePage.tsx`, `AboutPage.tsx`, `ContactPage.tsx`, `NotFoundPage.tsx`), and shared components used across the application. This feature establishes the overall look and feel, navigation, and basic user interaction patterns.\n\n`App.tsx` is the root component that sets up the React Router for navigation and wraps the application with necessary providers. It defines the main routes for public pages and the admin portal, ensuring the `SiteLayout` (which includes `SiteHeader` and `SiteFooter`) is applied globally to public routes, and `AdminLayout` to admin routes. It also integrates the `Toaster` component from `sonner` for displaying toast notifications.\n\n`HomePage.tsx` serves as the landing page, composed of `HeroSection.tsx`, `FeaturedProducts.tsx`, and `AboutSnippet.tsx`. The `HeroSection` displays a prominent banner with a background image, a compelling headline, and a call-to-action button. `FeaturedProducts` showcases a selection of products by fetching them from the `product-management-backend` via the generated `productService` and rendering them using `ProductCard` components. `AboutSnippet` provides a brief introduction to Fabricae PINE, encouraging users to learn more.\n\n`AboutPage.tsx` presents detailed information about Fabricae PINE, utilizing `CompanyStory.tsx` to describe the company's history and mission, and `ManufacturingProcess.tsx` to visually illustrate the garment production steps. The content should be professional and emphasize quality craftsmanship.\n\n`ContactPage.tsx` offers various ways for clients to reach Fabricae PINE. It includes `ContactForm.tsx` for general inquiries, which submits data to the `inquiry-management-backend` via the generated `inquiryService`. It also embeds `LocationMap.tsx` to display the business address using Google Maps, and lists contact details such as phone number and opening hours.\n\n`NotFoundPage.tsx` is a generic 404 page displayed when a user navigates to an invalid URL.\n\nShared components like `WhatsAppCta.tsx` provide a floating action button for direct communication, and `DeleteConfirmationDialog.tsx` offers a reusable modal for confirming delete actions, primarily for admin interfaces.\n\n### Inter-file Wiring and Data Flow:\n- `App.tsx` uses `react-router-dom` to define routes and render pages. It implicitly applies `SiteLayout` to public routes and `AdminLayout` to admin routes.\n- `HomePage.tsx` imports and renders `HeroSection`, `FeaturedProducts`, and `AboutSnippet`.\n- `FeaturedProducts.tsx` calls the generated `productService.getAllProducts()` to fetch product data and maps this data to `ProductCard` components. Each `ProductCard` will display product details like `name`, `price`, and `imageUrl` from the `ProductDto` data shape.\n- `AboutPage.tsx` imports and renders `CompanyStory` and `ManufacturingProcess`.\n- `ContactPage.tsx` imports and renders `ContactForm` and `LocationMap`.\n- `ContactForm.tsx` uses the generated `inquiryService.createInquiry(InquiryRequestDto)` to submit inquiry data to the backend. Upon successful submission, it should display a toast notification using `sonner`.\n- `LocationMap.tsx` uses the hardcoded latitude and longitude from the business context to display the map.\n- All pages and components will adhere to the defined Design Tokens for styling, using Tailwind CSS classes for colors, typography, and spacing.\n- Monetary values, where displayed (e.g., in `ProductCard` if prices are shown), must be formatted using `toLocaleString('en-IN', { style: 'currency', currency: 'INR' })`.\n\n### Error Handling:\n- `ContactForm.tsx` should handle potential errors from `inquiryService.createInquiry` by displaying an error toast notification to the user.\n- `FeaturedProducts.tsx` should handle errors from `productService.getAllProducts` by displaying an error message or toast, indicating that products could not be loaded.\n",
+    "depends_on_features" : [ "product-catalog", "inquiry-management-backend" ],
+    "consumes_foundation" : [ ],
+    "files" : [ {
+      "path" : "frontend/src/App.tsx",
+      "role" : "Main application component that sets up React Router, global providers, and the `sonner` Toaster. It defines the main public and admin routes, applying `SiteLayout` and `AdminLayout` respectively."
+    }, {
+      "path" : "frontend/src/pages/HomePage.tsx",
+      "role" : "Public page that serves as the landing page, composed of a hero section, featured products, and a company introduction snippet."
+    }, {
+      "path" : "frontend/src/pages/AboutPage.tsx",
+      "role" : "Public page that displays detailed information about Fabricae PINE's history, mission, and manufacturing process."
+    }, {
+      "path" : "frontend/src/pages/ContactPage.tsx",
+      "role" : "Public page that provides contact information, a general inquiry form, and an embedded Google Map showing the business location."
+    }, {
+      "path" : "frontend/src/pages/NotFoundPage.tsx",
+      "role" : "Public page that serves as a standard 404 error page for invalid routes."
+    }, {
+      "path" : "frontend/src/components/home/HeroSection.tsx",
+      "role" : "Component for the home page hero section, featuring a background image, a prominent headline, and a call-to-action button."
+    }, {
+      "path" : "frontend/src/components/home/FeaturedProducts.tsx",
+      "role" : "Component for displaying a grid of featured products on the home page, fetching data from the product-management-backend."
+    }, {
+      "path" : "frontend/src/components/home/AboutSnippet.tsx",
+      "role" : "Component providing a brief introduction to Fabricae PINE and its values, displayed on the home page."
+    }, {
+      "path" : "frontend/src/components/about/CompanyStory.tsx",
+      "role" : "Component detailing the history, mission, and values of Fabricae PINE for the About Us page."
+    }, {
+      "path" : "frontend/src/components/about/ManufacturingProcess.tsx",
+      "role" : "Component visually showcasing the steps involved in Fabricae PINE's garment manufacturing process."
+    }, {
+      "path" : "frontend/src/components/contact/ContactForm.tsx",
+      "role" : "Component for a general inquiry form, allowing users to submit messages to Fabricae PINE, which calls the inquiry-management-backend."
+    }, {
+      "path" : "frontend/src/components/contact/LocationMap.tsx",
+      "role" : "Component that embeds a Google Map to display the physical location of Fabricae PINE."
+    }, {
+      "path" : "frontend/src/components/shared/WhatsAppCta.tsx",
+      "role" : "Reusable floating action button component that initiates a WhatsApp chat with the business."
+    }, {
+      "path" : "frontend/src/components/shared/DeleteConfirmationDialog.tsx",
+      "role" : "Reusable dialog component to confirm delete actions, typically used in admin panels.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { isOpen: boolean; onClose: () => void; onConfirm: () => void; itemType: string; itemName: string }"
+    } ]
+  },
+  "authentication" : {
+    "feature_name" : "authentication",
+    "feature_display_name" : "Authentication",
+    "feature_type" : "FRONTEND",
+    "change_required" : true,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#0A4837] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#C2A02F] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-[#F5F5DC] (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#333333] leading-relaxed\n\nThis feature provides the client-facing authentication pages and components for Fabricae PINE, enabling B2B clients and administrators to log in and new B2B clients to register. It leverages the pre-scaffolded `useAuth()` hook from the authentication foundation to handle all authentication logic, including login, signup, and session management. The `LoginPage.tsx` and `SignupPage.tsx` are public pages that render the `LoginForm.tsx` and `SignupForm.tsx` components respectively. The `ProtectedRoute.tsx` component acts as a route guard, ensuring that only authenticated users with appropriate roles can access specific routes within the application. All forms will include appropriate validation and user feedback using `react-hook-form` and `sonner` for toasts.\n\n### `LoginPage.tsx`\nThis page serves as the entry point for existing B2B clients and administrators to log into their accounts. It will display a prominent login form, centered on the page, with a clear call to action. The page will use the `LoginForm` component to handle the actual login process.\n\n### `SignupPage.tsx`\nThis page allows new B2B clients to register for an account with Fabricae PINE. It will present a registration form, also centered, guiding users through the necessary steps to create a new account. The page will use the `SignupForm` component for the registration logic.\n\n### `LoginForm.tsx`\nThis component encapsulates the user login form. It will use `react-hook-form` for form management and validation. Upon submission, it will call the `useAuth().login(email, password)` method. Successful login will redirect the user to the client dashboard (`/client-dashboard`) or admin dashboard (`/admin`) based on their role, while failed attempts will display an error toast using `sonner`.\n\n### `SignupForm.tsx`\nThis component handles the B2B client registration process. It will use `react-hook-form` for form management and validation. Upon submission, it will call the `useAuth().signup(name, email, password, companyName)` method. Successful registration will redirect the user to the login page (`/login`) with a success message, while failed attempts will display an error toast using `sonner`.\n\n### `ProtectedRoute.tsx`\nThis component is a higher-order component (HOC) or a render prop component that wraps routes requiring authentication. It will utilize `useAuth().isAuthenticated` and `useAuth().user.role` to determine access. If the user is not authenticated, they will be redirected to the `/login` page. If they are authenticated but lack the required role, they will be redirected to a suitable fallback page (e.g., `/client-dashboard` for unauthorized admin access).",
+    "depends_on_features" : [ ],
+    "consumes_foundation" : [ "auth" ],
+    "files" : [ {
+      "path" : "frontend/src/pages/LoginPage.tsx",
+      "role" : "Public page for user login, rendering the LoginForm component."
+    }, {
+      "path" : "frontend/src/pages/SignupPage.tsx",
+      "role" : "Public page for new B2B client registration, rendering the SignupForm component."
+    }, {
+      "path" : "frontend/src/components/auth/LoginForm.tsx",
+      "role" : "React component for user login, interacting with the useAuth() hook."
+    }, {
+      "path" : "frontend/src/components/auth/SignupForm.tsx",
+      "role" : "React component for B2B client registration, interacting with the useAuth() hook."
+    }, {
+      "path" : "frontend/src/components/ProtectedRoute.tsx",
+      "role" : "React component acting as a route guard, checking authentication status and roles using useAuth().\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { children: React.ReactNode; roles: string[] | undefined }"
+    } ]
+  },
+  "client-dashboard" : {
+    "feature_name" : "client-dashboard",
+    "feature_display_name" : "Client Dashboard",
+    "feature_type" : "FRONTEND",
+    "change_required" : true,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#0A4837] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#B8942E] text-white font-semibold rounded-md px-6 py-3 transition-all duration-200\n- Secondary CTA: border border-[#0A4837] text-[#0A4837] hover:bg-[#0A4837] hover:text-white font-semibold rounded-md px-6 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-[#F5F5DC] (even sections)\n- Card: bg-white rounded-lg shadow-sm border border-gray-100 p-5\n- Section container: <section className=\"py-12 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-5xl font-bold text-white\n- Body: text-[#333333] leading-relaxed\n- Table header: bg-[#0A4837] text-white\n- Table row: bg-white even:bg-gray-50\n\nThe Client Dashboard feature provides a dedicated portal for logged-in B2B clients to manage their profile and view their inquiry history. The `ClientDashboardPage.tsx` serves as the main entry point, orchestrating the display of client-specific information. It utilizes the `DashboardHeader.tsx` component to present a personalized welcome message and the `InquiryHistoryTable.tsx` component to list all past inquiries made by the client. The `InquiryHistoryTable.tsx` component fetches inquiry data from the backend using the generated `inquiryService` and displays it in a structured, professional table format. All monetary values, if any, will be displayed in Indian Rupees (₹) using the `en-IN` locale.\n\n### ClientDashboardPage.tsx\nThis page is responsible for rendering the overall client dashboard layout. It will use the `useAuth()` hook to retrieve the current user's information and display a personalized welcome message via the `DashboardHeader` component. It will then render the `InquiryHistoryTable` component to show the client's past inquiries. The page will ensure a clean and structured layout, adhering to the defined design tokens.\n\n### DashboardHeader.tsx\nThis component receives the `clientName` as a prop and displays a welcoming header for the client dashboard. It will use the brand accent color for the client's name to maintain a professional and elegant look. The header will be simple and focused, aligning with the overall tone of reliability and expertise.\n\n### InquiryHistoryTable.tsx\nThis component is responsible for fetching and displaying the client's inquiry history in a tabular format. It will use the generated `inquiryService` to call the `getAllInquiries()` function, which in turn consumes the `GET /api/v1/admin/inquiries` endpoint from the `inquiry-management-backend` feature. Although the backend endpoint is `/admin/inquiries`, the frontend will filter the results to show only inquiries belonging to the current authenticated client. The table will display relevant inquiry details such as `submissionDate`, `productInterest`, `quantity`, and `status` from the `InquiryResponseDto` data shape. The table will be styled with the defined table header and row design tokens, ensuring a professional and readable presentation. Each row will display the `submissionDate` formatted as a localized date string for India, and any quantities as plain numbers. The `status` will be displayed as a capitalized string.\n",
+    "depends_on_features" : [ "inquiry-management-backend" ],
+    "consumes_foundation" : [ "auth" ],
+    "files" : [ {
+      "path" : "frontend/src/pages/ClientDashboardPage.tsx",
+      "role" : "PAGE layer — orchestrates the client dashboard view, displaying a personalized header and the client's inquiry history."
+    }, {
+      "path" : "frontend/src/components/client/DashboardHeader.tsx",
+      "role" : "COMPONENT layer — displays a welcome message for the authenticated client.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { clientName: string }"
+    }, {
+      "path" : "frontend/src/components/client/InquiryHistoryTable.tsx",
+      "role" : "COMPONENT layer — fetches and displays a table of the client's past inquiries."
+    } ]
+  },
+  "product-catalog" : {
+    "feature_name" : "product-catalog",
+    "feature_display_name" : "Product Catalog",
+    "feature_type" : "FRONTEND",
+    "change_required" : true,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#0A4837] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#B8942E] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-[#F5F5DC] (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#333333] leading-relaxed\n\nThe Product Catalog feature provides a comprehensive frontend experience for Fabricae PINE's product offerings, allowing B2B clients to browse products, view detailed information, and submit bulk order inquiries. This feature consists of TypeScript types, service functions for API interaction, and React components for UI rendering.\n\n`frontend/src/types/product.ts` defines the `Product` and `ProductCategory` interfaces, mirroring the backend `ProductDto` and `ProductCategoryDto` data shapes from the `product-management-backend` feature. Similarly, `frontend/src/types/inquiry.ts` defines the `InquiryRequest` and `InquiryResponse` interfaces, corresponding to the `inquiry-management-backend`'s `InquiryRequestDto` and `InquiryResponseDto`.\n\n`frontend/src/services/productService.ts` provides asynchronous functions to interact with the `product-management-backend`'s public API endpoints. It exposes `getAllProducts(categoryId?: Long): Promise<ProductDto[]>` to fetch a list of products, optionally filtered by category, and `getProductById(id: Long): Promise<ProductDto>` to retrieve details for a single product. It also exposes `getAllCategories(): Promise<ProductCategoryDto[]>` to fetch all available product categories. These functions will be consumed by the UI components to display product data.\n\n`frontend/src/services/inquiryService.ts` provides the `createInquiry(inquiry: InquiryRequest): Promise<InquiryResponse>` function, which sends a POST request to the `inquiry-management-backend`'s `/api/v1/inquiries` endpoint to submit a new bulk order inquiry.\n\n`frontend/src/pages/ProductsPage.tsx` serves as the main entry point for the product catalog. It fetches all products and categories using the generated service functions from `productService.ts`. It renders a `ProductFilterSidebar` component to allow users to filter products by category and a `ProductGrid` component to display the filtered products. The page layout will be structured with a hero section featuring a professional image and a compelling headline about Fabricae PINE's commitment to quality, followed by the filter sidebar and product grid.\n\n`frontend/src/components/product/ProductFilterSidebar.tsx` fetches product categories using `productService.getAllCategories()` and renders a list of clickable categories. When a category is selected, it updates the filter state in `ProductsPage.tsx` to display only products belonging to that category.\n\n`frontend/src/components/product/ProductGrid.tsx` receives a list of `ProductDto` objects as props. It iterates through this list and renders a `ProductCard` for each product. The grid will be responsive, displaying products in a visually appealing layout.\n\n`frontend/src/components/product/ProductCard.tsx` displays a summary of a single `ProductDto`. It shows the product's `name`, `imageUrl`, and `price`. The card includes an \"View Details\" button that navigates to the `ProductDetailPage.tsx` for the specific product. It also includes an \"Add to Cart\" button that calls `useCart().addItem()` with the product details, allowing B2B clients to build a bulk order.\n\n`frontend/src/pages/ProductDetailPage.tsx` displays detailed information for a single product. It retrieves the product `id` from the URL parameters and uses `productService.getProductById(id)` to fetch the product data. It renders `ProductImageGallery` to showcase product images, `ProductDetails` to display textual information, and an `InquiryForm` for bulk order inquiries. The page will have a clear, structured layout with a focus on high-resolution product imagery and detailed specifications.\n\n`frontend/src/components/product/ProductImageGallery.tsx` receives a `ProductDto` and displays its `imageUrl` in a prominent gallery format. It can be extended to show multiple images if the `ProductDto` were to include an array of image URLs.\n\n`frontend/src/components/product/ProductDetails.tsx` receives a `ProductDto` and displays its `name`, `description`, `price` (formatted in INR), and `minimumOrderQuantity`. It presents this information in a professional and easy-to-read format.\n\n`frontend/src/components/inquiry/InquiryForm.tsx` is a form component that allows B2B clients to submit an inquiry for a specific product. It takes the `productId` as a prop. The form collects `clientName`, `clientEmail`, `clientPhone`, `companyName`, `quantity`, and `additionalDetails`. Upon submission, it calls `inquiryService.createInquiry()` with the collected data and the `productInterest` (which will be the product's name). It provides user feedback on submission success or failure using a toast notification (e.g., from `sonner`).\n",
+    "depends_on_features" : [ "product-management-backend", "inquiry-management-backend" ],
+    "consumes_foundation" : [ ],
+    "files" : [ {
+      "path" : "frontend/src/types/product.ts",
+      "role" : "Generated from the backend API contract — TypeScript types and interfaces for products and product categories."
+    }, {
+      "path" : "frontend/src/services/productService.ts",
+      "role" : "SERVICE layer — provides asynchronous functions to interact with the product-management-backend API.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: getAllProducts(categoryId?: number): Promise<ProductDto[]>; getProductById(id: number): Promise<ProductDto>; getAllCategories(): Promise<ProductCategoryDto[]>"
+    }, {
+      "path" : "frontend/src/pages/ProductsPage.tsx",
+      "role" : "PAGE component — displays the main product catalog with filtering capabilities."
+    }, {
+      "path" : "frontend/src/pages/ProductDetailPage.tsx",
+      "role" : "PAGE component — displays detailed information for a single product and an inquiry form."
+    }, {
+      "path" : "frontend/src/components/product/ProductGrid.tsx",
+      "role" : "COMPONENT — renders a responsive grid of ProductCard components.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { products: ProductDto[] }"
+    }, {
+      "path" : "frontend/src/components/product/ProductCard.tsx",
+      "role" : "COMPONENT — displays a summary of a single product with a view details button and add to cart functionality.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { product: ProductDto }"
+    }, {
+      "path" : "frontend/src/components/product/ProductFilterSidebar.tsx",
+      "role" : "COMPONENT — provides controls to filter products by category.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { categories: ProductCategoryDto[]; selectedCategory: ProductCategoryDto | null; onSelectCategory: (category: ProductCategoryDto | null) => void }"
+    }, {
+      "path" : "frontend/src/components/product/ProductImageGallery.tsx",
+      "role" : "COMPONENT — displays a gallery of images for a single product.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { product: ProductDto }"
+    }, {
+      "path" : "frontend/src/components/product/ProductDetails.tsx",
+      "role" : "COMPONENT — displays textual details of a product.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { product: ProductDto }"
+    }, {
+      "path" : "frontend/src/types/inquiry.ts",
+      "role" : "Generated from the backend API contract — TypeScript types and interfaces for bulk order inquiries."
+    }, {
+      "path" : "frontend/src/services/inquiryService.ts",
+      "role" : "SERVICE layer — provides asynchronous functions to interact with the inquiry-management-backend API.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: createInquiry(inquiry: InquiryRequestDto): Promise<InquiryResponseDto>"
+    }, {
+      "path" : "frontend/src/components/inquiry/InquiryForm.tsx",
+      "role" : "COMPONENT — form for B2B clients to submit a bulk order inquiry.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { productId: number; productName: string }"
+    } ]
+  },
+  "lookbook" : {
+    "feature_name" : "lookbook",
+    "feature_display_name" : "Lookbook",
+    "feature_type" : "FRONTEND",
+    "change_required" : true,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#0A4837] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b8952e] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#333333] leading-relaxed\n\nThis feature provides a lookbook section for Fabricae PINE, showcasing various collections and designs. It consists of TypeScript types, a service for API interaction, and React components for displaying the lookbook entries.\n\n`frontend/src/types/lookbook.ts` defines the `LookbookEntry` interface, which mirrors the `LookbookEntryDto` from the `content-management-backend` feature. This ensures type safety across the frontend.\n\n`frontend/src/services/lookbookService.ts` provides functions to interact with the backend API for lookbook entries. It exports `getAllLookbookEntries()` to fetch all entries and `getLookbookEntryById(id: Long)` to fetch a single entry. These functions will internally call the respective `GET /api/v1/lookbook` and `GET /api/v1/lookbook/{id}` endpoints from the `content-management-backend`.\n\n`frontend/src/pages/LookbookPage.tsx` is the main page for the lookbook. It will fetch all lookbook entries using the generated service function (derived from `lookbookService.ts`) and render them using the `LookbookGrid` component. The page will have a hero section with a background image, a clear headline, and a subheadline conveying the professional tone of Fabricae PINE. The main content area will display the `LookbookGrid`.\n\n`frontend/src/pages/LookbookEntryDetailPage.tsx` displays the detailed view of a single lookbook entry. It will extract the `id` from the URL parameters, fetch the specific lookbook entry using the generated service function (derived from `lookbookService.ts`), and render its title, content, and image. The page will include a prominent image of the lookbook entry and its detailed description.\n\n`frontend/src/components/lookbook/LookbookGrid.tsx` is a reusable component that takes a list of `LookbookEntry` objects as props and renders them in a responsive grid layout. Each item in the grid will be a `LookbookCard` component.\n\n`frontend/src/components/lookbook/LookbookCard.tsx` is a presentational component that displays a summary of a single `LookbookEntry`. It receives a `LookbookEntry` object as a prop and renders its `title`, `imageUrl`, and a link to its detail page. The card will have a clean, elegant design consistent with the overall visual direction, featuring a high-resolution image and the entry's title.\n\n**Data Flow:**\n1. `LookbookPage.tsx` calls the generated service function `getAllLookbookEntries()`.\n2. `lookbookService.ts` makes an HTTP GET request to `/api/v1/lookbook` on the `content-management-backend`.\n3. The `LookbookPage.tsx` receives a `List<LookbookEntryDto>` and passes it to `LookbookGrid.tsx`.\n4. `LookbookGrid.tsx` iterates over the list and renders `LookbookCard.tsx` for each entry.\n5. `LookbookCard.tsx` displays the summary and provides a link to `LookbookEntryDetailPage.tsx`.\n6. `LookbookEntryDetailPage.tsx` extracts the `id` from the URL and calls the generated service function `getLookbookEntryById(id: Long)`.\n7. `lookbookService.ts` makes an HTTP GET request to `/api/v1/lookbook/{id}` on the `content-management-backend`.\n8. `LookbookEntryDetailPage.tsx` receives a `LookbookEntryDto` and displays its full details.\n\nAll monetary values, if any were to be displayed, would be formatted using `toLocaleString('en-IN', { style: 'currency', currency: 'INR' })`.",
+    "depends_on_features" : [ "content-management-backend" ],
+    "consumes_foundation" : [ ],
+    "files" : [ {
+      "path" : "frontend/src/types/lookbook.ts",
+      "role" : "Generated from the backend API contract — defines the TypeScript interface for a lookbook entry."
+    }, {
+      "path" : "frontend/src/services/lookbookService.ts",
+      "role" : "Generated from the backend API contract — provides functions for interacting with the lookbook API endpoints.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): methods: getAllLookbookEntries(): Promise<LookbookEntryDto[]>; getLookbookEntryById(id: number): Promise<LookbookEntryDto>"
+    }, {
+      "path" : "frontend/src/pages/LookbookPage.tsx",
+      "role" : "PAGE layer — displays a grid of all lookbook entries, fetching data via the generated lookbook service."
+    }, {
+      "path" : "frontend/src/pages/LookbookEntryDetailPage.tsx",
+      "role" : "PAGE layer — displays the full content and images for a single lookbook entry, fetching data via the generated lookbook service."
+    }, {
+      "path" : "frontend/src/components/lookbook/LookbookGrid.tsx",
+      "role" : "COMPONENT layer — a responsive grid that displays lookbook entry cards.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { entries: LookbookEntryDto[] }"
+    }, {
+      "path" : "frontend/src/components/lookbook/LookbookCard.tsx",
+      "role" : "COMPONENT layer — a card component to display a summary of a single lookbook entry.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { entry: LookbookEntryDto }"
+    } ]
+  },
+  "admin-portal" : {
+    "feature_name" : "admin-portal",
+    "feature_display_name" : "Admin Portal",
+    "feature_type" : "FRONTEND",
+    "change_required" : true,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#0A4837] text-white\n- Sidebar: bg-[#0A4837] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#C2A032] text-white font-semibold rounded-md px-6 py-2 transition-all duration-200\n- Secondary CTA: bg-[#F5F5DC] hover:bg-[#E0E0C4] text-[#333333] font-semibold rounded-md px-6 py-2 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-lg shadow-sm border border-gray-100 p-4\n- Section container: <section className=\"py-8 px-4\"><div className=\"max-w-7xl mx-auto\"> (for admin pages, adjust padding as needed)\n- Body: text-[#333333] leading-relaxed\n- Table Header: bg-[#F5F5DC] text-[#333333] font-semibold\n\n## Admin Portal Feature Instruction\n\nThis feature implements the administrative interface for Fabricae PINE, providing tools for managing products, client inquiries, and lookbook entries. It consists of a main layout component (`AdminLayout.tsx`) that provides consistent navigation and structure for all admin pages, and several page components (`AdminDashboardPage.tsx`, `AdminProductsPage.tsx`, `AdminInquiriesPage.tsx`, `AdminLookbookPage.tsx`) that display and manage specific data.\n\n### AdminLayout.tsx\nThis component serves as the root layout for all authenticated admin routes. It renders a sidebar with navigation links to the dashboard, products, inquiries, and lookbook sections, and a main content area where the child routes are rendered. It utilizes the `ProtectedRoute` component from the `authentication` feature to ensure only authenticated users with appropriate roles can access the admin section. The navigation links should be:\n- Dashboard: `/admin/dashboard`\n- Products: `/admin/products`\n- Inquiries: `/admin/inquiries`\n- Lookbook: `/admin/lookbook`\n\n### AdminDashboardPage.tsx\nThis page is the landing view for the admin portal. It displays a welcome message and summary statistics using the `DashboardSummary` component. The `DashboardSummary` component should display placeholder data for now, such as \"Total Products: 150\", \"New Inquiries: 5\", \"Lookbook Entries: 20\".\n\n### AdminProductsPage.tsx\nThis page allows administrators to manage the product catalog. It integrates `ProductTable` to display a list of products and `ProductForm` for creating and editing product details. It also uses `DeleteConfirmationDialog` for confirming product deletions. All interactions with product data (fetching, creating, updating, deleting) are handled by calling the generated service functions from `product-catalog` feature (e.g., `getAllProducts`, `createProduct`, `updateProduct`, `deleteProduct`).\n\n#### ProductTable.tsx\nThis component displays products in a tabular format. It fetches all products using the generated `getAllProducts()` service function. Each row should include product details like `name`, `price` (formatted in INR), `categoryName`, and `imageUrl`. It provides actions to edit and delete products. The edit action opens the `ProductForm` with the selected product's data, and the delete action triggers the `DeleteConfirmationDialog`.\n\n#### ProductForm.tsx\nThis component provides a form for creating or editing a product. It takes an optional `ProductDto` prop for pre-filling the form when editing. The form fields should include `name`, `description`, `price`, `minimumOrderQuantity`, `imageUrl`, and `categoryId`. The `imageUrl` field should integrate with the `useMedia()` hook from the `gallery` foundation feature for image uploads. Upon submission, it calls either the generated `createProduct()` or `updateProduct()` service function based on whether an `id` is present in the product data. It should also fetch available product categories using `getAllCategories()` from `product-catalog` to populate a dropdown for `categoryId`.\n\n### AdminInquiriesPage.tsx\nThis page is dedicated to viewing and managing client inquiries. It uses `InquiryTable` to list all inquiries and `InquiryDetailView` to show the full details of a selected inquiry. All inquiry data interactions are handled by calling the generated service functions from `inquiry-management-backend` feature (e.g., `getAllInquiries`, `getInquiryById`, `updateInquiryStatus`).\n\n#### InquiryTable.tsx\nThis component displays client inquiries in a table. It fetches all inquiries using the generated `getAllInquiries()` service function. Each row should display `clientName`, `clientEmail`, `productInterest`, `submissionDate`, and `status`. It should allow viewing the full details of an inquiry, which opens `InquiryDetailView`.\n\n#### InquiryDetailView.tsx\nThis component displays the comprehensive details of a single inquiry. It receives an `InquiryResponseDto` as a prop. It should display all fields from the `InquiryResponseDto` including `clientName`, `clientEmail`, `clientPhone`, `companyName`, `productInterest`, `quantity`, `additionalDetails`, `status`, and `submissionDate`. It should also provide an option to update the inquiry status using the generated `updateInquiryStatus()` service function.\n\n### AdminLookbookPage.tsx\nThis page allows administrators to manage lookbook entries. It integrates `LookbookTable` to display a list of entries and `LookbookForm` for creating and editing entries. It also uses `DeleteConfirmationDialog` for confirming deletions. All interactions with lookbook data are handled by calling the generated service functions from `content-management-backend` feature (e.g., `getAllLookbookEntries`, `createLookbookEntry`, `updateLookbookEntry`, `deleteLookbookEntry`).\n\n#### LookbookTable.tsx\nThis component displays lookbook entries in a table. It fetches all entries using the generated `getAllLookbookEntries()` service function. Each row should include `title`, `publicationDate`, and `imageUrl`. It provides actions to edit and delete entries. The edit action opens the `LookbookForm` with the selected entry's data, and the delete action triggers the `DeleteConfirmationDialog`.\n\n#### LookbookForm.tsx\nThis component provides a form for creating or editing a lookbook entry. It takes an optional `LookbookEntryDto` prop for pre-filling the form when editing. The form fields should include `title`, `content`, `imageUrl`, and `publicationDate`. The `imageUrl` field should integrate with the `useMedia()` hook from the `gallery` foundation feature for image uploads. Upon submission, it calls either the generated `createLookbookEntry()` or `updateLookbookEntry()` service function based on whether an `id` is present in the entry data.\n\n### DashboardSummary.tsx\nThis component displays summary cards with key metrics for the admin dashboard. It should display hardcoded placeholder values for now, such as \"Total Products\", \"New Inquiries\", and \"Lookbook Entries\", along with corresponding numerical values.\n\n### DeleteConfirmationDialog.tsx\nThis component is a shared dialog for confirming deletion actions. It is imported from the `core-ui` feature and used in `AdminProductsPage.tsx` and `AdminLookbookPage.tsx` to confirm product and lookbook entry deletions respectively. It takes `isOpen`, `onClose`, `onConfirm`, `itemType`, and `itemName` as props.",
+    "depends_on_features" : [ "product-catalog", "inquiry-management-backend", "content-management-backend", "authentication", "core-ui" ],
+    "consumes_foundation" : [ "auth", "gallery" ],
+    "files" : [ {
+      "path" : "frontend/src/components/AdminLayout.tsx",
+      "role" : "COMPONENT layer — provides the main layout for the admin section, including a sidebar for navigation and routing protection."
+    }, {
+      "path" : "frontend/src/pages/AdminDashboardPage.tsx",
+      "role" : "PAGE layer — the landing page for the admin portal, displaying key statistics and navigation links."
+    }, {
+      "path" : "frontend/src/pages/AdminProductsPage.tsx",
+      "role" : "PAGE layer — admin page for managing the product catalog, integrating product table and forms."
+    }, {
+      "path" : "frontend/src/pages/AdminInquiriesPage.tsx",
+      "role" : "PAGE layer — admin page for viewing and managing all submitted client inquiries."
+    }, {
+      "path" : "frontend/src/pages/AdminLookbookPage.tsx",
+      "role" : "PAGE layer — admin page for creating, editing, and deleting lookbook entries."
+    }, {
+      "path" : "frontend/src/components/admin/DashboardSummary.tsx",
+      "role" : "COMPONENT layer — displays summary statistics on the admin dashboard."
+    }, {
+      "path" : "frontend/src/components/product/admin/ProductTable.tsx",
+      "role" : "COMPONENT layer — a data table for displaying and managing products in the admin panel.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { onEdit: (product: ProductDto) => void; onDelete: (product: ProductDto) => void }"
+    }, {
+      "path" : "frontend/src/components/product/admin/ProductForm.tsx",
+      "role" : "COMPONENT layer — a form for creating and editing products, typically used within a dialog.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { product: ProductDto | null; onClose: () => void; onSuccess: () => void }"
+    }, {
+      "path" : "frontend/src/components/inquiry/admin/InquiryTable.tsx",
+      "role" : "COMPONENT layer — a data table for displaying and managing client inquiries in the admin panel.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { onView: (inquiry: InquiryResponseDto) => void }"
+    }, {
+      "path" : "frontend/src/components/inquiry/admin/InquiryDetailView.tsx",
+      "role" : "COMPONENT layer — a component to view the full details of a single client inquiry.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { inquiry: InquiryResponseDto; onClose: () => void; onStatusUpdate: () => void }"
+    }, {
+      "path" : "frontend/src/components/lookbook/admin/LookbookTable.tsx",
+      "role" : "COMPONENT layer — a data table for displaying and managing lookbook entries in the admin panel.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { onEdit: (entry: LookbookEntryDto) => void; onDelete: (entry: LookbookEntryDto) => void }"
+    }, {
+      "path" : "frontend/src/components/lookbook/admin/LookbookForm.tsx",
+      "role" : "COMPONENT layer — a form for creating and editing lookbook entries, typically used within a dialog.\n\nRECONCILED CONTRACT (ground truth — implement EXACTLY this interface): { entry: LookbookEntryDto | null; onClose: () => void; onSuccess: () => void }"
+    } ]
+  },
+  "infrastructure" : {
+    "feature_name" : "infrastructure",
+    "feature_display_name" : "Infrastructure",
+    "feature_type" : "INFRA",
+    "change_required" : true,
+    "feature_instruction" : null,
+    "depends_on_features" : null,
+    "consumes_foundation" : null,
+    "files" : [ ]
+  }
+}
