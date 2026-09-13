@@ -1,27 +1,20 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { ROUTES } from '@/routes';
 
-// Foundation 404 page — mounted at the "*" catch-all route. AppRoutes renders it inside
-// SiteLayout (header + footer), so this is only the inner content. Generic and business-agnostic:
-// shared across every generated project so the catch-all route always resolves to a real file.
-export default function NotFoundPage() {
+export default function NotFoundPage(): React.JSX.Element {
   return (
-    <div
-      className="mx-auto flex max-w-2xl flex-col items-center gap-6 px-4 py-24 text-center"
-      data-testid="not-found-page"
-    >
-      <p className="text-6xl font-bold text-primary" data-testid="not-found-code">
-        404
-      </p>
-      <div className="space-y-2">
-        <h1 className="text-2xl font-semibold tracking-tight">Page not found</h1>
-        <p className="text-muted-foreground">
-          The page you are looking for doesn&rsquo;t exist or may have moved.
+    <section className="py-16 px-4 bg-white min-h-[calc(100vh-var(--header-height)-var(--footer-height))] flex items-center justify-center">
+      <div className="max-w-md mx-auto text-center">
+        <h1 className="text-6xl md:text-8xl font-bold text-[#D4AF37] mb-4">404</h1>
+        <h2 className="text-2xl md:text-4xl font-semibold text-[#333333] mb-6">Page Not Found</h2>
+        <p className="text-lg text-[#333333] mb-8 leading-relaxed">
+          Oops! The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
         </p>
+        <Button asChild className="bg-[#D4AF37] hover:bg-[#C2A032] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200" data-testid="notfound-home-cta">
+          <Link to={ROUTES.HOME}>Go to Homepage</Link>
+        </Button>
       </div>
-      <Button asChild data-testid="not-found-home">
-        <Link to="/">Back to home</Link>
-      </Button>
-    </div>
+    </section>
   );
 }
