@@ -1982,13 +1982,17 @@
     "status" : "PLANNED",
     "description" : "TypeScript types and interfaces for lookbook entries.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "LookbookEntry",
+      "type" : "{ id: Long; title: string; content: string; imageUrl: string; publicationDate: string; }",
+      "description" : "Interface for a lookbook entry, mirroring the backend's LookbookEntryDto."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "lookbook",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — defines the TypeScript interface for a lookbook entry.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -2003,11 +2007,25 @@
     "public_functions" : null,
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/lookbook",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches all lookbook entries.",
+      "access" : null
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/lookbook/{id}",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches a single lookbook entry by its ID.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/types/lookbook.ts" ],
     "depends_on" : [ ],
     "feature_name" : "lookbook",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — provides functions for interacting with the lookbook API endpoints.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -2019,14 +2037,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Displays a grid of all lookbook entries, showcasing different collections.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "LookbookPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the main lookbook page, including a hero section and a grid of lookbook entries."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/lookbook/LookbookGrid.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "lookbook",
-    "file_role" : null,
+    "file_role" : "PAGE layer — displays a grid of all lookbook entries, fetching data via the generated lookbook service.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -2038,14 +2061,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Displays the full content and images for a single lookbook entry.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "LookbookEntryDetailPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the detailed view of a single lookbook entry based on its ID from the URL."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/lookbookService.ts", "frontend/src/types/lookbook.ts" ],
     "depends_on" : [ ],
     "feature_name" : "lookbook",
-    "file_role" : null,
+    "file_role" : "PAGE layer — displays the full content and images for a single lookbook entry, fetching data via the generated lookbook service.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -2057,14 +2085,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A responsive grid that displays lookbook entry cards.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "LookbookGrid",
+      "parameters" : [ "{ entries: LookbookEntry[] }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a grid of LookbookCard components from a list of lookbook entries."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/lookbookService.ts", "frontend/src/components/lookbook/LookbookCard.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "lookbook",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — a responsive grid that displays lookbook entry cards.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -2076,14 +2109,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A card component to display a summary of a single lookbook entry.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "LookbookCard",
+      "parameters" : [ "{ entry: LookbookEntry }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a card with the title, image, and a link to the detail page for a single lookbook entry."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/types/lookbook.ts" ],
     "depends_on" : [ ],
     "feature_name" : "lookbook",
-    "file_role" : null,
+    "file_role" : "COMPONENT layer — a card component to display a summary of a single lookbook entry.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -2400,9 +2438,9 @@
     "feature_display_name" : "Lookbook",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/types/lookbook.ts", "frontend/src/services/lookbookService.ts", "frontend/src/pages/LookbookPage.tsx", "frontend/src/pages/LookbookEntryDetailPage.tsx", "frontend/src/components/lookbook/LookbookGrid.tsx", "frontend/src/components/lookbook/LookbookCard.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
-    "consumes_foundation" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#0A4837] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#b8952e] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-gray-50 (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#333333] leading-relaxed\n\nThis feature provides a lookbook section for Fabricae PINE, showcasing various collections and designs. It consists of TypeScript types, a service for API interaction, and React components for displaying the lookbook entries.\n\n`frontend/src/types/lookbook.ts` defines the `LookbookEntry` interface, which mirrors the `LookbookEntryDto` from the `content-management-backend` feature. This ensures type safety across the frontend.\n\n`frontend/src/services/lookbookService.ts` provides functions to interact with the backend API for lookbook entries. It exports `getAllLookbookEntries()` to fetch all entries and `getLookbookEntryById(id: Long)` to fetch a single entry. These functions will internally call the respective `GET /api/v1/lookbook` and `GET /api/v1/lookbook/{id}` endpoints from the `content-management-backend`.\n\n`frontend/src/pages/LookbookPage.tsx` is the main page for the lookbook. It will fetch all lookbook entries using the generated service function (derived from `lookbookService.ts`) and render them using the `LookbookGrid` component. The page will have a hero section with a background image, a clear headline, and a subheadline conveying the professional tone of Fabricae PINE. The main content area will display the `LookbookGrid`.\n\n`frontend/src/pages/LookbookEntryDetailPage.tsx` displays the detailed view of a single lookbook entry. It will extract the `id` from the URL parameters, fetch the specific lookbook entry using the generated service function (derived from `lookbookService.ts`), and render its title, content, and image. The page will include a prominent image of the lookbook entry and its detailed description.\n\n`frontend/src/components/lookbook/LookbookGrid.tsx` is a reusable component that takes a list of `LookbookEntry` objects as props and renders them in a responsive grid layout. Each item in the grid will be a `LookbookCard` component.\n\n`frontend/src/components/lookbook/LookbookCard.tsx` is a presentational component that displays a summary of a single `LookbookEntry`. It receives a `LookbookEntry` object as a prop and renders its `title`, `imageUrl`, and a link to its detail page. The card will have a clean, elegant design consistent with the overall visual direction, featuring a high-resolution image and the entry's title.\n\n**Data Flow:**\n1. `LookbookPage.tsx` calls the generated service function `getAllLookbookEntries()`.\n2. `lookbookService.ts` makes an HTTP GET request to `/api/v1/lookbook` on the `content-management-backend`.\n3. The `LookbookPage.tsx` receives a `List<LookbookEntryDto>` and passes it to `LookbookGrid.tsx`.\n4. `LookbookGrid.tsx` iterates over the list and renders `LookbookCard.tsx` for each entry.\n5. `LookbookCard.tsx` displays the summary and provides a link to `LookbookEntryDetailPage.tsx`.\n6. `LookbookEntryDetailPage.tsx` extracts the `id` from the URL and calls the generated service function `getLookbookEntryById(id: Long)`.\n7. `lookbookService.ts` makes an HTTP GET request to `/api/v1/lookbook/{id}` on the `content-management-backend`.\n8. `LookbookEntryDetailPage.tsx` receives a `LookbookEntryDto` and displays its full details.\n\nAll monetary values, if any were to be displayed, would be formatted using `toLocaleString('en-IN', { style: 'currency', currency: 'INR' })`.",
+    "depends_on_features" : [ "content-management-backend" ],
+    "consumes_foundation" : [ ],
     "change_required" : true,
     "change_instruction" : null
   }, {
