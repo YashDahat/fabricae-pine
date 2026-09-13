@@ -1650,13 +1650,21 @@
     "status" : "PLANNED",
     "description" : "TypeScript types and interfaces for products and product categories.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "ProductCategory",
+      "type" : "{ id: Long; name: string; description: string; }",
+      "description" : "Interface for a product category."
+    }, {
+      "name" : "Product",
+      "type" : "{ id: Long; name: string; description: string; price: number; minimumOrderQuantity: number; imageUrl: string; categoryId: Long; categoryName: string; }",
+      "description" : "Interface for a product, including its category details."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "product-catalog",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — TypeScript types and interfaces for products and product categories.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1668,14 +1676,50 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Provides functions for interacting with the product-related API endpoints.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllProducts",
+      "parameters" : [ "Long categoryId" ],
+      "return_type" : "Promise<Product[]>",
+      "description" : "Fetches a list of all products, optionally filtered by category ID."
+    }, {
+      "name" : "getProductById",
+      "parameters" : [ "Long id" ],
+      "return_type" : "Promise<Product>",
+      "description" : "Fetches details for a single product by its ID."
+    }, {
+      "name" : "getAllCategories",
+      "parameters" : [ ],
+      "return_type" : "Promise<ProductCategory[]>",
+      "description" : "Fetches a list of all product categories."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/products",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches all products or products filtered by category.",
+      "access" : null
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/products/{id}",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches a single product by ID.",
+      "access" : null
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/categories",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Fetches all product categories.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/types/product.ts" ],
     "depends_on" : [ ],
     "feature_name" : "product-catalog",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — provides asynchronous functions to interact with the product-management-backend API.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1687,14 +1731,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Main product catalog page with a filterable grid of all available products.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ProductsPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the product catalog page, including a hero section, product filter sidebar, and product grid."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/components/product/ProductGrid.tsx", "frontend/src/components/product/ProductFilterSidebar.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "product-catalog",
-    "file_role" : null,
+    "file_role" : "PAGE component — displays the main product catalog with filtering capabilities.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1706,14 +1755,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Displays details for a single product, including images, specs, and an inquiry form.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ProductDetailPage",
+      "parameters" : [ ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the product detail page, showing product images, specifications, and a bulk order inquiry form."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/productService.ts", "frontend/src/types/product.ts", "frontend/src/components/product/ProductImageGallery.tsx", "frontend/src/components/product/ProductDetails.tsx", "frontend/src/components/inquiry/InquiryForm.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "product-catalog",
-    "file_role" : null,
+    "file_role" : "PAGE component — displays detailed information for a single product and an inquiry form.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1725,14 +1779,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A responsive grid that displays product cards based on active filters.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ProductGrid",
+      "parameters" : [ "{ products: Product[] }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Displays a grid of product cards based on the provided product data."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/productService.ts", "frontend/src/types/product.ts", "frontend/src/components/product/ProductCard.tsx" ],
     "depends_on" : [ ],
     "feature_name" : "product-catalog",
-    "file_role" : null,
+    "file_role" : "COMPONENT — renders a responsive grid of ProductCard components.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1744,14 +1803,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A card component to display a summary of a single product in the grid.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ProductCard",
+      "parameters" : [ "{ product: Product }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a card displaying product name, image, price, and actions to view details or add to cart."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/types/product.ts" ],
     "depends_on" : [ ],
     "feature_name" : "product-catalog",
-    "file_role" : null,
+    "file_role" : "COMPONENT — displays a summary of a single product with a view details button and add to cart functionality.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1763,14 +1827,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "A sidebar with controls to filter the product catalog by category and other attributes.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ProductFilterSidebar",
+      "parameters" : [ "{ onSelectCategory: (categoryId: Long | null) => void; selectedCategoryId: Long | null }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a sidebar with product category filters."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/productService.ts" ],
     "depends_on" : [ ],
     "feature_name" : "product-catalog",
-    "file_role" : null,
+    "file_role" : "COMPONENT — provides controls to filter products by category.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1782,14 +1851,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Displays a gallery of images for a single product.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ProductImageGallery",
+      "parameters" : [ "{ imageUrl: string; productName: string }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a gallery displaying the main image of a product."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/types/product.ts" ],
     "depends_on" : [ ],
     "feature_name" : "product-catalog",
-    "file_role" : null,
+    "file_role" : "COMPONENT — displays a gallery of images for a single product.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1801,14 +1875,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Displays textual details of a product, including description, specs, and pricing.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "ProductDetails",
+      "parameters" : [ "{ product: Product }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders the name, description, price, and minimum order quantity of a product."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/types/product.ts" ],
     "depends_on" : [ ],
     "feature_name" : "product-catalog",
-    "file_role" : null,
+    "file_role" : "COMPONENT — displays textual details of a product.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1821,13 +1900,21 @@
     "status" : "PLANNED",
     "description" : "TypeScript types and interfaces for bulk order inquiries.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "InquiryRequest",
+      "type" : "{ clientName: string; clientEmail: string; clientPhone: string; companyName: string; productInterest: string; quantity: number; additionalDetails: string; }",
+      "description" : "Interface for a bulk order inquiry request."
+    }, {
+      "name" : "InquiryResponse",
+      "type" : "{ id: Long; clientName: string; clientEmail: string; clientPhone: string; companyName: string; productInterest: string; quantity: number; additionalDetails: string; status: string; submissionDate: string; }",
+      "description" : "Interface for a bulk order inquiry response."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "product-catalog",
-    "file_role" : null,
+    "file_role" : "Generated from the backend API contract — TypeScript types and interfaces for bulk order inquiries.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1839,14 +1926,26 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Provides functions for interacting with the inquiry-related API endpoints.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createInquiry",
+      "parameters" : [ "InquiryRequest inquiry" ],
+      "return_type" : "Promise<InquiryResponse>",
+      "description" : "Submits a new bulk order inquiry."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
-    "api_endpoints_consumed" : null,
+    "api_endpoints_consumed" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/inquiries",
+      "request_body" : null,
+      "response_body" : null,
+      "description" : "Submits a new inquiry to the backend.",
+      "access" : null
+    } ],
     "imports_from" : [ "frontend/src/types/inquiry.ts" ],
     "depends_on" : [ ],
     "feature_name" : "product-catalog",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — provides asynchronous functions to interact with the inquiry-management-backend API.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1858,14 +1957,19 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Form for B2B clients to submit a bulk order inquiry for a specific product.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "InquiryForm",
+      "parameters" : [ "{ productId: Long; productName: string }" ],
+      "return_type" : "JSX.Element",
+      "description" : "Renders a form for submitting a bulk order inquiry for a given product."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "frontend/src/services/inquiryService.ts", "frontend/src/types/inquiry.ts" ],
     "depends_on" : [ ],
     "feature_name" : "product-catalog",
-    "file_role" : null,
+    "file_role" : "COMPONENT — form for B2B clients to submit a bulk order inquiry.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -2286,9 +2390,9 @@
     "feature_display_name" : "Product Catalog",
     "feature_type" : "FRONTEND",
     "file_paths" : [ "frontend/src/types/product.ts", "frontend/src/services/productService.ts", "frontend/src/pages/ProductsPage.tsx", "frontend/src/pages/ProductDetailPage.tsx", "frontend/src/components/product/ProductGrid.tsx", "frontend/src/components/product/ProductCard.tsx", "frontend/src/components/product/ProductFilterSidebar.tsx", "frontend/src/components/product/ProductImageGallery.tsx", "frontend/src/components/product/ProductDetails.tsx", "frontend/src/types/inquiry.ts", "frontend/src/services/inquiryService.ts", "frontend/src/components/inquiry/InquiryForm.tsx" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
-    "consumes_foundation" : null,
+    "feature_instruction" : "## Design Tokens\n- Navbar: bg-[#0A4837] text-white\n- Primary CTA: bg-[#D4AF37] hover:bg-[#B8942E] text-white font-semibold rounded-full px-8 py-3 transition-all duration-200\n- Brand text accent: text-[#D4AF37]\n- Section bg: bg-white (odd sections) / bg-[#F5F5DC] (even sections)\n- Card: bg-white rounded-xl shadow-md border border-gray-100 p-6\n- Section container: <section className=\"py-16 px-4\"><div className=\"max-w-7xl mx-auto\">\n- Hero h1: text-4xl md:text-6xl font-bold text-white\n- Body: text-[#333333] leading-relaxed\n\nThe Product Catalog feature provides a comprehensive frontend experience for Fabricae PINE's product offerings, allowing B2B clients to browse products, view detailed information, and submit bulk order inquiries. This feature consists of TypeScript types, service functions for API interaction, and React components for UI rendering.\n\n`frontend/src/types/product.ts` defines the `Product` and `ProductCategory` interfaces, mirroring the backend `ProductDto` and `ProductCategoryDto` data shapes from the `product-management-backend` feature. Similarly, `frontend/src/types/inquiry.ts` defines the `InquiryRequest` and `InquiryResponse` interfaces, corresponding to the `inquiry-management-backend`'s `InquiryRequestDto` and `InquiryResponseDto`.\n\n`frontend/src/services/productService.ts` provides asynchronous functions to interact with the `product-management-backend`'s public API endpoints. It exposes `getAllProducts(categoryId?: Long): Promise<ProductDto[]>` to fetch a list of products, optionally filtered by category, and `getProductById(id: Long): Promise<ProductDto>` to retrieve details for a single product. It also exposes `getAllCategories(): Promise<ProductCategoryDto[]>` to fetch all available product categories. These functions will be consumed by the UI components to display product data.\n\n`frontend/src/services/inquiryService.ts` provides the `createInquiry(inquiry: InquiryRequest): Promise<InquiryResponse>` function, which sends a POST request to the `inquiry-management-backend`'s `/api/v1/inquiries` endpoint to submit a new bulk order inquiry.\n\n`frontend/src/pages/ProductsPage.tsx` serves as the main entry point for the product catalog. It fetches all products and categories using the generated service functions from `productService.ts`. It renders a `ProductFilterSidebar` component to allow users to filter products by category and a `ProductGrid` component to display the filtered products. The page layout will be structured with a hero section featuring a professional image and a compelling headline about Fabricae PINE's commitment to quality, followed by the filter sidebar and product grid.\n\n`frontend/src/components/product/ProductFilterSidebar.tsx` fetches product categories using `productService.getAllCategories()` and renders a list of clickable categories. When a category is selected, it updates the filter state in `ProductsPage.tsx` to display only products belonging to that category.\n\n`frontend/src/components/product/ProductGrid.tsx` receives a list of `ProductDto` objects as props. It iterates through this list and renders a `ProductCard` for each product. The grid will be responsive, displaying products in a visually appealing layout.\n\n`frontend/src/components/product/ProductCard.tsx` displays a summary of a single `ProductDto`. It shows the product's `name`, `imageUrl`, and `price`. The card includes an \"View Details\" button that navigates to the `ProductDetailPage.tsx` for the specific product. It also includes an \"Add to Cart\" button that calls `useCart().addItem()` with the product details, allowing B2B clients to build a bulk order.\n\n`frontend/src/pages/ProductDetailPage.tsx` displays detailed information for a single product. It retrieves the product `id` from the URL parameters and uses `productService.getProductById(id)` to fetch the product data. It renders `ProductImageGallery` to showcase product images, `ProductDetails` to display textual information, and an `InquiryForm` for bulk order inquiries. The page will have a clear, structured layout with a focus on high-resolution product imagery and detailed specifications.\n\n`frontend/src/components/product/ProductImageGallery.tsx` receives a `ProductDto` and displays its `imageUrl` in a prominent gallery format. It can be extended to show multiple images if the `ProductDto` were to include an array of image URLs.\n\n`frontend/src/components/product/ProductDetails.tsx` receives a `ProductDto` and displays its `name`, `description`, `price` (formatted in INR), and `minimumOrderQuantity`. It presents this information in a professional and easy-to-read format.\n\n`frontend/src/components/inquiry/InquiryForm.tsx` is a form component that allows B2B clients to submit an inquiry for a specific product. It takes the `productId` as a prop. The form collects `clientName`, `clientEmail`, `clientPhone`, `companyName`, `quantity`, and `additionalDetails`. Upon submission, it calls `inquiryService.createInquiry()` with the collected data and the `productInterest` (which will be the product's name). It provides user feedback on submission success or failure using a toast notification (e.g., from `sonner`).\n",
+    "depends_on_features" : [ "product-management-backend", "inquiry-management-backend" ],
+    "consumes_foundation" : [ ],
     "change_required" : true,
     "change_instruction" : null
   }, {
