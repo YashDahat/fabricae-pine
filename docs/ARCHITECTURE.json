@@ -775,13 +775,33 @@
     "status" : "PLANNED",
     "description" : "Represents a single entry in the lookbook or blog to showcase collections.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "Long",
+      "description" : "Unique identifier for the lookbook entry, auto-generated."
+    }, {
+      "name" : "title",
+      "type" : "String",
+      "description" : "Title of the lookbook entry, not null, max 255 characters."
+    }, {
+      "name" : "content",
+      "type" : "String",
+      "description" : "Main content or description of the lookbook entry, not null."
+    }, {
+      "name" : "imageUrl",
+      "type" : "String",
+      "description" : "URL of the main image for the lookbook entry, not null, max 1024 characters."
+    }, {
+      "name" : "publicationDate",
+      "type" : "LocalDate",
+      "description" : "Date when the lookbook entry was published, not null."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "content-management-backend",
-    "file_role" : null,
+    "file_role" : "MODEL layer — defines the LookbookEntry entity for persistence, mapping to the database table.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -793,14 +813,14 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Spring Data JPA repository for CRUD operations on LookbookEntry entities.",
-    "public_functions" : null,
+    "public_functions" : [ ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/model/LookbookEntry.java" ],
     "depends_on" : [ ],
     "feature_name" : "content-management-backend",
-    "file_role" : null,
+    "file_role" : "REPOSITORY layer — provides standard CRUD operations for LookbookEntry entities.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -812,14 +832,39 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Handles business logic for managing lookbook entries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createLookbookEntry",
+      "parameters" : [ "LookbookEntryDto lookbookEntryDto" ],
+      "return_type" : "LookbookEntryDto",
+      "description" : "Creates a new lookbook entry from the provided DTO. Steps: 1. Map LookbookEntryDto to LookbookEntry. 2. Save the LookbookEntry using LookbookEntryRepository. 3. Map the saved LookbookEntry back to LookbookEntryDto and return it."
+    }, {
+      "name" : "getAllLookbookEntries",
+      "parameters" : [ ],
+      "return_type" : "List<LookbookEntryDto>",
+      "description" : "Retrieves all lookbook entries. Steps: 1. Fetch all LookbookEntry entities from LookbookEntryRepository. 2. Map each LookbookEntry to LookbookEntryDto. 3. Return the list of DTOs."
+    }, {
+      "name" : "getLookbookEntryById",
+      "parameters" : [ "Long id" ],
+      "return_type" : "LookbookEntryDto",
+      "description" : "Retrieves a single lookbook entry by its ID. Steps: 1. Find LookbookEntry by ID using LookbookEntryRepository. 2. If not found, throw ResourceNotFoundException. 3. Map the found LookbookEntry to LookbookEntryDto and return it."
+    }, {
+      "name" : "updateLookbookEntry",
+      "parameters" : [ "Long id", "LookbookEntryDto lookbookEntryDto" ],
+      "return_type" : "LookbookEntryDto",
+      "description" : "Updates an existing lookbook entry. Steps: 1. Find LookbookEntry by ID using LookbookEntryRepository. 2. If not found, throw ResourceNotFoundException. 3. Update the fields of the found LookbookEntry with values from LookbookEntryDto. 4. Save the updated LookbookEntry using LookbookEntryRepository. 5. Map the saved LookbookEntry back to LookbookEntryDto and return it."
+    }, {
+      "name" : "deleteLookbookEntry",
+      "parameters" : [ "Long id" ],
+      "return_type" : "void",
+      "description" : "Deletes a lookbook entry by its ID. Steps: 1. Check if LookbookEntry exists by ID using LookbookEntryRepository. 2. If not found, throw ResourceNotFoundException. 3. Delete the LookbookEntry using LookbookEntryRepository."
+    } ],
     "public_variables" : null,
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/repository/LookbookEntryRepository.java", "backend/src/main/java/com/fabricaepine/dto/LookbookEntryDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "content-management-backend",
-    "file_role" : null,
+    "file_role" : "SERVICE layer — implements business logic for managing lookbook entries, including createLookbookEntry(LookbookEntryDto), getAllLookbookEntries(), getLookbookEntryById(Long), updateLookbookEntry(Long, LookbookEntryDto), and deleteLookbookEntry(Long).",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -831,14 +876,38 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Public REST controller for fetching lookbook entries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "getAllLookbookEntries",
+      "parameters" : [ ],
+      "return_type" : "ResponseEntity<List<LookbookEntryDto>>",
+      "description" : "Handles GET requests to retrieve all lookbook entries. Calls LookbookEntryService.getAllLookbookEntries(). Returns 200 OK with a list of LookbookEntryDto."
+    }, {
+      "name" : "getLookbookEntryById",
+      "parameters" : [ "Long id" ],
+      "return_type" : "ResponseEntity<LookbookEntryDto>",
+      "description" : "Handles GET requests to retrieve a single lookbook entry by ID. Calls LookbookEntryService.getLookbookEntryById(id). Returns 200 OK with LookbookEntryDto or 404 NOT FOUND if ResourceNotFoundException is thrown."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "GET",
+      "path" : "/api/v1/lookbook",
+      "request_body" : null,
+      "response_body" : "List<LookbookEntryDto>",
+      "description" : "Retrieves a list of all public lookbook entries.",
+      "access" : "public"
+    }, {
+      "method" : "GET",
+      "path" : "/api/v1/lookbook/{id}",
+      "request_body" : null,
+      "response_body" : "LookbookEntryDto",
+      "description" : "Retrieves a single lookbook entry by its ID. Returns 404 if not found.",
+      "access" : "public"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/service/LookbookEntryService.java", "backend/src/main/java/com/fabricaepine/dto/LookbookEntryDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "content-management-backend",
-    "file_role" : null,
+    "file_role" : "Public REST controller for fetching lookbook entries, exposing GET /api/v1/lookbook and GET /api/v1/lookbook/{id}.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -850,14 +919,50 @@
     "updated_date" : "2024-07-30",
     "status" : "PLANNED",
     "description" : "Admin-only REST controller for CRUD operations on lookbook entries.",
-    "public_functions" : null,
+    "public_functions" : [ {
+      "name" : "createLookbookEntry",
+      "parameters" : [ "LookbookEntryDto lookbookEntryDto" ],
+      "return_type" : "ResponseEntity<LookbookEntryDto>",
+      "description" : "Handles POST requests to create a new lookbook entry. Calls LookbookEntryService.createLookbookEntry(lookbookEntryDto). Returns 201 CREATED with the created LookbookEntryDto."
+    }, {
+      "name" : "updateLookbookEntry",
+      "parameters" : [ "Long id", "LookbookEntryDto lookbookEntryDto" ],
+      "return_type" : "ResponseEntity<LookbookEntryDto>",
+      "description" : "Handles PUT requests to update an existing lookbook entry. Calls LookbookEntryService.updateLookbookEntry(id, lookbookEntryDto). Returns 200 OK with the updated LookbookEntryDto or 404 NOT FOUND if ResourceNotFoundException is thrown."
+    }, {
+      "name" : "deleteLookbookEntry",
+      "parameters" : [ "Long id" ],
+      "return_type" : "ResponseEntity<Void>",
+      "description" : "Handles DELETE requests to remove a lookbook entry. Calls LookbookEntryService.deleteLookbookEntry(id). Returns 204 NO CONTENT or 404 NOT FOUND if ResourceNotFoundException is thrown."
+    } ],
     "public_variables" : null,
-    "api_endpoints" : null,
+    "api_endpoints" : [ {
+      "method" : "POST",
+      "path" : "/api/v1/admin/lookbook",
+      "request_body" : "LookbookEntryDto",
+      "response_body" : "LookbookEntryDto",
+      "description" : "Creates a new lookbook entry. Requires admin authentication.",
+      "access" : "admin"
+    }, {
+      "method" : "PUT",
+      "path" : "/api/v1/admin/lookbook/{id}",
+      "request_body" : "LookbookEntryDto",
+      "response_body" : "LookbookEntryDto",
+      "description" : "Updates an existing lookbook entry by ID. Requires admin authentication. Returns 404 if not found.",
+      "access" : "admin"
+    }, {
+      "method" : "DELETE",
+      "path" : "/api/v1/admin/lookbook/{id}",
+      "request_body" : null,
+      "response_body" : "void",
+      "description" : "Deletes a lookbook entry by ID. Requires admin authentication. Returns 404 if not found.",
+      "access" : "admin"
+    } ],
     "api_endpoints_consumed" : null,
     "imports_from" : [ "backend/src/main/java/com/fabricaepine/service/LookbookEntryService.java", "backend/src/main/java/com/fabricaepine/dto/LookbookEntryDto.java" ],
     "depends_on" : [ ],
     "feature_name" : "content-management-backend",
-    "file_role" : null,
+    "file_role" : "Admin-only REST controller for CRUD operations on lookbook entries, exposing POST /api/v1/admin/lookbook, PUT /api/v1/admin/lookbook/{id}, and DELETE /api/v1/admin/lookbook/{id}.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -870,13 +975,33 @@
     "status" : "PLANNED",
     "description" : "Data Transfer Object for LookbookEntry entities.",
     "public_functions" : null,
-    "public_variables" : null,
+    "public_variables" : [ {
+      "name" : "id",
+      "type" : "Long",
+      "description" : "Unique identifier for the lookbook entry."
+    }, {
+      "name" : "title",
+      "type" : "String",
+      "description" : "Title of the lookbook entry. @NotBlank, @Size(max = 255)."
+    }, {
+      "name" : "content",
+      "type" : "String",
+      "description" : "Main content or description of the lookbook entry. @NotBlank."
+    }, {
+      "name" : "imageUrl",
+      "type" : "String",
+      "description" : "URL of the main image for the lookbook entry. @NotBlank, @Size(max = 1024)."
+    }, {
+      "name" : "publicationDate",
+      "type" : "LocalDate",
+      "description" : "Date when the lookbook entry was published. @NotNull."
+    } ],
     "api_endpoints" : null,
     "api_endpoints_consumed" : null,
     "imports_from" : [ ],
     "depends_on" : [ ],
     "feature_name" : "content-management-backend",
-    "file_role" : null,
+    "file_role" : "DTO layer — Data Transfer Object for LookbookEntry entities, used for request and response bodies.",
     "change_required" : null,
     "contract_reconciled" : null
   }, {
@@ -1980,9 +2105,9 @@
     "feature_display_name" : "Content Management (Backend)",
     "feature_type" : "BACKEND",
     "file_paths" : [ "backend/src/main/java/com/fabricaepine/model/LookbookEntry.java", "backend/src/main/java/com/fabricaepine/repository/LookbookEntryRepository.java", "backend/src/main/java/com/fabricaepine/service/LookbookEntryService.java", "backend/src/main/java/com/fabricaepine/controller/LookbookEntryController.java", "backend/src/main/java/com/fabricaepine/controller/admin/AdminLookbookController.java", "backend/src/main/java/com/fabricaepine/dto/LookbookEntryDto.java" ],
-    "feature_instruction" : null,
-    "depends_on_features" : null,
-    "consumes_foundation" : null,
+    "feature_instruction" : "This feature provides the backend infrastructure for managing lookbook entries, which showcase Fabricae PINE's collections and manufacturing insights. It includes a Spring Data JPA entity (`LookbookEntry`), a repository (`LookbookEntryRepository`) for database interactions, a service layer (`LookbookEntryService`) for business logic, and two controllers: `LookbookEntryController` for public access to view entries, and `AdminLookbookController` for authenticated administrators to perform CRUD operations. A `LookbookEntryDto` is used for data transfer between layers.\n\n`LookbookEntry` defines the structure of a lookbook entry, including fields for title, content, image URL, and publication date. `LookbookEntryRepository` extends `JpaRepository` to provide standard CRUD functionalities.\n\n`LookbookEntryService` orchestrates interactions between the controllers and the repository. It provides methods for creating, retrieving, updating, and deleting lookbook entries. When creating or updating an entry, the service maps `LookbookEntryDto` to `LookbookEntry` and vice-versa. It handles `ResourceNotFoundException` if an entry is not found during update or deletion operations.\n\n`LookbookEntryController` exposes public API endpoints for fetching all lookbook entries and a single entry by its ID. These endpoints are accessible without authentication. `AdminLookbookController` provides authenticated endpoints for administrators to create, update, and delete lookbook entries. All controller methods return `ResponseEntity` objects, encapsulating the `LookbookEntryDto` or a list of them, along with appropriate HTTP status codes.\n\nBoth controllers inject `LookbookEntryService`. The service, in turn, injects `LookbookEntryRepository`. Image URLs for lookbook entries are expected to be managed externally, likely through a media management system (e.g., the `gallery` foundation feature), and are stored as simple `String` fields in the `LookbookEntry` entity. The `LookbookEntryDto` mirrors the relevant fields of the `LookbookEntry` entity for safe data transfer.",
+    "depends_on_features" : [ ],
+    "consumes_foundation" : [ "gallery" ],
     "change_required" : true,
     "change_instruction" : null
   }, {
